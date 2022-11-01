@@ -1,0 +1,196 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Team18DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="UsersTbl">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Passccode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="client">
+    <Key>
+      <PropertyRef Name="CLIENT_ID" />
+    </Key>
+    <Property Name="Fname" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Minit" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="Lname" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="CLIENT_ID" Type="String" MaxLength="4" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CLIENT_COMPANY" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Project_ID" Type="Int32" />
+    <NavigationProperty Name="project" Relationship="Self.client_client_ibfk_1" FromRole="client" ToRole="projects" />
+  </EntityType>
+  <EntityType Name="department">
+    <Key>
+      <PropertyRef Name="DEPT_NUM" />
+    </Key>
+    <Property Name="DEPT_NUM" Type="Int32" Nullable="false" />
+    <Property Name="DEPT_MANAGER_SSN" Type="Int32" />
+    <Property Name="dept_name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="employee" Relationship="Self.department_department_ibfk_1" FromRole="department" ToRole="employee" />
+    <NavigationProperty Name="employees" Relationship="Self.employee_employee_ibfk_1" FromRole="department" ToRole="employee" />
+    <NavigationProperty Name="projects" Relationship="Self.projects_projects_ibfk_1" FromRole="department" ToRole="projects" />
+  </EntityType>
+  <EntityType Name="employee">
+    <Key>
+      <PropertyRef Name="SSN" />
+    </Key>
+    <Property Name="Fname" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Minit" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="Lname" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="SSN" Type="Int32" Nullable="false" />
+    <Property Name="DOB" Type="DateTime" Precision="0" />
+    <Property Name="Sex" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="Department_number" Type="Int32" />
+    <Property Name="hourly_rate" Type="Decimal" Precision="6" Scale="2" />
+    <NavigationProperty Name="departments" Relationship="Self.department_department_ibfk_1" FromRole="employee" ToRole="department" />
+    <NavigationProperty Name="department" Relationship="Self.employee_employee_ibfk_1" FromRole="employee" ToRole="department" />
+    <NavigationProperty Name="projects" Relationship="Self.projects_projects_ibfk_2" FromRole="employee" ToRole="projects" />
+  </EntityType>
+  <EntityType Name="project">
+    <Key>
+      <PropertyRef Name="PROJECT_NUM" />
+    </Key>
+    <Property Name="PROJECT_NUM" Type="Int32" Nullable="false" />
+    <Property Name="PROJECT_DEPT" Type="Int32" />
+    <Property Name="project_manager" Type="Int32" />
+    <Property Name="PROJECT_BUDGET" Type="Decimal" Precision="8" Scale="2" />
+    <Property Name="CURRENT_EXPENSES" Type="Decimal" Precision="8" Scale="2" />
+    <Property Name="project_deadline" Type="DateTime" Precision="0" />
+    <Property Name="project_status" Type="Int16" />
+    <Property Name="project_name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="clients" Relationship="Self.client_client_ibfk_1" FromRole="projects" ToRole="client" />
+    <NavigationProperty Name="department" Relationship="Self.projects_projects_ibfk_1" FromRole="projects" ToRole="department" />
+    <NavigationProperty Name="employee" Relationship="Self.projects_projects_ibfk_2" FromRole="projects" ToRole="employee" />
+    <NavigationProperty Name="tasks" Relationship="Self.tasks_tasks_ibfk_1" FromRole="projects" ToRole="tasks" />
+  </EntityType>
+  <EntityType Name="task">
+    <Key>
+      <PropertyRef Name="task_id" />
+    </Key>
+    <Property Name="project_id" Type="Int32" />
+    <Property Name="task_id" Type="Int32" Nullable="false" />
+    <Property Name="task_budget" Type="Decimal" Precision="8" Scale="2" />
+    <Property Name="task_name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="task_deadline" Type="DateTime" Precision="0" />
+    <Property Name="task_status" Type="Int16" />
+    <Property Name="task_expenses" Type="Decimal" Precision="8" Scale="2" />
+    <NavigationProperty Name="project" Relationship="Self.tasks_tasks_ibfk_1" FromRole="tasks" ToRole="projects" />
+  </EntityType>
+  <Association Name="client_client_ibfk_1">
+    <End Role="projects" Type="Self.project" Multiplicity="0..1" />
+    <End Role="client" Type="Self.client" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="projects">
+        <PropertyRef Name="PROJECT_NUM" />
+      </Principal>
+      <Dependent Role="client">
+        <PropertyRef Name="Project_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="department_department_ibfk_1">
+    <End Role="employee" Type="Self.employee" Multiplicity="0..1" />
+    <End Role="department" Type="Self.department" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employee">
+        <PropertyRef Name="SSN" />
+      </Principal>
+      <Dependent Role="department">
+        <PropertyRef Name="DEPT_MANAGER_SSN" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="employee_employee_ibfk_1">
+    <End Role="department" Type="Self.department" Multiplicity="0..1" />
+    <End Role="employee" Type="Self.employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="department">
+        <PropertyRef Name="DEPT_NUM" />
+      </Principal>
+      <Dependent Role="employee">
+        <PropertyRef Name="Department_number" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="projects_projects_ibfk_1">
+    <End Role="department" Type="Self.department" Multiplicity="0..1" />
+    <End Role="projects" Type="Self.project" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="department">
+        <PropertyRef Name="DEPT_NUM" />
+      </Principal>
+      <Dependent Role="projects">
+        <PropertyRef Name="PROJECT_DEPT" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="projects_projects_ibfk_2">
+    <End Role="employee" Type="Self.employee" Multiplicity="0..1" />
+    <End Role="projects" Type="Self.project" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employee">
+        <PropertyRef Name="SSN" />
+      </Principal>
+      <Dependent Role="projects">
+        <PropertyRef Name="project_manager" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="tasks_tasks_ibfk_1">
+    <End Role="projects" Type="Self.project" Multiplicity="0..1" />
+    <End Role="tasks" Type="Self.task" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="projects">
+        <PropertyRef Name="PROJECT_NUM" />
+      </Principal>
+      <Dependent Role="tasks">
+        <PropertyRef Name="project_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="UsersTbls" EntityType="Self.UsersTbl" />
+    <EntitySet Name="clients" EntityType="Self.client" />
+    <EntitySet Name="departments" EntityType="Self.department" />
+    <EntitySet Name="employees" EntityType="Self.employee" />
+    <EntitySet Name="projects" EntityType="Self.project" />
+    <EntitySet Name="tasks" EntityType="Self.task" />
+    <AssociationSet Name="client_client_ibfk_1" Association="Self.client_client_ibfk_1">
+      <End Role="projects" EntitySet="projects" />
+      <End Role="client" EntitySet="clients" />
+    </AssociationSet>
+    <AssociationSet Name="department_department_ibfk_1" Association="Self.department_department_ibfk_1">
+      <End Role="employee" EntitySet="employees" />
+      <End Role="department" EntitySet="departments" />
+    </AssociationSet>
+    <AssociationSet Name="employee_employee_ibfk_1" Association="Self.employee_employee_ibfk_1">
+      <End Role="department" EntitySet="departments" />
+      <End Role="employee" EntitySet="employees" />
+    </AssociationSet>
+    <AssociationSet Name="projects_projects_ibfk_1" Association="Self.projects_projects_ibfk_1">
+      <End Role="department" EntitySet="departments" />
+      <End Role="projects" EntitySet="projects" />
+    </AssociationSet>
+    <AssociationSet Name="projects_projects_ibfk_2" Association="Self.projects_projects_ibfk_2">
+      <End Role="employee" EntitySet="employees" />
+      <End Role="projects" EntitySet="projects" />
+    </AssociationSet>
+    <AssociationSet Name="tasks_tasks_ibfk_1" Association="Self.tasks_tasks_ibfk_1">
+      <End Role="projects" EntitySet="projects" />
+      <End Role="tasks" EntitySet="tasks" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
