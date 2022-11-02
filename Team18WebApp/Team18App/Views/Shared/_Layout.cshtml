@@ -35,12 +35,12 @@
                         if(isLoggedIn)
                         {
                         <li>@Html.ActionLink(User.Identity.Name, "Index", "Home")</li>
-                        <li>@Html.ActionLink("Signout", "Signout", "Accounts")</li>
+                        <li>@Html.ActionLink("Signout", "Signout", "Account")</li>
                         }
                         else
                         {
-                        <li>@Html.ActionLink("Login", "Login", "Accounts")</li>
-                        <li>@Html.ActionLink("Register", "Signup", "Accounts")</li>
+                        <li>@Html.ActionLink("Login", "Login", "Account")</li>
+                        <li>@Html.ActionLink("Register", "Signup", "Account")</li>
                         }
                     }
                 </ul>
