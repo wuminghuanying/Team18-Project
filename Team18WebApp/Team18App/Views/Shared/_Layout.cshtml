@@ -1,4 +1,4 @@
-﻿@{
+@{
     bool isLoggedIn = true;
     if(string.IsNullOrWhiteSpace(User.Identity.Name)){
         isLoggedIn=false;
@@ -32,15 +32,19 @@
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     @{
-                        if(isLoggedIn)
+                        if (isLoggedIn)
                         {
-                        <li>@Html.ActionLink(User.Identity.Name, "Index", "Home")</li>
-                        <li>@Html.ActionLink("Signout", "Signout", "Account")</li>
+                            <li>@Html.ActionLink(User.Identity.Name, "Index", "Home")</li>
+                            <li>@Html.ActionLink("Signout", "Signout", "Account")</li>
+                            <li>@Html.ActionLink("employees", "Index", "employees")</li>
+                            <li>@Html.ActionLink("clients", "Index", "clients")</li>
+                            <li>@Html.ActionLink("departments", "Index", "departments")</li>
+                            <li>@Html.ActionLink("projects", "Index", "projects")</li>
                         }
                         else
                         {
-                        <li>@Html.ActionLink("Login", "Login", "Account")</li>
-                        <li>@Html.ActionLink("Register", "Signup", "Account")</li>
+                            <li>@Html.ActionLink("Login", "Login", "Account")</li>
+                            <li>@Html.ActionLink("Register", "Signup", "Account")</li>
                         }
                     }
                 </ul>
