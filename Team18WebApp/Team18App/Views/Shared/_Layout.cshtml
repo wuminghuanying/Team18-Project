@@ -3,6 +3,11 @@
     if(string.IsNullOrWhiteSpace(User.Identity.Name)){
         isLoggedIn=false;
     }
+    bool isAdmin = false;
+    if(User.Identity.Name.Contains("Admin"))
+    {
+        isAdmin = true;
+    }
 }
 
 
@@ -34,12 +39,15 @@
                     @{
                         if (isLoggedIn)
                         {
-                            <li>@Html.ActionLink(User.Identity.Name, "Index", "Home")</li>
-                            <li>@Html.ActionLink("Signout", "Signout", "Account")</li>
-                            <li>@Html.ActionLink("employees", "Index", "employees")</li>
+                            if (isAdmin)
+                            {
+                            <li>@Html.ActionLink("Employees", "Index", "employees")</li>
                             <li>@Html.ActionLink("clients", "Index", "clients")</li>
                             <li>@Html.ActionLink("departments", "Index", "departments")</li>
                             <li>@Html.ActionLink("projects", "Index", "projects")</li>
+                            }
+                            <li>@Html.ActionLink(User.Identity.Name, "Index", "Home")</li>
+                            <li>@Html.ActionLink("Signout", "Signout", "Account")</li>
                         }
                         else
                         {
