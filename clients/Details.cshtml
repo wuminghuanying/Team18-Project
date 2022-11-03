@@ -1,0 +1,58 @@
+﻿@model Team18App.Models.client
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>client</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Fname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Minit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Minit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Lname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Lname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CLIENT_COMPANY)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CLIENT_COMPANY)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.project.project_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.project.project_name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CLIENT_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
