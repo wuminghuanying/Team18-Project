@@ -1,0 +1,201 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Team18DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="UsersTbl">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Username" Type="varchar" MaxLength="50" />
+    <Property Name="Email" Type="varchar" MaxLength="255" />
+    <Property Name="Passccode" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="client">
+    <Key>
+      <PropertyRef Name="CLIENT_ID" />
+    </Key>
+    <Property Name="Fname" Type="nvarchar" MaxLength="30" />
+    <Property Name="Minit" Type="nchar" MaxLength="1" />
+    <Property Name="Lname" Type="nvarchar" MaxLength="30" />
+    <Property Name="CLIENT_ID" Type="nvarchar" MaxLength="4" Nullable="false" />
+    <Property Name="CLIENT_COMPANY" Type="nvarchar" MaxLength="20" />
+    <Property Name="Project_ID" Type="int" />
+  </EntityType>
+  <EntityType Name="department">
+    <Key>
+      <PropertyRef Name="DEPT_NUM" />
+    </Key>
+    <Property Name="DEPT_NUM" Type="int" Nullable="false" />
+    <Property Name="DEPT_MANAGER_SSN" Type="int" />
+    <Property Name="dept_name" Type="nvarchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="employee">
+    <Key>
+      <PropertyRef Name="SSN" />
+    </Key>
+    <Property Name="Fname" Type="nvarchar" MaxLength="30" />
+    <Property Name="Minit" Type="nchar" MaxLength="1" />
+    <Property Name="Lname" Type="nvarchar" MaxLength="30" />
+    <Property Name="SSN" Type="int" Nullable="false" />
+    <Property Name="DOB" Type="date" />
+    <Property Name="Sex" Type="nchar" MaxLength="1" />
+    <Property Name="Department_number" Type="int" />
+    <Property Name="hourly_rate" Type="decimal" Precision="6" Scale="2" />
+  </EntityType>
+  <EntityType Name="projects">
+    <Key>
+      <PropertyRef Name="PROJECT_NUM" />
+    </Key>
+    <Property Name="PROJECT_NUM" Type="int" Nullable="false" />
+    <Property Name="PROJECT_DEPT" Type="int" />
+    <Property Name="project_manager" Type="int" />
+    <Property Name="PROJECT_BUDGET" Type="decimal" Precision="8" Scale="2" />
+    <Property Name="CURRENT_EXPENSES" Type="decimal" Precision="8" Scale="2" />
+    <Property Name="project_deadline" Type="date" />
+    <Property Name="project_status" Type="smallint" />
+    <Property Name="project_name" Type="nvarchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="tasks">
+    <Key>
+      <PropertyRef Name="task_id" />
+    </Key>
+    <Property Name="project_id" Type="int" />
+    <Property Name="task_id" Type="int" Nullable="false" />
+    <Property Name="task_budget" Type="decimal" Precision="8" Scale="2" />
+    <Property Name="task_name" Type="nvarchar" MaxLength="20" />
+    <Property Name="task_deadline" Type="date" />
+    <Property Name="task_status" Type="smallint" />
+    <Property Name="task_expenses" Type="decimal" Precision="8" Scale="2" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'team18projectms-database.team18.works_on' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="works_on">
+          <Property Name="EMPLOYEE_SSN" Type="int" />
+          <Property Name="Project_num" Type="int" />
+          <Property Name="Hours_worked" Type="int" />
+          <Property Name="task_id" Type="int" />
+        </EntityType>-->
+  <Association Name="client$client_ibfk_1">
+    <End Role="projects" Type="Self.projects" Multiplicity="0..1" />
+    <End Role="client" Type="Self.client" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="projects">
+        <PropertyRef Name="PROJECT_NUM" />
+      </Principal>
+      <Dependent Role="client">
+        <PropertyRef Name="Project_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="department$department_ibfk_1">
+    <End Role="employee" Type="Self.employee" Multiplicity="0..1" />
+    <End Role="department" Type="Self.department" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employee">
+        <PropertyRef Name="SSN" />
+      </Principal>
+      <Dependent Role="department">
+        <PropertyRef Name="DEPT_MANAGER_SSN" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="employee$employee_ibfk_1">
+    <End Role="department" Type="Self.department" Multiplicity="0..1" />
+    <End Role="employee" Type="Self.employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="department">
+        <PropertyRef Name="DEPT_NUM" />
+      </Principal>
+      <Dependent Role="employee">
+        <PropertyRef Name="Department_number" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="projects$projects_ibfk_1">
+    <End Role="department" Type="Self.department" Multiplicity="0..1" />
+    <End Role="projects" Type="Self.projects" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="department">
+        <PropertyRef Name="DEPT_NUM" />
+      </Principal>
+      <Dependent Role="projects">
+        <PropertyRef Name="PROJECT_DEPT" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="projects$projects_ibfk_2">
+    <End Role="employee" Type="Self.employee" Multiplicity="0..1" />
+    <End Role="projects" Type="Self.projects" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employee">
+        <PropertyRef Name="SSN" />
+      </Principal>
+      <Dependent Role="projects">
+        <PropertyRef Name="project_manager" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="tasks$tasks_ibfk_1">
+    <End Role="projects" Type="Self.projects" Multiplicity="0..1" />
+    <End Role="tasks" Type="Self.tasks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="projects">
+        <PropertyRef Name="PROJECT_NUM" />
+      </Principal>
+      <Dependent Role="tasks">
+        <PropertyRef Name="project_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <!--Errors Found During Generation:
+error 6004: The table 'team18projectms-database.team18.works_on' is referenced by a relationship, but cannot be found.
+        <Association Name="works_on$works_on_ibfk_1" />-->
+  <!--Errors Found During Generation:
+error 6004: The table 'team18projectms-database.team18.works_on' is referenced by a relationship, but cannot be found.
+        <Association Name="works_on$works_on_ibfk_2" />-->
+  <!--Errors Found During Generation:
+error 6004: The table 'team18projectms-database.team18.works_on' is referenced by a relationship, but cannot be found.
+        <Association Name="works_on$works_on_ibfk_3" />-->
+  <EntityContainer Name="Team18DBModelStoreContainer">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UsersTbl" EntityType="Self.UsersTbl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="client" EntityType="Self.client" Schema="team18" store:Type="Tables" />
+    <EntitySet Name="department" EntityType="Self.department" Schema="team18" store:Type="Tables" />
+    <EntitySet Name="employee" EntityType="Self.employee" Schema="team18" store:Type="Tables" />
+    <EntitySet Name="projects" EntityType="Self.projects" Schema="team18" store:Type="Tables" />
+    <EntitySet Name="tasks" EntityType="Self.tasks" Schema="team18" store:Type="Tables" />
+    <AssociationSet Name="client$client_ibfk_1" Association="Self.client$client_ibfk_1">
+      <End Role="projects" EntitySet="projects" />
+      <End Role="client" EntitySet="client" />
+    </AssociationSet>
+    <AssociationSet Name="department$department_ibfk_1" Association="Self.department$department_ibfk_1">
+      <End Role="employee" EntitySet="employee" />
+      <End Role="department" EntitySet="department" />
+    </AssociationSet>
+    <AssociationSet Name="employee$employee_ibfk_1" Association="Self.employee$employee_ibfk_1">
+      <End Role="department" EntitySet="department" />
+      <End Role="employee" EntitySet="employee" />
+    </AssociationSet>
+    <AssociationSet Name="projects$projects_ibfk_1" Association="Self.projects$projects_ibfk_1">
+      <End Role="department" EntitySet="department" />
+      <End Role="projects" EntitySet="projects" />
+    </AssociationSet>
+    <AssociationSet Name="projects$projects_ibfk_2" Association="Self.projects$projects_ibfk_2">
+      <End Role="employee" EntitySet="employee" />
+      <End Role="projects" EntitySet="projects" />
+    </AssociationSet>
+    <AssociationSet Name="tasks$tasks_ibfk_1" Association="Self.tasks$tasks_ibfk_1">
+      <End Role="projects" EntitySet="projects" />
+      <End Role="tasks" EntitySet="tasks" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

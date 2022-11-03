@@ -297,6 +297,7 @@
     <Content Include="obj\Debug\Team18App.csproj.AssemblyReference.cache" />
     <Content Include="obj\Debug\Team18App.csproj.CopyComplete" />
     <Content Include="obj\Debug\Team18App.csproj.CoreCompileInputs.cache" />
+    <Content Include="libman.json" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

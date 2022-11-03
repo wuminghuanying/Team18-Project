@@ -1,0 +1,2 @@
+C:\Users\Slaye\Documents\COSC3380 Team 18\Team18WebApp\Team18App\obj\Release\Team18App.csproj.AssemblyReference.cache
+C:\Users\Slaye\Documents\COSC3380 Team 18\Team18WebApp\Team18App\obj\Release\Team18App.csproj.CoreCompileInputs.cache
