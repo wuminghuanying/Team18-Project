@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Team18DBModelStoreContainer" CdmEntityContainer="Entities">
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="Team18DBModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UsersTbls">
+      <EntityTypeMapping TypeName="Team18DBModel.UsersTbl">
+        <MappingFragment StoreEntitySet="UsersTbl">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Passccode" ColumnName="Passccode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="clients">
+      <EntityTypeMapping TypeName="Team18DBModel.client">
+        <MappingFragment StoreEntitySet="client">
+          <ScalarProperty Name="Fname" ColumnName="Fname" />
+          <ScalarProperty Name="Minit" ColumnName="Minit" />
+          <ScalarProperty Name="Lname" ColumnName="Lname" />
+          <ScalarProperty Name="CLIENT_ID" ColumnName="CLIENT_ID" />
+          <ScalarProperty Name="CLIENT_COMPANY" ColumnName="CLIENT_COMPANY" />
+          <ScalarProperty Name="Project_ID" ColumnName="Project_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="departments">
+      <EntityTypeMapping TypeName="Team18DBModel.department">
+        <MappingFragment StoreEntitySet="department">
+          <ScalarProperty Name="DEPT_NUM" ColumnName="DEPT_NUM" />
+          <ScalarProperty Name="DEPT_MANAGER_SSN" ColumnName="DEPT_MANAGER_SSN" />
+          <ScalarProperty Name="dept_name" ColumnName="dept_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="employees">
+      <EntityTypeMapping TypeName="Team18DBModel.employee">
+        <MappingFragment StoreEntitySet="employee">
+          <ScalarProperty Name="Fname" ColumnName="Fname" />
+          <ScalarProperty Name="Minit" ColumnName="Minit" />
+          <ScalarProperty Name="Lname" ColumnName="Lname" />
+          <ScalarProperty Name="SSN" ColumnName="SSN" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="Sex" ColumnName="Sex" />
+          <ScalarProperty Name="Department_number" ColumnName="Department_number" />
+          <ScalarProperty Name="hourly_rate" ColumnName="hourly_rate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="projects">
+      <EntityTypeMapping TypeName="Team18DBModel.project">
+        <MappingFragment StoreEntitySet="projects">
+          <ScalarProperty Name="PROJECT_NUM" ColumnName="PROJECT_NUM" />
+          <ScalarProperty Name="PROJECT_DEPT" ColumnName="PROJECT_DEPT" />
+          <ScalarProperty Name="project_manager" ColumnName="project_manager" />
+          <ScalarProperty Name="PROJECT_BUDGET" ColumnName="PROJECT_BUDGET" />
+          <ScalarProperty Name="CURRENT_EXPENSES" ColumnName="CURRENT_EXPENSES" />
+          <ScalarProperty Name="project_deadline" ColumnName="project_deadline" />
+          <ScalarProperty Name="project_status" ColumnName="project_status" />
+          <ScalarProperty Name="project_name" ColumnName="project_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tasks">
+      <EntityTypeMapping TypeName="Team18DBModel.task">
+        <MappingFragment StoreEntitySet="tasks">
+          <ScalarProperty Name="project_id" ColumnName="project_id" />
+          <ScalarProperty Name="task_id" ColumnName="task_id" />
+          <ScalarProperty Name="task_budget" ColumnName="task_budget" />
+          <ScalarProperty Name="task_name" ColumnName="task_name" />
+          <ScalarProperty Name="task_deadline" ColumnName="task_deadline" />
+          <ScalarProperty Name="task_status" ColumnName="task_status" />
+          <ScalarProperty Name="task_expenses" ColumnName="task_expenses" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

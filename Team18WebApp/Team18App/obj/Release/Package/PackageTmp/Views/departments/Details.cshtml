@@ -1,0 +1,34 @@
+﻿@model Team18App.Models.department
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>department</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.dept_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dept_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.employee.Fname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.employee.Fname)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.DEPT_NUM }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Team18App.Models.employee>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Fname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Minit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Lname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DOB)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sex)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.hourly_rate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.department.dept_name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Minit)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Lname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DOB)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sex)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.hourly_rate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.department.dept_name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.SSN }) |
+            @Html.ActionLink("Details", "Details", new { id=item.SSN }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.SSN })
+        </td>
+    </tr>
+}
+
+</table>
