@@ -1,13 +1,22 @@
 ﻿@{
     ViewBag.Title = "Home Page";
+    if (User.Identity.Name.Contains("AdminUser18-"))
+    {
+    }
 }
 
 <div class="jumbotron">
     <h1 style="text-align:center">COSC 3380 Team 18</h1>
     <p class="lead" style="text-align:center">Project Management Systems</p>
-    <p style="text-align:center"><a href="https://team18app.azurewebsites.net/Account/Signup" class="btn btn-primary btn-lg">Signup &raquo;</a></p>
-    <p style="text-align:center; font-size: 10px">Have admin in username for admin view</p>
+    @if (string.IsNullOrWhiteSpace(User.Identity.Name))
+    {
+    <p style="text-align:center"><a href="https://team18app.azurewebsites.net/Account/Signup" class="btn btn-primary btn-lg">Signup &raquo;</a></p> }
+    else
+            {
+                <p style="text-align:center">Welcome, @User.Identity.Name!</p>
+            }
 </div>
+
 
 @*<div class="row">
     <div class="col-md-4">
