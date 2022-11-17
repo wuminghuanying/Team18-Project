@@ -10,14 +10,13 @@
 namespace Team18App.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class UsersTbl
+    public partial class getProjectInfo_Result
     {
-        public int UserID { get; set; }
-        public string Username { get; set; }
-        public string Email { get; set; }
-        public string Passccode { get; set; }
-        public Nullable<int> RoleId { get; set; }
+        public int Project_ID { get; set; }
+        public int Project_Name { get; set; }
+        public Nullable<short> Status { get; set; }
+        public Nullable<int> Department_Code { get; set; }
+        public Nullable<int> Amount_of_Related_Tasks { get; set; }
     }
 }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Team18DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Team18DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -23,6 +23,7 @@
           <Property Name="Username" Type="varchar" MaxLength="50" />
           <Property Name="Email" Type="varchar" MaxLength="255" />
           <Property Name="Passccode" Type="varchar" MaxLength="20" />
+          <Property Name="RoleId" Type="int" />
         </EntityType>
         <EntityType Name="client">
           <Key>
@@ -81,14 +82,6 @@
           <Property Name="task_status" Type="smallint" />
           <Property Name="task_expenses" Type="decimal" Precision="8" Scale="2" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'team18projectms-database.team18.works_on' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="works_on">
-          <Property Name="EMPLOYEE_SSN" Type="int" />
-          <Property Name="Project_num" Type="int" />
-          <Property Name="Hours_worked" Type="int" />
-          <Property Name="task_id" Type="int" />
-        </EntityType>-->
         <Association Name="client$client_ibfk_1">
           <End Role="projects" Type="Self.projects" Multiplicity="0..1" />
           <End Role="client" Type="Self.client" Multiplicity="*" />
@@ -161,15 +154,60 @@ warning 6013: The table/view 'team18projectms-database.team18.works_on' does not
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <!--Errors Found During Generation:
-error 6004: The table 'team18projectms-database.team18.works_on' is referenced by a relationship, but cannot be found.
-        <Association Name="works_on$works_on_ibfk_1" />-->
-        <!--Errors Found During Generation:
-error 6004: The table 'team18projectms-database.team18.works_on' is referenced by a relationship, but cannot be found.
-        <Association Name="works_on$works_on_ibfk_2" />-->
-        <!--Errors Found During Generation:
-error 6004: The table 'team18projectms-database.team18.works_on' is referenced by a relationship, but cannot be found.
-        <Association Name="works_on$works_on_ibfk_3" />-->
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="getProjectInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="team18">
+          <Parameter Name="projectID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="getProjManagerInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="team18">
+          <Parameter Name="projManagerID" Type="int" Mode="In" />
+          <Parameter Name="deptNum" Type="int" Mode="In" />
+          <Parameter Name="projNum" Type="int" Mode="In" />
+        </Function>
+        <Function Name="getTaskInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="team18">
+          <Parameter Name="projectCode" Type="int" Mode="In" />
+        </Function>
+        <Function Name="getTopEmployees" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="team18">
+          <Parameter Name="hoursWorked" Type="int" Mode="In" />
+          <Parameter Name="deptNum" Type="int" Mode="In" />
+          <Parameter Name="projNum" Type="int" Mode="In" />
+        </Function>
+        <Function Name="InsertFirstName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="team18">
+          <Parameter Name="Firstname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Procedure" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="team18">
+          <Parameter Name="param1" Type="int" Mode="In" />
+          <Parameter Name="param2" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="Team18DBModelStoreContainer">
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UsersTbl" EntityType="Self.UsersTbl" Schema="dbo" store:Type="Tables" />
@@ -203,8 +241,7 @@ error 6004: The table 'team18projectms-database.team18.works_on' is referenced b
             <End Role="tasks" EntitySet="tasks" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Team18DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -226,6 +263,7 @@ error 6004: The table 'team18projectms-database.team18.works_on' is referenced b
           <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Passccode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="RoleId" Type="Int32" />
         </EntityType>
         <EntityType Name="client">
           <Key>
@@ -400,7 +438,101 @@ error 6004: The table 'team18projectms-database.team18.works_on' is referenced b
             <End Role="projects" EntitySet="projects" />
             <End Role="tasks" EntitySet="tasks" />
           </AssociationSet>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(Team18DBModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(Team18DBModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+          <FunctionImport Name="getProjectInfo" ReturnType="Collection(Team18DBModel.getProjectInfo_Result)">
+            <Parameter Name="projectID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getProjManagerInfo" ReturnType="Collection(Team18DBModel.getProjManagerInfo_Result)">
+            <Parameter Name="projManagerID" Mode="In" Type="Int32" />
+            <Parameter Name="deptNum" Mode="In" Type="Int32" />
+            <Parameter Name="projNum" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getTaskInfo" ReturnType="Collection(Team18DBModel.getTaskInfo_Result)">
+            <Parameter Name="projectCode" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getTopEmployees" ReturnType="Collection(Team18DBModel.getTopEmployees_Result)">
+            <Parameter Name="hoursWorked" Mode="In" Type="Int32" />
+            <Parameter Name="deptNum" Mode="In" Type="Int32" />
+            <Parameter Name="projNum" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="InsertFirstName">
+            <Parameter Name="Firstname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Procedure" ReturnType="Collection(Team18DBModel.Procedure_Result)">
+            <Parameter Name="param1" Mode="In" Type="Int32" />
+            <Parameter Name="param2" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="getProjectInfo_Result">
+          <Property Type="Int32" Name="Project_ID" Nullable="false" />
+          <Property Type="Int32" Name="Project_Name" Nullable="false" />
+          <Property Type="Int16" Name="Status" Nullable="true" />
+          <Property Type="Int32" Name="Department_Code" Nullable="true" />
+          <Property Type="Int32" Name="Amount_of_Related_Tasks" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="getProjManagerInfo_Result">
+          <Property Type="Int32" Name="SSN" Nullable="false" />
+          <Property Type="String" Name="Fname" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="Lname" Nullable="true" MaxLength="30" />
+          <Property Type="Int32" Name="Dept_Code" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="getTaskInfo_Result">
+          <Property Type="String" Name="Task" Nullable="true" MaxLength="20" />
+          <Property Type="Int16" Name="Status" Nullable="true" />
+          <Property Type="DateTime" Name="Deadline" Nullable="true" />
+          <Property Type="Int32" Name="Assigned_Employee" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="getTopEmployees_Result">
+          <Property Type="Int32" Name="SSN" Nullable="false" />
+          <Property Type="String" Name="First_Name" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="Last_Name" Nullable="true" MaxLength="30" />
+          <Property Type="Decimal" Name="Weekly_Pay" Nullable="true" Precision="17" Scale="2" />
+          <Property Type="Int32" Name="Dept_Code" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Procedure_Result">
+          <Property Type="Int32" Name="Column1" Nullable="true" />
+          <Property Type="Int32" Name="Column2" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -421,6 +553,7 @@ error 6004: The table 'team18projectms-database.team18.works_on' is referenced b
           <EntitySetMapping Name="UsersTbls">
             <EntityTypeMapping TypeName="Team18DBModel.UsersTbl">
               <MappingFragment StoreEntitySet="UsersTbl">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
@@ -490,6 +623,81 @@ error 6004: The table 'team18projectms-database.team18.works_on' is referenced b
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="Team18DBModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="Team18DBModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="Team18DBModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="Team18DBModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Team18DBModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="Team18DBModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Team18DBModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="Team18DBModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Team18DBModel.Store.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="getProjectInfo" FunctionName="Team18DBModel.Store.getProjectInfo">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Team18DBModel.getProjectInfo_Result">
+                <ScalarProperty Name="Project_ID" ColumnName="Project ID" />
+                <ScalarProperty Name="Project_Name" ColumnName="Project Name" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Department_Code" ColumnName="Department Code" />
+                <ScalarProperty Name="Amount_of_Related_Tasks" ColumnName="Amount of Related Tasks" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getProjManagerInfo" FunctionName="Team18DBModel.Store.getProjManagerInfo">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Team18DBModel.getProjManagerInfo_Result">
+                <ScalarProperty Name="SSN" ColumnName="SSN" />
+                <ScalarProperty Name="Fname" ColumnName="Fname" />
+                <ScalarProperty Name="Lname" ColumnName="Lname" />
+                <ScalarProperty Name="Dept_Code" ColumnName="Dept_Code" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getTaskInfo" FunctionName="Team18DBModel.Store.getTaskInfo">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Team18DBModel.getTaskInfo_Result">
+                <ScalarProperty Name="Task" ColumnName="Task" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Deadline" ColumnName="Deadline" />
+                <ScalarProperty Name="Assigned_Employee" ColumnName="Assigned Employee" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getTopEmployees" FunctionName="Team18DBModel.Store.getTopEmployees">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Team18DBModel.getTopEmployees_Result">
+                <ScalarProperty Name="SSN" ColumnName="SSN" />
+                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+                <ScalarProperty Name="Weekly_Pay" ColumnName="Weekly_Pay" />
+                <ScalarProperty Name="Dept_Code" ColumnName="Dept_Code" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="InsertFirstName" FunctionName="Team18DBModel.Store.InsertFirstName" />
+          <FunctionImportMapping FunctionImportName="Procedure" FunctionName="Team18DBModel.Store.Procedure">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Team18DBModel.Procedure_Result">
+                <ScalarProperty Name="Column1" ColumnName="Column1" />
+                <ScalarProperty Name="Column2" ColumnName="Column2" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

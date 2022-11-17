@@ -10,14 +10,13 @@
 namespace Team18App.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class UsersTbl
+    public partial class sp_helpdiagrams_Result
     {
-        public int UserID { get; set; }
-        public string Username { get; set; }
-        public string Email { get; set; }
-        public string Passccode { get; set; }
-        public Nullable<int> RoleId { get; set; }
+        public string Database { get; set; }
+        public string Name { get; set; }
+        public int ID { get; set; }
+        public string Owner { get; set; }
+        public int OwnerID { get; set; }
     }
 }

@@ -10,14 +10,10 @@
 namespace Team18App.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class UsersTbl
+    public partial class Procedure_Result
     {
-        public int UserID { get; set; }
-        public string Username { get; set; }
-        public string Email { get; set; }
-        public string Passccode { get; set; }
-        public Nullable<int> RoleId { get; set; }
+        public Nullable<int> Column1 { get; set; }
+        public Nullable<int> Column2 { get; set; }
     }
 }
