@@ -25,10 +25,15 @@ namespace Team18App.Controllers
             Entities _entity = new Entities(); //to Get the student details filtered with student city  
             return View(_entity.getTaskInfo(3)); //calling our entity imported function "Bangalore" is our input parameter  
         }  
-        public ActionResult getTopEmployees() //to Get the student details filter with student city and age  
+        
+        
+        public ActionResult getParamsTE(int deptNum, int projNum, int HoursWorked) //to Get the student details filter with student city and age  
         {  
-            Entities _entity = new Entities();  
-            return View(_entity.getTopEmployees(30,4,12)); //calling our entity imported function "Bangalore" and 12 is our input parameters  
+            Entities _entity = new Entities();
+            int dp = deptNum;
+            int pN = projNum;
+            int hW = HoursWorked;
+            return View(_entity.getTopEmployees(hW,dp,pN)); //calling our entity imported function "Bangalore" and 12 is our input parameters  
         }  
         /*public ActionResult getStudentsCountbyCity() //to get the count of student details filter with student city  
         {  

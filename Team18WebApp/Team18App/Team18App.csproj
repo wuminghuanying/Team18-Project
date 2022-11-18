@@ -381,12 +381,12 @@
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Views\TopEmployees\getTopEmployees.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="obj\Release\ProfileTransformWebConfig\transformed\Views\" />
     <Folder Include="obj\Release\TransformWebConfig\transformed\Views\" />
-    <Folder Include="Views\SPReports\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

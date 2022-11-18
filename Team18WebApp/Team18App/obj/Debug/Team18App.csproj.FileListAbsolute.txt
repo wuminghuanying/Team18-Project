@@ -137,3 +137,7 @@ C:\Users\Slaye\Documents\COSC3380 Team 18\Team18WebApp\Team18App\obj\Debug\Team1
 C:\Users\Slaye\Documents\COSC3380 Team 18\Team18WebApp\Team18App\obj\Debug\Team18App.dll
 C:\Users\Slaye\Documents\COSC3380 Team 18\Team18WebApp\Team18App\obj\Debug\Team18App.pdb
 C:\Users\Slaye\Documents\COSC3380 Team 18\Team18WebApp\Team18App\obj\Debug\Team18App.csproj.AssemblyReference.cache
+C:\Users\abish\source\repos\COSC3380-Team-18-Project\Team18WebApp\Team18App\obj\Debug\Team18App.csproj.AssemblyReference.cache
+C:\Users\abish\source\repos\COSC3380-Team-18-Project\Team18WebApp\Team18App\obj\Debug\Team18App.csproj.CoreCompileInputs.cache
+C:\Users\abish\source\repos\COSC3380-Team-18-Project\Team18WebApp\Team18App\obj\Debug\Team18App.dll
+C:\Users\abish\source\repos\COSC3380-Team-18-Project\Team18WebApp\Team18App\obj\Debug\Team18App.pdb
