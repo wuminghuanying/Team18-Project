@@ -89,7 +89,7 @@ namespace Team18App.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(project).State = EntityState.Modified;
+                db.Entry(project).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
