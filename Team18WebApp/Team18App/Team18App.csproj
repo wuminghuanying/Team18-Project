@@ -139,6 +139,7 @@
     <Compile Include="Controllers\employeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\projectsController.cs" />
+    <Compile Include="Controllers\tasksController.cs" />
     <Compile Include="Controllers\TopEmployeesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -387,6 +388,11 @@
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Views\TopEmployees\getTopEmployees.cshtml" />
     <Content Include="Views\TopEmployees\getParamsTE.cshtml" />
+    <Content Include="Views\tasks\Create.cshtml" />
+    <Content Include="Views\tasks\Delete.cshtml" />
+    <Content Include="Views\tasks\Details.cshtml" />
+    <Content Include="Views\tasks\Edit.cshtml" />
+    <Content Include="Views\tasks\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
