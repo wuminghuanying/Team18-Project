@@ -1,34 +1,51 @@
-﻿@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+﻿@model Team18App.Models.TopEmployeesFormModel
+
+@{
+    ViewBag.Title = "getParamsTE";
 }
 
-<!DOCTYPE html>
+<h2>Generate Top Employees Report</h2>
 
-<html>
-<head>
-    <meta name="getParamsTE" content="width=device-width" />
-    <title>Generate Top Employees Report</title>
-</head>
-<body>
-    <form method="get" action="Welcome\Index">
-        <table>
-            <tr>
-                <td>Enter Department Code</td>
-                <td><input type="number" id="fname_id" name="deptNum" /></td>
-            </tr>
-            <tr>
-                <td>Enter Project Code</td>
-                <td><input type="number" id="lname_id" name="projNum" /></td>
-            </tr>
-            <tr>
-                <td>Enter Minimum Hours Worked</td>
-                <td><input type="number" id="lname_id" name="HoursWorked" /></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td><input type="submit" /></td>
-            </tr>
-        </table>
-    </form>
-</body>
-</html>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>TopEmployeeFormModel</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.HoursWorked, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.HoursWorked, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.HoursWorked, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.deptNum, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.deptNum, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.deptNum, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.projNum, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.projNum, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.projNum, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Generate" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

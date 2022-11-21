@@ -4,9 +4,15 @@
     ViewBag.Title = "getTopEmployees";
 }
 
-<h2>The Top Hardworking Employees</h2>
+<h2>Top Employees Report</h2>
+
 
 <table>
+    <style type="text/css">
+        td {
+            padding: 0 15px;
+        }
+    </style>
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.SSN)
@@ -18,10 +24,10 @@
             @Html.DisplayNameFor(model => model.Last_Name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Dept_Code)
+            @Html.DisplayNameFor(model => model.Weekly_Pay)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Weekly_Pay)
+            @Html.DisplayNameFor(model => model.Hours_worked)
         </th>
     </tr>
 
@@ -38,11 +44,15 @@
                 @Html.DisplayFor(modelItem => item.Last_Name)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.Weekly_Pay)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Dept_Code)
             </td>
             <td>
-                @Html.DisplayNameFor(model => model.Weekly_Pay)
+                @Html.DisplayFor(modelItem => item.Hours_worked)
             </td>
+
         </tr>
 
     }
