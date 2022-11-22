@@ -18,5 +18,7 @@ namespace Team18App.Models
         public string Last_Name { get; set; }
         public Nullable<decimal> Weekly_Pay { get; set; }
         public Nullable<int> Dept_Code { get; set; }
+
+        public Nullable<int> Hours_worked { get; set; }
     }
 }
