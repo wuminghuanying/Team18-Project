@@ -145,6 +145,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\database_firewall_rules.cs">
+      <DependentUpon>EDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ErrorMessage.cs">
+      <DependentUpon>EDM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\getTaskInfoModel.cs" />
     <Compile Include="Models\TopEmployeesFormModel.cs" />
     <Compile Include="Models\client.cs">

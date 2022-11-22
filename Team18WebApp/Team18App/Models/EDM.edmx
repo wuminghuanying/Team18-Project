@@ -57,6 +57,15 @@
           <Property Name="Department_number" Type="int" />
           <Property Name="hourly_rate" Type="decimal" Precision="6" Scale="2" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'team18projectms-database.team18.ErrorMessages' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ErrorMessages">
+          <Key>
+            <PropertyRef Name="project_num" />
+          </Key>
+          <Property Name="project_num" Type="int" Nullable="false" />
+          <Property Name="error_desc" Type="nvarchar" MaxLength="100" />
+        </EntityType>
         <EntityType Name="projects">
           <Key>
             <PropertyRef Name="PROJECT_NUM" />
@@ -81,6 +90,32 @@
           <Property Name="task_deadline" Type="date" />
           <Property Name="task_status" Type="smallint" />
           <Property Name="task_expenses" Type="decimal" Precision="8" Scale="2" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'team18projectms-database.team18.works_on' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="works_on">
+          <Property Name="EMPLOYEE_SSN" Type="int" />
+          <Property Name="Project_num" Type="int" />
+          <Property Name="Hours_worked" Type="int" />
+          <Property Name="task_id" Type="int" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'team18projectms-database.sys.database_firewall_rules' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="database_firewall_rules">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="name" />
+            <PropertyRef Name="start_ip_address" />
+            <PropertyRef Name="end_ip_address" />
+            <PropertyRef Name="create_date" />
+            <PropertyRef Name="modify_date" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="start_ip_address" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="end_ip_address" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="create_date" Type="datetime" Nullable="false" />
+          <Property Name="modify_date" Type="datetime" Nullable="false" />
         </EntityType>
         <Association Name="client$client_ibfk_1">
           <End Role="projects" Type="Self.projects" Multiplicity="0..1" />
@@ -115,6 +150,18 @@
             </Principal>
             <Dependent Role="employee">
               <PropertyRef Name="Department_number" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Errormessages$ErrorMessages_ibfk_1">
+          <End Role="projects" Type="Self.projects" Multiplicity="1" />
+          <End Role="ErrorMessages" Type="Self.ErrorMessages" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="projects">
+              <PropertyRef Name="PROJECT_NUM" />
+            </Principal>
+            <Dependent Role="ErrorMessages">
+              <PropertyRef Name="project_num" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -154,6 +201,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <!--Errors Found During Generation:
+error 6004: The table 'team18projectms-database.team18.works_on' is referenced by a relationship, but cannot be found.
+        <Association Name="works_on$works_on_ibfk_1" />-->
+        <!--Errors Found During Generation:
+error 6004: The table 'team18projectms-database.team18.works_on' is referenced by a relationship, but cannot be found.
+        <Association Name="works_on$works_on_ibfk_2" />-->
+        <!--Errors Found During Generation:
+error 6004: The table 'team18projectms-database.team18.works_on' is referenced by a relationship, but cannot be found.
+        <Association Name="works_on$works_on_ibfk_3" />-->
         <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
         <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
@@ -216,6 +272,22 @@
           <EntitySet Name="employee" EntityType="Self.employee" Schema="team18" store:Type="Tables" />
           <EntitySet Name="projects" EntityType="Self.projects" Schema="team18" store:Type="Tables" />
           <EntitySet Name="tasks" EntityType="Self.tasks" Schema="team18" store:Type="Tables" />
+          <EntitySet Name="ErrorMessages" EntityType="Self.ErrorMessages" store:Type="Tables" store:Schema="team18">
+            <DefiningQuery>SELECT 
+    [ErrorMessages].[project_num] AS [project_num], 
+    [ErrorMessages].[error_desc] AS [error_desc]
+    FROM [team18].[ErrorMessages] AS [ErrorMessages]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="database_firewall_rules" EntityType="Self.database_firewall_rules" store:Type="Views" store:Schema="sys">
+            <DefiningQuery>SELECT 
+    [database_firewall_rules].[id] AS [id], 
+    [database_firewall_rules].[name] AS [name], 
+    [database_firewall_rules].[start_ip_address] AS [start_ip_address], 
+    [database_firewall_rules].[end_ip_address] AS [end_ip_address], 
+    [database_firewall_rules].[create_date] AS [create_date], 
+    [database_firewall_rules].[modify_date] AS [modify_date]
+    FROM [sys].[database_firewall_rules] AS [database_firewall_rules]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="client$client_ibfk_1" Association="Self.client$client_ibfk_1">
             <End Role="projects" EntitySet="projects" />
             <End Role="client" EntitySet="client" />
@@ -227,6 +299,10 @@
           <AssociationSet Name="employee$employee_ibfk_1" Association="Self.employee$employee_ibfk_1">
             <End Role="department" EntitySet="department" />
             <End Role="employee" EntitySet="employee" />
+          </AssociationSet>
+          <AssociationSet Name="Errormessages$ErrorMessages_ibfk_1" Association="Self.Errormessages$ErrorMessages_ibfk_1">
+            <End Role="projects" EntitySet="projects" />
+            <End Role="ErrorMessages" EntitySet="ErrorMessages" />
           </AssociationSet>
           <AssociationSet Name="projects$projects_ibfk_1" Association="Self.projects$projects_ibfk_1">
             <End Role="department" EntitySet="department" />
@@ -320,6 +396,7 @@
           <NavigationProperty Name="department" Relationship="Self.projects_projects_ibfk_1" FromRole="projects" ToRole="department" />
           <NavigationProperty Name="employee" Relationship="Self.projects_projects_ibfk_2" FromRole="projects" ToRole="employee" />
           <NavigationProperty Name="tasks" Relationship="Self.tasks_tasks_ibfk_1" FromRole="projects" ToRole="tasks" />
+          <NavigationProperty Name="ErrorMessage" Relationship="Team18DBModel.Errormessages_ErrorMessages_ibfk_1" FromRole="project" ToRole="ErrorMessage" />
         </EntityType>
         <EntityType Name="task">
           <Key>
@@ -469,7 +546,7 @@
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
           <FunctionImport Name="getProjectInfo" ReturnType="Collection(Team18DBModel.getProjectInfo_Result)">
-            <Parameter Name="projectID" Mode="In" Type="Int32" />
+          <Parameter Name="projectID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="getProjManagerInfo" ReturnType="Collection(Team18DBModel.getProjManagerInfo_Result)">
             <Parameter Name="projManagerID" Mode="In" Type="Int32" />
@@ -477,7 +554,7 @@
             <Parameter Name="projNum" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="getTaskInfo" ReturnType="Collection(Team18DBModel.getTaskInfo_Result)">
-            <Parameter Name="projectCode" Mode="In" Type="Int32" />
+          <Parameter Name="projectCode" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="getTopEmployees" ReturnType="Collection(Team18DBModel.getTopEmployees_Result)">
             <Parameter Name="hoursWorked" Mode="In" Type="Int32" />
@@ -485,12 +562,18 @@
             <Parameter Name="projNum" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="InsertFirstName">
-            <Parameter Name="Firstname" Mode="In" Type="String" />
+          <Parameter Name="Firstname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="Procedure" ReturnType="Collection(Team18DBModel.Procedure_Result)">
             <Parameter Name="param1" Mode="In" Type="Int32" />
             <Parameter Name="param2" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="ErrorMessages" EntityType="Team18DBModel.ErrorMessage" />
+          <EntitySet Name="database_firewall_rules" EntityType="Team18DBModel.database_firewall_rules" />
+          <AssociationSet Name="Errormessages_ErrorMessages_ibfk_1" Association="Team18DBModel.Errormessages_ErrorMessages_ibfk_1">
+            <End Role="project" EntitySet="projects" />
+            <End Role="ErrorMessage" EntitySet="ErrorMessages" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -533,6 +616,42 @@
           <Property Type="Int32" Name="Column1" Nullable="true" />
           <Property Type="Int32" Name="Column2" Nullable="true" />
         </ComplexType>
+        <EntityType Name="ErrorMessage">
+          <Key>
+            <PropertyRef Name="project_num" />
+          </Key>
+          <Property Name="project_num" Type="Int32" Nullable="false" />
+          <Property Name="error_desc" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="project" Relationship="Team18DBModel.Errormessages_ErrorMessages_ibfk_1" FromRole="ErrorMessage" ToRole="project" />
+        </EntityType>
+        <EntityType Name="database_firewall_rules">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="name" />
+            <PropertyRef Name="start_ip_address" />
+            <PropertyRef Name="end_ip_address" />
+            <PropertyRef Name="create_date" />
+            <PropertyRef Name="modify_date" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="start_ip_address" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="end_ip_address" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="modify_date" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <Association Name="Errormessages_ErrorMessages_ibfk_1">
+          <End Type="Team18DBModel.project" Role="project" Multiplicity="1" />
+          <End Type="Team18DBModel.ErrorMessage" Role="ErrorMessage" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="project">
+              <PropertyRef Name="PROJECT_NUM" />
+            </Principal>
+            <Dependent Role="ErrorMessage">
+              <PropertyRef Name="project_num" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -698,6 +817,26 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="ErrorMessages">
+            <EntityTypeMapping TypeName="Team18DBModel.ErrorMessage">
+              <MappingFragment StoreEntitySet="ErrorMessages">
+                <ScalarProperty Name="error_desc" ColumnName="error_desc" />
+                <ScalarProperty Name="project_num" ColumnName="project_num" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="database_firewall_rules">
+            <EntityTypeMapping TypeName="Team18DBModel.database_firewall_rules">
+              <MappingFragment StoreEntitySet="database_firewall_rules">
+                <ScalarProperty Name="modify_date" ColumnName="modify_date" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="end_ip_address" ColumnName="end_ip_address" />
+                <ScalarProperty Name="start_ip_address" ColumnName="start_ip_address" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

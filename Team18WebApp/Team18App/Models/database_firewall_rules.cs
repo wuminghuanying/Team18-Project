@@ -10,14 +10,15 @@
 namespace Team18App.Models
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class getTopEmployees_Result
+    public partial class database_firewall_rules
     {
-        public int SSN { get; set; }
-        public string First_Name { get; set; }
-        public string Last_Name { get; set; }
-        public Nullable<decimal> Weekly_Pay { get; set; }
-        public Nullable<int> Dept_Code { get; set; }
-        public Nullable<int> Hours_worked { get; set; }
+        public int id { get; set; }
+        public string name { get; set; }
+        public string start_ip_address { get; set; }
+        public string end_ip_address { get; set; }
+        public System.DateTime create_date { get; set; }
+        public System.DateTime modify_date { get; set; }
     }
 }

@@ -10,14 +10,13 @@
 namespace Team18App.Models
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class getTopEmployees_Result
+    public partial class ErrorMessage
     {
-        public int SSN { get; set; }
-        public string First_Name { get; set; }
-        public string Last_Name { get; set; }
-        public Nullable<decimal> Weekly_Pay { get; set; }
-        public Nullable<int> Dept_Code { get; set; }
-        public Nullable<int> Hours_worked { get; set; }
+        public int project_num { get; set; }
+        public string error_desc { get; set; }
+    
+        public virtual project project { get; set; }
     }
 }

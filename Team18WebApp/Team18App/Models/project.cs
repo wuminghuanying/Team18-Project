@@ -36,5 +36,6 @@ namespace Team18App.Models
         public virtual employee employee { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<task> tasks { get; set; }
+        public virtual ErrorMessage ErrorMessage { get; set; }
     }
 }

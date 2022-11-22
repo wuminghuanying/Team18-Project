@@ -34,6 +34,8 @@ namespace Team18App.Models
         public virtual DbSet<employee> employees { get; set; }
         public virtual DbSet<project> projects { get; set; }
         public virtual DbSet<task> tasks { get; set; }
+        public virtual DbSet<ErrorMessage> ErrorMessages { get; set; }
+        public virtual DbSet<database_firewall_rules> database_firewall_rules { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
@@ -187,7 +189,7 @@ namespace Team18App.Models
                 new ObjectParameter("projNum", projNum) :
                 new ObjectParameter("projNum", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getTopEmployees_Result>("Entities.getTopEmployees", hoursWorkedParameter, deptNumParameter, projNumParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getTopEmployees_Result>("getTopEmployees", hoursWorkedParameter, deptNumParameter, projNumParameter);
         }
     
         public virtual int InsertFirstName(string firstname)
