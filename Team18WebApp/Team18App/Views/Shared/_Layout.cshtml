@@ -4,9 +4,22 @@
         isLoggedIn=false;
     }
     bool isAdmin = false;
-    if(User.Identity.Name=="AdminUser")
+    bool isDhead = false;
+    bool isEmployee = false;
+    if (User.Identity.Name.Contains("AdminUser"))
     {
         isAdmin = true;
+        isDhead = true;
+        isEmployee = true;
+    }
+    if (User.Identity.Name.Contains("DepartmentHead"))
+    {
+        isDhead = true;
+        isEmployee = true;
+    }
+    if (User.Identity.Name.Contains("Employee"))
+    {
+        isEmployee = true;
     }
 }
 
@@ -37,12 +50,12 @@
                     @{
                         if (isLoggedIn)
                         {
-                            if (isAdmin)
+                            if (isEmployee)
                             {
-                            <li>@Html.ActionLink("Employees", "Index", "employees")</li>
-                            <li>@Html.ActionLink("clients", "Index", "clients")</li>
-                            <li>@Html.ActionLink("departments", "Index", "departments")</li>
-                            <li>@Html.ActionLink("projects", "Index", "projects")</li>
+                            <li>@Html.ActionLink("Task Report", "getParamsTI", "getTaskInfo")</li>
+                            if (isDhead){
+                            <li>@Html.ActionLink("Employee Report", "getParamsTE", "TopEmployees")</li>
+                            }
                             }
                             <li>@Html.ActionLink(User.Identity.Name, "Index", "Home")</li>
                             <li>@Html.ActionLink("Signout", "Signout", "Account")</li>

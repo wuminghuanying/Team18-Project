@@ -24,8 +24,8 @@
 
 <h2>Generate Top Employees Report</h2>
 
-
-@using (Html.BeginForm())
+@if (isDhead) {
+using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
@@ -66,4 +66,8 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+}
+}
+else {
+<h1>Insufficient Viewing Privileges</h1>
 }
