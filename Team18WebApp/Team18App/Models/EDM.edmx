@@ -5,6 +5,12 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="Team18DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'team18projectms-database.dbo.Client_Requests' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="Client_Requests">
+          <Property Name="UserID" Type="int" />
+          <Property Name="Message" Type="varchar" MaxLength="500" />
+        </EntityType>-->
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -92,6 +98,14 @@ warning 6002: The table/view 'team18projectms-database.team18.ErrorMessages' doe
           <Property Name="task_expenses" Type="decimal" Precision="8" Scale="2" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6013: The table/view 'team18projectms-database.team18.works_on' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="works_on">
+          <Property Name="EMPLOYEE_SSN" Type="int" />
+          <Property Name="Project_num" Type="int" />
+          <Property Name="Hours_worked" Type="int" />
+          <Property Name="task_id" Type="int" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'team18projectms-database.sys.database_firewall_rules' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="database_firewall_rules">
           <Key>
@@ -157,6 +171,9 @@ warning 6002: The table/view 'team18projectms-database.sys.database_firewall_rul
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <!--Errors Found During Generation:
+error 6004: The table 'team18projectms-database.dbo.Client_Requests' is referenced by a relationship, but cannot be found.
+        <Association Name="FK__Client_Re__UserI__32767D0B" />-->
         <Association Name="projects$projects_ibfk_1">
           <End Role="department" Type="Self.department" Multiplicity="0..1" />
           <End Role="projects" Type="Self.projects" Multiplicity="*" />
@@ -193,6 +210,15 @@ warning 6002: The table/view 'team18projectms-database.sys.database_firewall_rul
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <!--Errors Found During Generation:
+error 6004: The table 'team18projectms-database.team18.works_on' is referenced by a relationship, but cannot be found.
+        <Association Name="works_on$works_on_ibfk_1" />-->
+        <!--Errors Found During Generation:
+error 6004: The table 'team18projectms-database.team18.works_on' is referenced by a relationship, but cannot be found.
+        <Association Name="works_on$works_on_ibfk_2" />-->
+        <!--Errors Found During Generation:
+error 6004: The table 'team18projectms-database.team18.works_on' is referenced by a relationship, but cannot be found.
+        <Association Name="works_on$works_on_ibfk_3" />-->
         <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
         <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
@@ -555,7 +581,7 @@ warning 6002: The table/view 'team18projectms-database.sys.database_firewall_rul
             <End Role="ErrorMessage" EntitySet="ErrorMessages" />
           </AssociationSet>
           <FunctionImport Name="getProjectInfo" ReturnType="Collection(Team18DBModel.getProjectInfo_Result)">
-            <Parameter Name="projectID" Mode="In" Type="Int32" />
+          <Parameter Name="projectID" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">

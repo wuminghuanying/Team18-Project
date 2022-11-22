@@ -224,9 +224,6 @@
       <Parameter Name="new_diagramname" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="sp_upgraddiagrams" />
-    <FunctionImport Name="getProjectInfo" ReturnType="Collection(Team18DBModel.getProjectInfo_Result)">
-      <Parameter Name="projectID" Mode="In" Type="Int32" />
-    </FunctionImport>
     <FunctionImport Name="getProjManagerInfo" ReturnType="Collection(Team18DBModel.getProjManagerInfo_Result)">
       <Parameter Name="projManagerID" Mode="In" Type="Int32" />
       <Parameter Name="deptNum" Mode="In" Type="Int32" />
@@ -253,6 +250,9 @@
       <End Role="project" EntitySet="projects" />
       <End Role="ErrorMessage" EntitySet="ErrorMessages" />
     </AssociationSet>
+    <FunctionImport Name="getProjectInfo" ReturnType="Collection(Team18DBModel.getProjectInfo_Result)">
+      <Parameter Name="projectID" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="sp_helpdiagramdefinition_Result">
     <Property Type="Int32" Name="version" Nullable="true" />
@@ -264,13 +264,6 @@
     <Property Type="Int32" Name="ID" Nullable="false" />
     <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
     <Property Type="Int32" Name="OwnerID" Nullable="false" />
-  </ComplexType>
-  <ComplexType Name="getProjectInfo_Result">
-    <Property Type="Int32" Name="Project_ID" Nullable="false" />
-    <Property Type="Int32" Name="Project_Name" Nullable="false" />
-    <Property Type="Int16" Name="Status" Nullable="true" />
-    <Property Type="Int32" Name="Department_Code" Nullable="true" />
-    <Property Type="Int32" Name="Amount_of_Related_Tasks" Nullable="true" />
   </ComplexType>
   <ComplexType Name="getProjManagerInfo_Result">
     <Property Type="Int32" Name="SSN" Nullable="false" />
@@ -331,4 +324,12 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <ComplexType Name="getProjectInfo_Result">
+    <Property Type="Int32" Name="Project_ID" Nullable="false" />
+    <Property Type="String" Name="Project_Name" Nullable="true" MaxLength="30" />
+    <Property Type="Int16" Name="Status" Nullable="true" />
+    <Property Type="Int32" Name="Department_Code" Nullable="true" />
+    <Property Type="Decimal" Name="Budget_Balance" Nullable="true" Precision="9" Scale="2" />
+    <Property Type="Int32" Name="Amount_of_Related_Tasks" Nullable="true" />
+  </ComplexType>
 </Schema>

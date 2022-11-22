@@ -1,0 +1,61 @@
+﻿@model IEnumerable<Team18App.Models.ErrorMessage>
+
+@{
+    ViewBag.Title = "Index";
+    bool isAdmin = false;
+    bool isDhead = false;
+    bool isEmployee = false;
+    if (User.Identity.Name.Contains("AdminUser"))
+    {
+        isAdmin = true;
+        isDhead = true;
+        isEmployee = true;
+    }
+    if (User.Identity.Name.Contains("DepartmentHead"))
+    {
+        isDhead = true;
+        isEmployee = true;
+    }
+    if (User.Identity.Name.Contains("Employee"))
+    {
+        isEmployee = true;
+    }
+}
+
+<h2>Index</h2>
+@if (isDhead) {
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.error_desc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.project.project_name)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.error_desc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.project.project_name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.project_num }) |
+            @Html.ActionLink("Details", "Details", new { id=item.project_num }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.project_num })
+        </td>
+    </tr>
+}
+
+</table>
+}
+else {
+<h2>Insufficient Viewing Privileges</h2>
+}
