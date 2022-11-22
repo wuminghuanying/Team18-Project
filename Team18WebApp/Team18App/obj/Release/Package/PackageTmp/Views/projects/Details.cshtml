@@ -2,10 +2,29 @@
 
 @{
     ViewBag.Title = "Details";
+    ViewBag.Title = "Create";
+    bool isAdmin = false;
+    bool isDhead = false;
+    bool isEmployee = false;
+    if (User.Identity.Name.Contains("AdminUser"))
+    {
+        isAdmin = true;
+        isDhead = true;
+        isEmployee = true;
+    }
+    if (User.Identity.Name.Contains("DepartmentHead"))
+    {
+        isDhead = true;
+        isEmployee = true;
+    }
+    if (User.Identity.Name.Contains("Employee"))
+    {
+        isEmployee = true;
+    }
 }
 
 <h2>Details</h2>
-
+@if (isEmployee) {
 <div>
     <h4>project</h4>
     <hr />
@@ -72,3 +91,7 @@
     @Html.ActionLink("Edit", "Edit", new { id = Model.PROJECT_NUM }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+}
+else {
+<h2>Insufficient Viewing Privileges</h2>
+}

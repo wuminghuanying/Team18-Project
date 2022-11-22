@@ -18,6 +18,9 @@
         <AssociationConnector Association="Team18DBModel.projects_projects_ibfk_1" ManuallyRouted="false" />
         <AssociationConnector Association="Team18DBModel.projects_projects_ibfk_2" ManuallyRouted="false" />
         <AssociationConnector Association="Team18DBModel.tasks_tasks_ibfk_1" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Team18DBModel.ErrorMessage" Width="1.5" PointX="7.875" PointY="8.25" />
+        <EntityTypeShape EntityType="Team18DBModel.database_firewall_rules" Width="1.5" PointX="0.75" PointY="9.75" />
+        <AssociationConnector Association="Team18DBModel.Errormessages_ErrorMessages_ibfk_1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

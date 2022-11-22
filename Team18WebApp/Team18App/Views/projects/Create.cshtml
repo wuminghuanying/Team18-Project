@@ -25,8 +25,7 @@
 
 <h2>Create</h2>
 
-@if (isDhead) {
-using (Html.BeginForm())
+@using (Html.BeginForm())
 {
 @Html.AntiForgeryToken()
 
@@ -112,8 +111,4 @@ using (Html.BeginForm())
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-}
-}
-else {
-<h2>Insufficient Viewing Privileges</h2>
 }

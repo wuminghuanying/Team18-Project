@@ -1,0 +1,87 @@
+﻿@model IEnumerable<Team18App.Models.task>
+
+@{
+    ViewBag.Title = "Index";
+    bool isAdmin = false;
+    bool isDhead = false;
+    bool isEmployee = false;
+    if (User.Identity.Name.Contains("AdminUser"))
+    {
+        isAdmin = true;
+        isDhead = true;
+        isEmployee = true;
+    }
+    if (User.Identity.Name.Contains("DepartmentHead"))
+    {
+        isDhead = true;
+        isEmployee = true;
+    }
+    if (User.Identity.Name.Contains("Employee"))
+    {
+        isEmployee = true;
+    }
+}
+
+<h2>Index</h2>
+@if (isEmployee) {
+<p>
+    @if (isDhead) {
+    @Html.ActionLink("Create New", "Create")
+    }
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.task_budget)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.task_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.task_deadline)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.task_status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.task_expenses)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.project.project_name)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.task_budget)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.task_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.task_deadline)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.task_status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.task_expenses)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.project.project_name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.task_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.task_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.task_id })
+        </td>
+    </tr>
+}
+
+</table>
+}
+else {
+<h2>Insufficient Viewing Privileges</h2>
+}

@@ -4,9 +4,22 @@
         isLoggedIn=false;
     }
     bool isAdmin = false;
-    if(User.Identity.Name=="AdminUser")
+    bool isDhead = false;
+    bool isEmployee = false;
+    if (User.Identity.Name.Contains("AdminUser"))
     {
         isAdmin = true;
+        isDhead = true;
+        isEmployee = true;
+    }
+    if (User.Identity.Name.Contains("DepartmentHead"))
+    {
+        isDhead = true;
+        isEmployee = true;
+    }
+    if (User.Identity.Name.Contains("Employee"))
+    {
+        isEmployee = true;
     }
 }
 
@@ -34,25 +47,25 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     @{
                         if (isLoggedIn)
                         {
-                            if (isAdmin)
+                            if (isEmployee)
                             {
-                            <li>@Html.ActionLink("Employees", "Index", "employees")</li>
-                            <li>@Html.ActionLink("clients", "Index", "clients")</li>
-                            <li>@Html.ActionLink("departments", "Index", "departments")</li>
-                            <li>@Html.ActionLink("projects", "Index", "projects")</li>
+                        <li>@Html.ActionLink("Task Report", "getParamsTI", "getTaskInfo")</li>
+                            if (isDhead){
+                        <li>@Html.ActionLink("Employee Report", "getParamsTE", "TopEmployees")</li>
+                        <li>@Html.ActionLink("Project Report", "getParamsPI", "getProjectInfo")</li>
+                        <li>@Html.ActionLink("Messages", "Index", "ErrorMessages")</li>
                             }
-                            <li>@Html.ActionLink(User.Identity.Name, "Index", "Home")</li>
-                            <li>@Html.ActionLink("Signout", "Signout", "Account")</li>
+                            }
+                        <li>@Html.ActionLink(User.Identity.Name, "Index", "Home")</li>
+                        <li>@Html.ActionLink("Signout", "Signout", "Account")</li>
                         }
                         else
                         {
-                            <li>@Html.ActionLink("Login", "Login", "Account")</li>
-                            <li>@Html.ActionLink("Register", "Signup", "Account")</li>
+                        <li>@Html.ActionLink("Login", "Login", "Account")</li>
+                        <li>@Html.ActionLink("Register", "Signup", "Account")</li>
                         }
                     }
                 </ul>

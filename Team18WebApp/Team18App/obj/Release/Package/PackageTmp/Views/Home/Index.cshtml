@@ -1,8 +1,24 @@
 ﻿@{
     ViewBag.Title = "Home Page";
-    if (User.Identity.Name.Contains("AdminUser18-"))
+    bool isAdmin = false;
+    bool isDhead = false;
+    bool isEmployee = false;
+    if (User.Identity.Name.Contains("AdminUser"))
     {
+        isAdmin = true;
+        isDhead = true;
+        isEmployee = true;
     }
+    if (User.Identity.Name.Contains("DepartmentHead"))
+    {
+        isDhead = true;
+        isEmployee = true;
+    }
+    if (User.Identity.Name.Contains("Employee"))
+    {
+        isEmployee = true;
+    }
+
 }
 
 <div class="jumbotron">
@@ -13,29 +29,71 @@
     <p style="text-align:center"><a href="https://team18app.azurewebsites.net/Account/Signup" class="btn btn-primary btn-lg">Signup &raquo;</a></p> }
     else
             {
-                <p style="text-align:center">Welcome, @User.Identity.Name!</p>
+    <p style="text-align:center">Welcome, @User.Identity.Name!</p>
             }
 </div>
 
-
-@*<div class="row">
+@if (!string.IsNullOrWhiteSpace(User.Identity.Name))
+    {
+<h2>Useful Pages</h2>
+<div class="row">
+    @if (!isEmployee) {
     <div class="col-md-4">
-        <h2>Getting started</h2>
+        <h2>Submit a Project</h2>
         <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
+            If you are a client, click here to submit a project!
         </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865%22%3ELearn more &raquo;</a></p>
+        <p><a class="btn btn-default" href="https://team18app.azurewebsites.net/projects/create">Project &raquo;</a></p>
+    </div>
+    }
+    @if (isEmployee) {
+    <div class="col-md-4">
+        <h2>Projects</h2>
+        <p>View active projects!</p>
+        <p><a class="btn btn-default" href="https://team18app.azurewebsites.net/projects">Projects &raquo;</a></p>
     </div>
     <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866%22%3ELearn more &raquo;</a></p>
+        <h2>Tasks</h2>
+        <p>View task information for each project</p>
+        <p><a class="btn btn-default" href="https://team18app.azurewebsites.net/tasks">Tasks &raquo;</a></p>
     </div>
     <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867%22%3ELearn more &raquo;</a></p>
+        <h2>Task Report</h2>
+        <p>View tasks for a specific project</p>
+        <p><a class="btn btn-default" href="https://team18app.azurewebsites.net/getTaskInfo/getParamsTI">Tasks &raquo;</a></p>
     </div>
-</div>*@
+    }
+</div>
+if (isDhead) {
+<div class="row">
+    <div class="col-md-4">
+        <h2>Employees</h2>
+        <p>
+            View employee information
+        </p>
+        <p><a class="btn btn-default" href="https://team18app.azurewebsites.net/employees">Employees &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Departments</h2>
+        <p>View all departments</p>
+        <p><a class="btn btn-default" href="https://team18app.azurewebsites.net/departments">Departments &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Clients</h2>
+        <p>View client information</p>
+        <p><a class="btn btn-default" href="https://team18app.azurewebsites.net/clients">Clients &raquo;</a></p>
+    </div>
+</div>
+if (isAdmin) {
+<div class="row">
+    <div class="col-md-4">
+        <h2>User Login Info</h2>
+        <p>
+            View all logins to this website
+        </p>
+        <p><a class="btn btn-default" href="https://team18app.azurewebsites.net/UsersTbls">Logins &raquo;</a></p>
+    </div>
+</div>
+}
+    }
+}
