@@ -75,6 +75,7 @@
     <NavigationProperty Name="department" Relationship="Self.projects_projects_ibfk_1" FromRole="projects" ToRole="department" />
     <NavigationProperty Name="employee" Relationship="Self.projects_projects_ibfk_2" FromRole="projects" ToRole="employee" />
     <NavigationProperty Name="tasks" Relationship="Self.tasks_tasks_ibfk_1" FromRole="projects" ToRole="tasks" />
+    <NavigationProperty Name="ErrorMessage" Relationship="Team18DBModel.Errormessages_ErrorMessages_ibfk_1" FromRole="project" ToRole="ErrorMessage" />
   </EntityType>
   <EntityType Name="task">
     <Key>
@@ -223,9 +224,6 @@
       <Parameter Name="new_diagramname" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="sp_upgraddiagrams" />
-    <FunctionImport Name="getProjectInfo" ReturnType="Collection(Team18DBModel.getProjectInfo_Result)">
-      <Parameter Name="projectID" Mode="In" Type="Int32" />
-    </FunctionImport>
     <FunctionImport Name="getProjManagerInfo" ReturnType="Collection(Team18DBModel.getProjManagerInfo_Result)">
       <Parameter Name="projManagerID" Mode="In" Type="Int32" />
       <Parameter Name="deptNum" Mode="In" Type="Int32" />
@@ -246,6 +244,15 @@
       <Parameter Name="param1" Mode="In" Type="Int32" />
       <Parameter Name="param2" Mode="In" Type="Int32" />
     </FunctionImport>
+    <EntitySet Name="ErrorMessages" EntityType="Team18DBModel.ErrorMessage" />
+    <EntitySet Name="database_firewall_rules" EntityType="Team18DBModel.database_firewall_rules" />
+    <AssociationSet Name="Errormessages_ErrorMessages_ibfk_1" Association="Team18DBModel.Errormessages_ErrorMessages_ibfk_1">
+      <End Role="project" EntitySet="projects" />
+      <End Role="ErrorMessage" EntitySet="ErrorMessages" />
+    </AssociationSet>
+    <FunctionImport Name="getProjectInfo" ReturnType="Collection(Team18DBModel.getProjectInfo_Result)">
+      <Parameter Name="projectID" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="sp_helpdiagramdefinition_Result">
     <Property Type="Int32" Name="version" Nullable="true" />
@@ -257,13 +264,6 @@
     <Property Type="Int32" Name="ID" Nullable="false" />
     <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
     <Property Type="Int32" Name="OwnerID" Nullable="false" />
-  </ComplexType>
-  <ComplexType Name="getProjectInfo_Result">
-    <Property Type="Int32" Name="Project_ID" Nullable="false" />
-    <Property Type="Int32" Name="Project_Name" Nullable="false" />
-    <Property Type="Int16" Name="Status" Nullable="true" />
-    <Property Type="Int32" Name="Department_Code" Nullable="true" />
-    <Property Type="Int32" Name="Amount_of_Related_Tasks" Nullable="true" />
   </ComplexType>
   <ComplexType Name="getProjManagerInfo_Result">
     <Property Type="Int32" Name="SSN" Nullable="false" />
@@ -287,5 +287,49 @@
   <ComplexType Name="Procedure_Result">
     <Property Type="Int32" Name="Column1" Nullable="true" />
     <Property Type="Int32" Name="Column2" Nullable="true" />
+  </ComplexType>
+  <EntityType Name="ErrorMessage">
+    <Key>
+      <PropertyRef Name="project_num" />
+    </Key>
+    <Property Name="project_num" Type="Int32" Nullable="false" />
+    <Property Name="error_desc" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="project" Relationship="Team18DBModel.Errormessages_ErrorMessages_ibfk_1" FromRole="ErrorMessage" ToRole="project" />
+  </EntityType>
+  <EntityType Name="database_firewall_rules">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="name" />
+      <PropertyRef Name="start_ip_address" />
+      <PropertyRef Name="end_ip_address" />
+      <PropertyRef Name="create_date" />
+      <PropertyRef Name="modify_date" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="start_ip_address" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="end_ip_address" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="modify_date" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <Association Name="Errormessages_ErrorMessages_ibfk_1">
+    <End Type="Team18DBModel.project" Role="project" Multiplicity="1" />
+    <End Type="Team18DBModel.ErrorMessage" Role="ErrorMessage" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="project">
+        <PropertyRef Name="PROJECT_NUM" />
+      </Principal>
+      <Dependent Role="ErrorMessage">
+        <PropertyRef Name="project_num" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="getProjectInfo_Result">
+    <Property Type="Int32" Name="Project_ID" Nullable="false" />
+    <Property Type="String" Name="Project_Name" Nullable="true" MaxLength="30" />
+    <Property Type="Int16" Name="Status" Nullable="true" />
+    <Property Type="Int32" Name="Department_Code" Nullable="true" />
+    <Property Type="Decimal" Name="Budget_Balance" Nullable="true" Precision="9" Scale="2" />
+    <Property Type="Int32" Name="Amount_of_Related_Tasks" Nullable="true" />
   </ComplexType>
 </Schema>

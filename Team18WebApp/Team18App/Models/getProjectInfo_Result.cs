@@ -14,9 +14,10 @@ namespace Team18App.Models
     public partial class getProjectInfo_Result
     {
         public int Project_ID { get; set; }
-        public int Project_Name { get; set; }
+        public string Project_Name { get; set; }
         public Nullable<short> Status { get; set; }
         public Nullable<int> Department_Code { get; set; }
+        public Nullable<decimal> Budget_Balance { get; set; }
         public Nullable<int> Amount_of_Related_Tasks { get; set; }
     }
 }

@@ -137,6 +137,7 @@
     <Compile Include="Controllers\clientsController.cs" />
     <Compile Include="Controllers\departmentsController.cs" />
     <Compile Include="Controllers\employeesController.cs" />
+    <Compile Include="Controllers\getProjectInfoController.cs" />
     <Compile Include="Controllers\getTaskInfoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\projectsController.cs" />
@@ -145,10 +146,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\getProjectInfoFormModel.cs" />
     <Compile Include="Models\database_firewall_rules.cs">
       <DependentUpon>EDM.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ErrorMessage.cs">
+      <DependentUpon>EDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\getProjectInfo_Result.cs">
       <DependentUpon>EDM.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\getTaskInfoModel.cs" />
@@ -176,9 +181,6 @@
       <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="Models\employee.cs">
-      <DependentUpon>EDM.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\getProjectInfo_Result.cs">
       <DependentUpon>EDM.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\getProjManagerInfo_Result.cs">
@@ -403,6 +405,8 @@
     <Content Include="Views\tasks\Index.cshtml" />
     <Content Include="Views\getTaskInfo\getParamsTI.cshtml" />
     <Content Include="Views\getTaskInfo\getTaskInfo.cshtml" />
+    <Content Include="Views\getProjectInfo\getParamsPI.cshtml" />
+    <Content Include="Views\getProjectInfo\getProjectInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

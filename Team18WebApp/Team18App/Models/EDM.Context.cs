@@ -140,15 +140,6 @@ namespace Team18App.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
         }
     
-        public virtual ObjectResult<getProjectInfo_Result> getProjectInfo(Nullable<int> projectID)
-        {
-            var projectIDParameter = projectID.HasValue ?
-                new ObjectParameter("projectID", projectID) :
-                new ObjectParameter("projectID", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getProjectInfo_Result>("getProjectInfo", projectIDParameter);
-        }
-    
         public virtual ObjectResult<getProjManagerInfo_Result> getProjManagerInfo(Nullable<int> projManagerID, Nullable<int> deptNum, Nullable<int> projNum)
         {
             var projManagerIDParameter = projManagerID.HasValue ?
@@ -212,6 +203,15 @@ namespace Team18App.Models
                 new ObjectParameter("param2", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Procedure_Result>("Procedure", param1Parameter, param2Parameter);
+        }
+    
+        public virtual ObjectResult<getProjectInfo_Result> getProjectInfo(Nullable<int> projectID)
+        {
+            var projectIDParameter = projectID.HasValue ?
+                new ObjectParameter("projectID", projectID) :
+                new ObjectParameter("projectID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getProjectInfo_Result>("getProjectInfo", projectIDParameter);
         }
     }
 }
