@@ -137,6 +137,7 @@
     <Compile Include="Controllers\clientsController.cs" />
     <Compile Include="Controllers\departmentsController.cs" />
     <Compile Include="Controllers\employeesController.cs" />
+    <Compile Include="Controllers\getTaskInfoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\projectsController.cs" />
     <Compile Include="Controllers\tasksController.cs" />
@@ -144,6 +145,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\getTaskInfoModel.cs" />
     <Compile Include="Models\TopEmployeesFormModel.cs" />
     <Compile Include="Models\client.cs">
       <DependentUpon>EDM.tt</DependentUpon>
@@ -393,6 +395,8 @@
     <Content Include="Views\tasks\Details.cshtml" />
     <Content Include="Views\tasks\Edit.cshtml" />
     <Content Include="Views\tasks\Index.cshtml" />
+    <Content Include="Views\getTaskInfo\getParamsTI.cshtml" />
+    <Content Include="Views\getTaskInfo\getTaskInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

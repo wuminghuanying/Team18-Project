@@ -1,0 +1,62 @@
+﻿
+
+<h2>getParamsTI</h2>
+@model Team18App.Models.getTaskInfoModel
+
+@{
+    ViewBag.Title = "getParamsTI";
+    bool isAdmin = false;
+    bool isDhead = true;
+    bool isEmployee = false;
+    if (User.Identity.Name.Contains("AdminUser"))
+    {
+        isAdmin = true;
+        isDhead = true;
+        isEmployee = true;
+    }
+    if (User.Identity.Name.Contains("DepartmentHead"))
+    {
+        isDhead = true;
+        isEmployee = true;
+    }
+    if (User.Identity.Name.Contains("Employee"))
+    {
+        isEmployee = true;
+    }
+}
+
+<h2>Task Information Report</h2>
+
+@if (isDhead)
+{
+    using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>getTaskInfoModel</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+             @Html.LabelFor(model => model.projectCode, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.projectCode, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.projectCode, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+</div>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+}
+else
+{
+    <h2>Insufficient Viewing Privileges</h2>
+}
