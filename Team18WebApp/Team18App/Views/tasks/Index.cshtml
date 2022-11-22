@@ -2,12 +2,32 @@
 
 @{
     ViewBag.Title = "Index";
+    bool isAdmin = false;
+    bool isDhead = false;
+    bool isEmployee = false;
+    if (User.Identity.Name.Contains("AdminUser"))
+    {
+        isAdmin = true;
+        isDhead = true;
+        isEmployee = true;
+    }
+    if (User.Identity.Name.Contains("DepartmentHead"))
+    {
+        isDhead = true;
+        isEmployee = true;
+    }
+    if (User.Identity.Name.Contains("Employee"))
+    {
+        isEmployee = true;
+    }
 }
 
 <h2>Index</h2>
-
+@if (isEmployee) {
 <p>
+    @if (isDhead) {
     @Html.ActionLink("Create New", "Create")
+    }
 </p>
 <table class="table">
     <tr>
@@ -32,7 +52,7 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+    @foreach (var item in Model) {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.task_budget)
@@ -61,3 +81,7 @@
 }
 
 </table>
+}
+else {
+<h2>Insufficient Viewing Privileges</h2>
+}

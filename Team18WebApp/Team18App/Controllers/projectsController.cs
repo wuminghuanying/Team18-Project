@@ -10,6 +10,7 @@ using Team18App.Models;
 
 namespace Team18App.Controllers
 {
+    [Authorize]
     public class projectsController : Controller
     {
         private Entities db = new Entities();

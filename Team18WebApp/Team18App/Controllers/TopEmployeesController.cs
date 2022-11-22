@@ -10,6 +10,7 @@ using Team18App.Models;
 
 namespace Team18App.Controllers
 {
+    [Authorize]
     public class TopEmployeesController : Controller
     {
         // GET: TopEmployees
