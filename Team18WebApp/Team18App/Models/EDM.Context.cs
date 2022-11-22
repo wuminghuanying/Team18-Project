@@ -187,7 +187,7 @@ namespace Team18App.Models
                 new ObjectParameter("projNum", projNum) :
                 new ObjectParameter("projNum", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getTopEmployees_Result>("getTopEmployees", hoursWorkedParameter, deptNumParameter, projNumParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getTopEmployees_Result>("Entities.getTopEmployees", hoursWorkedParameter, deptNumParameter, projNumParameter);
         }
     
         public virtual int InsertFirstName(string firstname)
