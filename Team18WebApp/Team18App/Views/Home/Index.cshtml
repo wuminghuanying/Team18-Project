@@ -35,24 +35,49 @@
 
 @if (!string.IsNullOrWhiteSpace(User.Identity.Name))
     {
-<h2 style="text-align: center">What do you want to view?</h2>
+<h2>Useful Pages</h2>
+<div class="row">
+    @if (!isEmployee) {
+    <div class="col-md-4">
+        <h2>Submit a Project</h2>
+        <p>
+            If you are a client, click here to submit a project!
+        </p>
+        <p><a class="btn btn-default" href="https://team18app.azurewebsites.net/projects">Placeholder &raquo;</a></p>
+    </div>
+    }
+    @if (isEmployee) {
+    <div class="col-md-4">
+        <h2>Projects</h2>
+        <p>View active projects!</p>
+        <p><a class="btn btn-default" href="https://team18app.azurewebsites.net/projects">Projects &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Tasks</h2>
+        <p>View task information for each project</p>
+        <p><a class="btn btn-default" href="https://team18app.azurewebsites.net/tasks">Tasks &raquo;</a></p>
+    </div>
+    }
+</div>
+if (isDhead) {
 <div class="row">
     <div class="col-md-4">
         <h2>Employees</h2>
         <p>
-            View employee information!
+            View employee information
         </p>
         <p><a class="btn btn-default" href="https://team18app.azurewebsites.net/employees">Employees &raquo;</a></p>
     </div>
     <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+        <h2>Departments</h2>
+        <p>View all departments</p>
+        <p><a class="btn btn-default" href="https://team18app.azurewebsites.net/departments">Departments &raquo;</a></p>
     </div>
     <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+        <h2>Clients</h2>
+        <p>View client information</p>
+        <p><a class="btn btn-default" href="https://team18app.azurewebsites.net/clients">Clients &raquo;</a></p>
     </div>
 </div>
+    }
 }
