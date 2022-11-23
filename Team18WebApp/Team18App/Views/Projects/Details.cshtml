@@ -1,0 +1,74 @@
+﻿@model Team18App.Models.Project
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Project</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ProjectBudget)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProjectBudget)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CurrentExpenses)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CurrentExpenses)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProjectDeadline)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProjectDeadline)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProjectName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProjectName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Department.DepartmentName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Department.DepartmentName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Employee.Fname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Employee.Fname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status.StatusName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status.StatusName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ProjectID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
