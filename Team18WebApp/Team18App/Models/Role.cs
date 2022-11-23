@@ -12,12 +12,18 @@ namespace Team18App.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class UsersTbl
+    public partial class Role
     {
-        public int UserID { get; set; }
-        public string Username { get; set; }
-        public string Email { get; set; }
-        public string Passccode { get; set; }
-        public Nullable<int> RoleId { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Role()
+        {
+            this.Users = new HashSet<User>();
+        }
+    
+        public int roleId { get; set; }
+        public string roleName { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<User> Users { get; set; }
     }
 }

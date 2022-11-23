@@ -12,15 +12,14 @@ namespace Team18App.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class client
+    public partial class Client
     {
+        public int ClientID { get; set; }
+        public int UserID { get; set; }
         public string Fname { get; set; }
         public string Minit { get; set; }
         public string Lname { get; set; }
-        public string CLIENT_ID { get; set; }
-        public string CLIENT_COMPANY { get; set; }
-        public Nullable<int> Project_ID { get; set; }
     
-        public virtual project project { get; set; }
+        public virtual User User { get; set; }
     }
 }

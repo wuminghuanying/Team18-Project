@@ -131,87 +131,58 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\clientsController.cs" />
-    <Compile Include="Controllers\departmentsController.cs" />
-    <Compile Include="Controllers\employeesController.cs" />
-    <Compile Include="Controllers\ErrorMessagesController.cs" />
-    <Compile Include="Controllers\getProjectInfoController.cs" />
-    <Compile Include="Controllers\getTaskInfoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\projectsController.cs" />
-    <Compile Include="Controllers\tasksController.cs" />
-    <Compile Include="Controllers\TopEmployeesController.cs" />
-    <Compile Include="Controllers\UsersTblsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\getProjectInfoFormModel.cs" />
-    <Compile Include="Models\database_firewall_rules.cs">
+    <Compile Include="Models\Client.cs">
+      <DependentUpon>EDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Department.cs">
+      <DependentUpon>EDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EDM.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EDM.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EDM.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EDM.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EDM.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Employee.cs">
       <DependentUpon>EDM.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ErrorMessage.cs">
       <DependentUpon>EDM.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\getProjectInfo_Result.cs">
+    <Compile Include="Models\Project.cs">
       <DependentUpon>EDM.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\getTaskInfoModel.cs" />
-    <Compile Include="Models\TopEmployeesFormModel.cs" />
-    <Compile Include="Models\client.cs">
+    <Compile Include="Models\Role.cs">
+      <DependentUpon>EDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Status.cs">
+      <DependentUpon>EDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Table.cs">
+      <DependentUpon>EDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Task.cs">
       <DependentUpon>EDM.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Constants.cs" />
-    <Compile Include="Models\department.cs">
-      <DependentUpon>EDM.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EDM.Context.cs">
-      <DependentUpon>EDM.Context.tt</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
-    <Compile Include="Models\EDM.cs">
-      <DependentUpon>EDM.tt</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
-    <Compile Include="Models\EDM.Designer.cs">
-      <DependentUpon>EDM.edmx</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
-    <Compile Include="Models\employee.cs">
-      <DependentUpon>EDM.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\getProjManagerInfo_Result.cs">
-      <DependentUpon>EDM.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\getTaskInfo_Result.cs">
-      <DependentUpon>EDM.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\getTopEmployees_Result.cs">
-      <DependentUpon>EDM.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\LoginViewModel.cs" />
-    <Compile Include="Models\Procedure_Result.cs">
+    <Compile Include="Models\User.cs">
       <DependentUpon>EDM.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\project.cs">
-      <DependentUpon>EDM.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>EDM.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_helpdiagrams_Result.cs">
-      <DependentUpon>EDM.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sysdiagram.cs">
-      <DependentUpon>EDM.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\task.cs">
-      <DependentUpon>EDM.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UsersTbl.cs">
+    <Compile Include="Models\WorksOn.cs">
       <DependentUpon>EDM.tt</DependentUpon>
     </Compile>
     <Compile Include="obj\Debug\.NETFramework,Version=v4.7.2.AssemblyAttributes.cs" />
@@ -301,16 +272,13 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Global.asax" />
     <Content Include="Models\EDM.Context.tt">
-      <DependentUpon>EDM.edmx</DependentUpon>
       <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EDM.edmx</DependentUpon>
       <LastGenOutput>EDM.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\EDM.edmx.diagram">
-      <DependentUpon>EDM.edmx</DependentUpon>
-    </Content>
     <Content Include="Models\EDM.tt">
-      <DependentUpon>EDM.edmx</DependentUpon>
       <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EDM.edmx</DependentUpon>
       <LastGenOutput>EDM.cs</LastGenOutput>
     </Content>
     <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
@@ -341,6 +309,13 @@
     <Content Include="obj\Release\edmxResourcesToEmbed\Models\EDM.ssdl" />
     <Content Include="obj\Release\Team18App.csproj.AssemblyReference.cache" />
     <Content Include="obj\Release\Team18App.csproj.CoreCompileInputs.cache" />
+    <EntityDeploy Include="Models\EDM.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>EDM.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\EDM.edmx.diagram">
+      <DependentUpon>EDM.edmx</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\Team18App - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\Team18App - Web Deploy1.pubxml" />
     <Content Include="Properties\ServiceDependencies\Team18App - Web Deploy1\profile.arm.json" />
@@ -358,31 +333,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Account\Signup.cshtml" />
-    <Content Include="Views\clients\Create.cshtml" />
-    <Content Include="Views\clients\Delete.cshtml" />
-    <Content Include="Views\clients\Details.cshtml" />
-    <Content Include="Views\clients\Edit.cshtml" />
-    <Content Include="Views\clients\Index.cshtml" />
-    <Content Include="Views\departments\Create.cshtml" />
-    <Content Include="Views\departments\Delete.cshtml" />
-    <Content Include="Views\departments\Details.cshtml" />
-    <Content Include="Views\departments\Edit.cshtml" />
-    <Content Include="Views\departments\Index.cshtml" />
-    <Content Include="Views\employees\Create.cshtml" />
-    <Content Include="Views\employees\Delete.cshtml" />
-    <Content Include="Views\employees\Details.cshtml" />
-    <Content Include="Views\employees\Edit.cshtml" />
-    <Content Include="Views\employees\Index.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\projects\Create.cshtml" />
-    <Content Include="Views\projects\Delete.cshtml" />
-    <Content Include="Views\projects\Details.cshtml" />
-    <Content Include="Views\projects\Edit.cshtml" />
-    <Content Include="Views\projects\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
@@ -396,27 +349,6 @@
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Views\TopEmployees\getTopEmployees.cshtml" />
-    <Content Include="Views\TopEmployees\getParamsTE.cshtml" />
-    <Content Include="Views\tasks\Create.cshtml" />
-    <Content Include="Views\tasks\Delete.cshtml" />
-    <Content Include="Views\tasks\Details.cshtml" />
-    <Content Include="Views\tasks\Edit.cshtml" />
-    <Content Include="Views\tasks\Index.cshtml" />
-    <Content Include="Views\getTaskInfo\getParamsTI.cshtml" />
-    <Content Include="Views\getTaskInfo\getTaskInfo.cshtml" />
-    <Content Include="Views\getProjectInfo\getParamsPI.cshtml" />
-    <Content Include="Views\getProjectInfo\getProjectInfo.cshtml" />
-    <Content Include="Views\UsersTbls\Create.cshtml" />
-    <Content Include="Views\UsersTbls\Delete.cshtml" />
-    <Content Include="Views\UsersTbls\Details.cshtml" />
-    <Content Include="Views\UsersTbls\Edit.cshtml" />
-    <Content Include="Views\UsersTbls\Index.cshtml" />
-    <Content Include="Views\ErrorMessages\Create.cshtml" />
-    <Content Include="Views\ErrorMessages\Delete.cshtml" />
-    <Content Include="Views\ErrorMessages\Details.cshtml" />
-    <Content Include="Views\ErrorMessages\Edit.cshtml" />
-    <Content Include="Views\ErrorMessages\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -428,12 +360,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <EntityDeploy Include="Models\EDM.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>EDM.Designer.cs</LastGenOutput>
-    </EntityDeploy>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

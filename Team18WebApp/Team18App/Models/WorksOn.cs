@@ -10,12 +10,15 @@
 namespace Team18App.Models
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class getProjManagerInfo_Result
+    public partial class WorksOn
     {
-        public int SSN { get; set; }
-        public string Fname { get; set; }
-        public string Lname { get; set; }
-        public Nullable<int> Dept_Code { get; set; }
+        public int WorksOnID { get; set; }
+        public int ProjectNum { get; set; }
+        public decimal HoursWorked { get; set; }
+        public int ProjectID { get; set; }
+    
+        public virtual Project Project { get; set; }
     }
 }

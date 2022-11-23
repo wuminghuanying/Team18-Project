@@ -1,23 +1,4 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
-    bool isAdmin = false;
-    bool isDhead = false;
-    bool isEmployee = false;
-    if (User.Identity.Name.Contains("AdminUser"))
-    {
-        isAdmin = true;
-        isDhead = true;
-        isEmployee = true;
-    }
-    if (User.Identity.Name.Contains("DepartmentHead"))
-    {
-        isDhead = true;
-        isEmployee = true;
-    }
-    if (User.Identity.Name.Contains("Employee"))
-    {
-        isEmployee = true;
-    }
 
 }
 
@@ -37,7 +18,6 @@
     {
 <h2>Useful Pages</h2>
 <div class="row">
-    @if (!isEmployee) {
     <div class="col-md-4">
         <h2>Submit a Project</h2>
         <p>
@@ -45,8 +25,6 @@
         </p>
         <p><a class="btn btn-default" href="https://team18app.azurewebsites.net/projects/create">Project &raquo;</a></p>
     </div>
-    }
-    @if (isEmployee) {
     <div class="col-md-4">
         <h2>Projects</h2>
         <p>View active projects!</p>
@@ -62,9 +40,7 @@
         <p>View tasks for a specific project</p>
         <p><a class="btn btn-default" href="https://team18app.azurewebsites.net/getTaskInfo/getParamsTI">Tasks &raquo;</a></p>
     </div>
-    }
 </div>
-if (isDhead) {
 <div class="row">
     <div class="col-md-4">
         <h2>Employees</h2>
@@ -84,7 +60,6 @@ if (isDhead) {
         <p><a class="btn btn-default" href="https://team18app.azurewebsites.net/clients">Clients &raquo;</a></p>
     </div>
 </div>
-if (isAdmin) {
 <div class="row">
     <div class="col-md-4">
         <h2>User Login Info</h2>
@@ -94,6 +69,5 @@ if (isAdmin) {
         <p><a class="btn btn-default" href="https://team18app.azurewebsites.net/UsersTbls">Logins &raquo;</a></p>
     </div>
 </div>
-}
-    }
+
 }

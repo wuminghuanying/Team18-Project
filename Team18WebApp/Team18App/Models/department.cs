@@ -12,23 +12,19 @@ namespace Team18App.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class department
+    public partial class Department
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public department()
+        public Department()
         {
-            this.employees = new HashSet<employee>();
-            this.projects = new HashSet<project>();
+            this.Projects = new HashSet<Project>();
         }
     
-        public int DEPT_NUM { get; set; }
-        public Nullable<int> DEPT_MANAGER_SSN { get; set; }
-        public string dept_name { get; set; }
+        public int DepartmentID { get; set; }
+        public string DepartmentName { get; set; }
+        public int DepartmentManagerID { get; set; }
     
-        public virtual employee employee { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<employee> employees { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<project> projects { get; set; }
+        public virtual ICollection<Project> Projects { get; set; }
     }
 }

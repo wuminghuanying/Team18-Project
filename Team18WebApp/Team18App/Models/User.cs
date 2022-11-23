@@ -12,26 +12,24 @@ namespace Team18App.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Employee
+    public partial class User
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Employee()
+        public User()
         {
-            this.Projects = new HashSet<Project>();
+            this.Clients = new HashSet<Client>();
+            this.Employees = new HashSet<Employee>();
         }
     
-        public int UserID { get; set; }
-        public int EmployeeID { get; set; }
-        public string Fname { get; set; }
-        public string Minit { get; set; }
-        public string Lname { get; set; }
-        public System.DateTime DOB { get; set; }
-        public string Sex { get; set; }
-        public int DepartmentID { get; set; }
-        public Nullable<decimal> Hourly_rate { get; set; }
+        public int id { get; set; }
+        public int role { get; set; }
+        public string userName { get; set; }
+        public string password { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Project> Projects { get; set; }
-        public virtual User User { get; set; }
+        public virtual ICollection<Client> Clients { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Employee> Employees { get; set; }
+        public virtual Role Role1 { get; set; }
     }
 }

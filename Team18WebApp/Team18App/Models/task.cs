@@ -12,16 +12,17 @@ namespace Team18App.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class task
+    public partial class Task
     {
-        public Nullable<int> project_id { get; set; }
-        public int task_id { get; set; }
-        public Nullable<decimal> task_budget { get; set; }
-        public string task_name { get; set; }
-        public Nullable<System.DateTime> task_deadline { get; set; }
-        public Nullable<short> task_status { get; set; }
-        public Nullable<decimal> task_expenses { get; set; }
+        public int TaskID { get; set; }
+        public int ProjectID { get; set; }
+        public decimal TaskBudget { get; set; }
+        public string TaskName { get; set; }
+        public System.DateTime TaskDeadline { get; set; }
+        public int TaskStatus { get; set; }
+        public decimal TaskExpenses { get; set; }
     
-        public virtual project project { get; set; }
+        public virtual Project Project { get; set; }
+        public virtual Status Status { get; set; }
     }
 }

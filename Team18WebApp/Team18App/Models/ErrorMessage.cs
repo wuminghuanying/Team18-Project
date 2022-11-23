@@ -14,9 +14,10 @@ namespace Team18App.Models
     
     public partial class ErrorMessage
     {
-        public int project_num { get; set; }
-        public string error_desc { get; set; }
+        public int MessageID { get; set; }
+        public int ProjectID { get; set; }
+        public string ErrorDescription { get; set; }
     
-        public virtual project project { get; set; }
+        public virtual Project Project { get; set; }
     }
 }

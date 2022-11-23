@@ -10,12 +10,11 @@
 namespace Team18App.Models
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class getTaskInfo_Result
+    public partial class Table
     {
-        public string Task { get; set; }
-        public Nullable<short> Status { get; set; }
-        public Nullable<System.DateTime> Deadline { get; set; }
-        public Nullable<int> Assigned_Employee { get; set; }
+        public int StatusID { get; set; }
+        public string StatusName { get; set; }
     }
 }

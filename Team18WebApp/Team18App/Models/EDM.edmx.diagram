@@ -4,23 +4,28 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="83c5b716e0e143e8bad1f564eb802155" Name="Diagram1">
-        <EntityTypeShape EntityType="Team18DBModel.sysdiagram" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Team18DBModel.UsersTbl" Width="1.5" PointX="2.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Team18DBModel.client" Width="1.5" PointX="7.5" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Team18DBModel.department" Width="1.5" PointX="3" PointY="2.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Team18DBModel.employee" Width="1.5" PointX="0.75" PointY="2.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Team18DBModel.project" Width="1.5" PointX="5.25" PointY="2.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Team18DBModel.task" Width="1.5" PointX="7.5" PointY="4.25" IsExpanded="true" />
-        <AssociationConnector Association="Team18DBModel.client_client_ibfk_1" ManuallyRouted="false" />
-        <AssociationConnector Association="Team18DBModel.department_department_ibfk_1" ManuallyRouted="false" />
-        <AssociationConnector Association="Team18DBModel.employee_employee_ibfk_1" ManuallyRouted="false" />
-        <AssociationConnector Association="Team18DBModel.projects_projects_ibfk_1" ManuallyRouted="false" />
-        <AssociationConnector Association="Team18DBModel.projects_projects_ibfk_2" ManuallyRouted="false" />
-        <AssociationConnector Association="Team18DBModel.tasks_tasks_ibfk_1" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="Team18DBModel.ErrorMessage" Width="1.5" PointX="7.875" PointY="8.25" />
-        <EntityTypeShape EntityType="Team18DBModel.database_firewall_rules" Width="1.5" PointX="0.75" PointY="9.75" />
-        <AssociationConnector Association="Team18DBModel.Errormessages_ErrorMessages_ibfk_1" />
+      <Diagram DiagramId="87c0d88fccec43f0aec95ffe86aeee3b" Name="Diagram1">
+        <EntityTypeShape EntityType="team18dbModel.Client" Width="1.5" PointX="3.75" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="team18dbModel.Department" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="team18dbModel.Employee" Width="1.5" PointX="0.75" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="team18dbModel.ErrorMessage" Width="1.5" PointX="5.25" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="team18dbModel.Project" Width="1.5" PointX="3" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="team18dbModel.Role" Width="1.5" PointX="1.5" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="team18dbModel.Status" Width="1.5" PointX="0.75" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="team18dbModel.Table" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="team18dbModel.Task" Width="1.5" PointX="8.25" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="team18dbModel.User" Width="1.5" PointX="1.5" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="team18dbModel.WorksOn" Width="1.5" PointX="5.25" PointY="9" IsExpanded="true" />
+        <AssociationConnector Association="team18dbModel.FK_UserID" ManuallyRouted="false" />
+        <AssociationConnector Association="team18dbModel.FK_ProjectDept" ManuallyRouted="false" />
+        <AssociationConnector Association="team18dbModel.FK_ManagerID" ManuallyRouted="false" />
+        <AssociationConnector Association="team18dbModel.FK_UserIDEmployee" ManuallyRouted="false" />
+        <AssociationConnector Association="team18dbModel.FK_ErrorMessages_ProjectID" ManuallyRouted="false" />
+        <AssociationConnector Association="team18dbModel.FK_ProjectStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="team18dbModel.FK_TaskProjectID" ManuallyRouted="false" />
+        <AssociationConnector Association="team18dbModel.FK_WorksOnProject" ManuallyRouted="false" />
+        <AssociationConnector Association="team18dbModel.FK_Role" ManuallyRouted="false" />
+        <AssociationConnector Association="team18dbModel.FK_TasksStatus" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -12,30 +12,33 @@ namespace Team18App.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class project
+    public partial class Project
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public project()
+        public Project()
         {
-            this.clients = new HashSet<client>();
-            this.tasks = new HashSet<task>();
+            this.ErrorMessages = new HashSet<ErrorMessage>();
+            this.Tasks = new HashSet<Task>();
+            this.WorksOns = new HashSet<WorksOn>();
         }
     
-        public int PROJECT_NUM { get; set; }
-        public Nullable<int> PROJECT_DEPT { get; set; }
-        public Nullable<int> project_manager { get; set; }
-        public Nullable<decimal> PROJECT_BUDGET { get; set; }
-        public Nullable<decimal> CURRENT_EXPENSES { get; set; }
-        public Nullable<System.DateTime> project_deadline { get; set; }
-        public Nullable<short> project_status { get; set; }
-        public string project_name { get; set; }
+        public int ProjectID { get; set; }
+        public int ProjectDept { get; set; }
+        public int ProjectManagerID { get; set; }
+        public decimal ProjectBudget { get; set; }
+        public decimal CurrentExpenses { get; set; }
+        public System.DateTime ProjectDeadline { get; set; }
+        public int ProjectStatus { get; set; }
+        public string ProjectName { get; set; }
     
+        public virtual Department Department { get; set; }
+        public virtual Employee Employee { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<client> clients { get; set; }
-        public virtual department department { get; set; }
-        public virtual employee employee { get; set; }
+        public virtual ICollection<ErrorMessage> ErrorMessages { get; set; }
+        public virtual Status Status { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<task> tasks { get; set; }
-        public virtual ErrorMessage ErrorMessage { get; set; }
+        public virtual ICollection<Task> Tasks { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<WorksOn> WorksOns { get; set; }
     }
 }

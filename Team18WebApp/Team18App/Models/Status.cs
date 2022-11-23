@@ -12,26 +12,21 @@ namespace Team18App.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Employee
+    public partial class Status
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Employee()
+        public Status()
         {
             this.Projects = new HashSet<Project>();
+            this.Tasks = new HashSet<Task>();
         }
     
-        public int UserID { get; set; }
-        public int EmployeeID { get; set; }
-        public string Fname { get; set; }
-        public string Minit { get; set; }
-        public string Lname { get; set; }
-        public System.DateTime DOB { get; set; }
-        public string Sex { get; set; }
-        public int DepartmentID { get; set; }
-        public Nullable<decimal> Hourly_rate { get; set; }
+        public int StatusID { get; set; }
+        public string StatusName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Project> Projects { get; set; }
-        public virtual User User { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Task> Tasks { get; set; }
     }
 }

@@ -12,13 +12,11 @@ namespace Team18App.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    using System.Data.Entity.Core.Objects;
-    using System.Linq;
     
-    public partial class Entities : DbContext
+    public partial class team18dbEntities : DbContext
     {
-        public Entities()
-            : base("name=Entities")
+        public team18dbEntities()
+            : base("name=team18dbEntities")
         {
         }
     
@@ -27,191 +25,16 @@ namespace Team18App.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
-        public virtual DbSet<UsersTbl> UsersTbls { get; set; }
-        public virtual DbSet<client> clients { get; set; }
-        public virtual DbSet<department> departments { get; set; }
-        public virtual DbSet<employee> employees { get; set; }
-        public virtual DbSet<project> projects { get; set; }
-        public virtual DbSet<task> tasks { get; set; }
+        public virtual DbSet<Client> Clients { get; set; }
+        public virtual DbSet<Department> Departments { get; set; }
+        public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<ErrorMessage> ErrorMessages { get; set; }
-        public virtual DbSet<database_firewall_rules> database_firewall_rules { get; set; }
-    
-        public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            var versionParameter = version.HasValue ?
-                new ObjectParameter("version", version) :
-                new ObjectParameter("version", typeof(int));
-    
-            var definitionParameter = definition != null ?
-                new ObjectParameter("definition", definition) :
-                new ObjectParameter("definition", typeof(byte[]));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_alterdiagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
-        }
-    
-        public virtual int sp_creatediagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            var versionParameter = version.HasValue ?
-                new ObjectParameter("version", version) :
-                new ObjectParameter("version", typeof(int));
-    
-            var definitionParameter = definition != null ?
-                new ObjectParameter("definition", definition) :
-                new ObjectParameter("definition", typeof(byte[]));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_creatediagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
-        }
-    
-        public virtual int sp_dropdiagram(string diagramname, Nullable<int> owner_id)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_dropdiagram", diagramnameParameter, owner_idParameter);
-        }
-    
-        public virtual ObjectResult<sp_helpdiagramdefinition_Result> sp_helpdiagramdefinition(string diagramname, Nullable<int> owner_id)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagramdefinition_Result>("sp_helpdiagramdefinition", diagramnameParameter, owner_idParameter);
-        }
-    
-        public virtual ObjectResult<sp_helpdiagrams_Result> sp_helpdiagrams(string diagramname, Nullable<int> owner_id)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagrams_Result>("sp_helpdiagrams", diagramnameParameter, owner_idParameter);
-        }
-    
-        public virtual int sp_renamediagram(string diagramname, Nullable<int> owner_id, string new_diagramname)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            var new_diagramnameParameter = new_diagramname != null ?
-                new ObjectParameter("new_diagramname", new_diagramname) :
-                new ObjectParameter("new_diagramname", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_renamediagram", diagramnameParameter, owner_idParameter, new_diagramnameParameter);
-        }
-    
-        public virtual int sp_upgraddiagrams()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
-        }
-    
-        public virtual ObjectResult<getProjManagerInfo_Result> getProjManagerInfo(Nullable<int> projManagerID, Nullable<int> deptNum, Nullable<int> projNum)
-        {
-            var projManagerIDParameter = projManagerID.HasValue ?
-                new ObjectParameter("projManagerID", projManagerID) :
-                new ObjectParameter("projManagerID", typeof(int));
-    
-            var deptNumParameter = deptNum.HasValue ?
-                new ObjectParameter("deptNum", deptNum) :
-                new ObjectParameter("deptNum", typeof(int));
-    
-            var projNumParameter = projNum.HasValue ?
-                new ObjectParameter("projNum", projNum) :
-                new ObjectParameter("projNum", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getProjManagerInfo_Result>("getProjManagerInfo", projManagerIDParameter, deptNumParameter, projNumParameter);
-        }
-    
-        public virtual ObjectResult<getTaskInfo_Result> getTaskInfo(Nullable<int> projectCode)
-        {
-            var projectCodeParameter = projectCode.HasValue ?
-                new ObjectParameter("projectCode", projectCode) :
-                new ObjectParameter("projectCode", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getTaskInfo_Result>("getTaskInfo", projectCodeParameter);
-        }
-    
-        public virtual ObjectResult<getTopEmployees_Result> getTopEmployees(Nullable<int> hoursWorked, Nullable<int> deptNum, Nullable<int> projNum)
-        {
-            var hoursWorkedParameter = hoursWorked.HasValue ?
-                new ObjectParameter("hoursWorked", hoursWorked) :
-                new ObjectParameter("hoursWorked", typeof(int));
-    
-            var deptNumParameter = deptNum.HasValue ?
-                new ObjectParameter("deptNum", deptNum) :
-                new ObjectParameter("deptNum", typeof(int));
-    
-            var projNumParameter = projNum.HasValue ?
-                new ObjectParameter("projNum", projNum) :
-                new ObjectParameter("projNum", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getTopEmployees_Result>("getTopEmployees", hoursWorkedParameter, deptNumParameter, projNumParameter);
-        }
-    
-        public virtual int InsertFirstName(string firstname)
-        {
-            var firstnameParameter = firstname != null ?
-                new ObjectParameter("Firstname", firstname) :
-                new ObjectParameter("Firstname", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InsertFirstName", firstnameParameter);
-        }
-    
-        public virtual ObjectResult<Procedure_Result> Procedure(Nullable<int> param1, Nullable<int> param2)
-        {
-            var param1Parameter = param1.HasValue ?
-                new ObjectParameter("param1", param1) :
-                new ObjectParameter("param1", typeof(int));
-    
-            var param2Parameter = param2.HasValue ?
-                new ObjectParameter("param2", param2) :
-                new ObjectParameter("param2", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Procedure_Result>("Procedure", param1Parameter, param2Parameter);
-        }
-    
-        public virtual ObjectResult<getProjectInfo_Result> getProjectInfo(Nullable<int> projectID)
-        {
-            var projectIDParameter = projectID.HasValue ?
-                new ObjectParameter("projectID", projectID) :
-                new ObjectParameter("projectID", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getProjectInfo_Result>("getProjectInfo", projectIDParameter);
-        }
+        public virtual DbSet<Project> Projects { get; set; }
+        public virtual DbSet<Role> Roles { get; set; }
+        public virtual DbSet<Status> Status { get; set; }
+        public virtual DbSet<Table> Tables { get; set; }
+        public virtual DbSet<Task> Tasks { get; set; }
+        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<WorksOn> WorksOns { get; set; }
     }
 }

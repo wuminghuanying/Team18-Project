@@ -1,185 +1,120 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="Team18DBModelStoreContainer" CdmEntityContainer="Entities">
-    <EntitySetMapping Name="sysdiagrams">
-      <EntityTypeMapping TypeName="Team18DBModel.sysdiagram">
-        <MappingFragment StoreEntitySet="sysdiagrams">
-          <ScalarProperty Name="name" ColumnName="name" />
-          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-          <ScalarProperty Name="version" ColumnName="version" />
-          <ScalarProperty Name="definition" ColumnName="definition" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="UsersTbls">
-      <EntityTypeMapping TypeName="Team18DBModel.UsersTbl">
-        <MappingFragment StoreEntitySet="UsersTbl">
-          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+  <EntityContainerMapping StorageEntityContainer="team18dbModelStoreContainer" CdmEntityContainer="team18dbEntities">
+    <EntitySetMapping Name="Clients">
+      <EntityTypeMapping TypeName="team18dbModel.Client">
+        <MappingFragment StoreEntitySet="Client">
+          <ScalarProperty Name="ClientID" ColumnName="ClientID" />
           <ScalarProperty Name="UserID" ColumnName="UserID" />
-          <ScalarProperty Name="Username" ColumnName="Username" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="Passccode" ColumnName="Passccode" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="clients">
-      <EntityTypeMapping TypeName="Team18DBModel.client">
-        <MappingFragment StoreEntitySet="client">
           <ScalarProperty Name="Fname" ColumnName="Fname" />
           <ScalarProperty Name="Minit" ColumnName="Minit" />
           <ScalarProperty Name="Lname" ColumnName="Lname" />
-          <ScalarProperty Name="CLIENT_ID" ColumnName="CLIENT_ID" />
-          <ScalarProperty Name="CLIENT_COMPANY" ColumnName="CLIENT_COMPANY" />
-          <ScalarProperty Name="Project_ID" ColumnName="Project_ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="departments">
-      <EntityTypeMapping TypeName="Team18DBModel.department">
-        <MappingFragment StoreEntitySet="department">
-          <ScalarProperty Name="DEPT_NUM" ColumnName="DEPT_NUM" />
-          <ScalarProperty Name="DEPT_MANAGER_SSN" ColumnName="DEPT_MANAGER_SSN" />
-          <ScalarProperty Name="dept_name" ColumnName="dept_name" />
+    <EntitySetMapping Name="Departments">
+      <EntityTypeMapping TypeName="team18dbModel.Department">
+        <MappingFragment StoreEntitySet="Department">
+          <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+          <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
+          <ScalarProperty Name="DepartmentManagerID" ColumnName="DepartmentManagerID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="employees">
-      <EntityTypeMapping TypeName="Team18DBModel.employee">
-        <MappingFragment StoreEntitySet="employee">
+    <EntitySetMapping Name="Employees">
+      <EntityTypeMapping TypeName="team18dbModel.Employee">
+        <MappingFragment StoreEntitySet="Employee">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
           <ScalarProperty Name="Fname" ColumnName="Fname" />
           <ScalarProperty Name="Minit" ColumnName="Minit" />
           <ScalarProperty Name="Lname" ColumnName="Lname" />
-          <ScalarProperty Name="SSN" ColumnName="SSN" />
           <ScalarProperty Name="DOB" ColumnName="DOB" />
           <ScalarProperty Name="Sex" ColumnName="Sex" />
-          <ScalarProperty Name="Department_number" ColumnName="Department_number" />
-          <ScalarProperty Name="hourly_rate" ColumnName="hourly_rate" />
+          <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+          <ScalarProperty Name="Hourly_rate" ColumnName="Hourly_rate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="projects">
-      <EntityTypeMapping TypeName="Team18DBModel.project">
-        <MappingFragment StoreEntitySet="projects">
-          <ScalarProperty Name="PROJECT_NUM" ColumnName="PROJECT_NUM" />
-          <ScalarProperty Name="PROJECT_DEPT" ColumnName="PROJECT_DEPT" />
-          <ScalarProperty Name="project_manager" ColumnName="project_manager" />
-          <ScalarProperty Name="PROJECT_BUDGET" ColumnName="PROJECT_BUDGET" />
-          <ScalarProperty Name="CURRENT_EXPENSES" ColumnName="CURRENT_EXPENSES" />
-          <ScalarProperty Name="project_deadline" ColumnName="project_deadline" />
-          <ScalarProperty Name="project_status" ColumnName="project_status" />
-          <ScalarProperty Name="project_name" ColumnName="project_name" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tasks">
-      <EntityTypeMapping TypeName="Team18DBModel.task">
-        <MappingFragment StoreEntitySet="tasks">
-          <ScalarProperty Name="project_id" ColumnName="project_id" />
-          <ScalarProperty Name="task_id" ColumnName="task_id" />
-          <ScalarProperty Name="task_budget" ColumnName="task_budget" />
-          <ScalarProperty Name="task_name" ColumnName="task_name" />
-          <ScalarProperty Name="task_deadline" ColumnName="task_deadline" />
-          <ScalarProperty Name="task_status" ColumnName="task_status" />
-          <ScalarProperty Name="task_expenses" ColumnName="task_expenses" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="Team18DBModel.Store.sp_alterdiagram" />
-    <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="Team18DBModel.Store.sp_creatediagram" />
-    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="Team18DBModel.Store.sp_dropdiagram" />
-    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="Team18DBModel.Store.sp_helpdiagramdefinition">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="Team18DBModel.sp_helpdiagramdefinition_Result">
-          <ScalarProperty Name="version" ColumnName="version" />
-          <ScalarProperty Name="definition" ColumnName="definition" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="Team18DBModel.Store.sp_helpdiagrams">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="Team18DBModel.sp_helpdiagrams_Result">
-          <ScalarProperty Name="Database" ColumnName="Database" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="Owner" ColumnName="Owner" />
-          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="Team18DBModel.Store.sp_renamediagram" />
-    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Team18DBModel.Store.sp_upgraddiagrams" />
-    <FunctionImportMapping FunctionImportName="getProjManagerInfo" FunctionName="Team18DBModel.Store.getProjManagerInfo">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="Team18DBModel.getProjManagerInfo_Result">
-          <ScalarProperty Name="SSN" ColumnName="SSN" />
-          <ScalarProperty Name="Fname" ColumnName="Fname" />
-          <ScalarProperty Name="Lname" ColumnName="Lname" />
-          <ScalarProperty Name="Dept_Code" ColumnName="Dept_Code" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="getTaskInfo" FunctionName="Team18DBModel.Store.getTaskInfo">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="Team18DBModel.getTaskInfo_Result">
-          <ScalarProperty Name="Task" ColumnName="Task" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="Deadline" ColumnName="Deadline" />
-          <ScalarProperty Name="Assigned_Employee" ColumnName="Assigned Employee" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="getTopEmployees" FunctionName="Team18DBModel.Store.getTopEmployees">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="Team18DBModel.getTopEmployees_Result">
-          <ScalarProperty Name="SSN" ColumnName="SSN" />
-          <ScalarProperty Name="First_Name" ColumnName="First_Name" />
-          <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
-          <ScalarProperty Name="Weekly_Pay" ColumnName="Weekly_Pay" />
-          <ScalarProperty Name="Dept_Code" ColumnName="Dept_Code" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="InsertFirstName" FunctionName="Team18DBModel.Store.InsertFirstName" />
-    <FunctionImportMapping FunctionImportName="Procedure" FunctionName="Team18DBModel.Store.Procedure">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="Team18DBModel.Procedure_Result">
-          <ScalarProperty Name="Column1" ColumnName="Column1" />
-          <ScalarProperty Name="Column2" ColumnName="Column2" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
     <EntitySetMapping Name="ErrorMessages">
-      <EntityTypeMapping TypeName="Team18DBModel.ErrorMessage">
+      <EntityTypeMapping TypeName="team18dbModel.ErrorMessage">
         <MappingFragment StoreEntitySet="ErrorMessages">
-          <ScalarProperty Name="error_desc" ColumnName="error_desc" />
-          <ScalarProperty Name="project_num" ColumnName="project_num" />
+          <ScalarProperty Name="MessageID" ColumnName="MessageID" />
+          <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+          <ScalarProperty Name="ErrorDescription" ColumnName="ErrorDescription" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="database_firewall_rules">
-      <EntityTypeMapping TypeName="Team18DBModel.database_firewall_rules">
-        <MappingFragment StoreEntitySet="database_firewall_rules">
-          <ScalarProperty Name="modify_date" ColumnName="modify_date" />
-          <ScalarProperty Name="create_date" ColumnName="create_date" />
-          <ScalarProperty Name="end_ip_address" ColumnName="end_ip_address" />
-          <ScalarProperty Name="start_ip_address" ColumnName="start_ip_address" />
-          <ScalarProperty Name="name" ColumnName="name" />
+    <EntitySetMapping Name="Projects">
+      <EntityTypeMapping TypeName="team18dbModel.Project">
+        <MappingFragment StoreEntitySet="Projects">
+          <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+          <ScalarProperty Name="ProjectDept" ColumnName="ProjectDept" />
+          <ScalarProperty Name="ProjectManagerID" ColumnName="ProjectManagerID" />
+          <ScalarProperty Name="ProjectBudget" ColumnName="ProjectBudget" />
+          <ScalarProperty Name="CurrentExpenses" ColumnName="CurrentExpenses" />
+          <ScalarProperty Name="ProjectDeadline" ColumnName="ProjectDeadline" />
+          <ScalarProperty Name="ProjectStatus" ColumnName="ProjectStatus" />
+          <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="team18dbModel.Role">
+        <MappingFragment StoreEntitySet="Role">
+          <ScalarProperty Name="roleId" ColumnName="roleId" />
+          <ScalarProperty Name="roleName" ColumnName="roleName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Status">
+      <EntityTypeMapping TypeName="team18dbModel.Status">
+        <MappingFragment StoreEntitySet="Status">
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="StatusName" ColumnName="StatusName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tables">
+      <EntityTypeMapping TypeName="team18dbModel.Table">
+        <MappingFragment StoreEntitySet="Table">
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="StatusName" ColumnName="StatusName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tasks">
+      <EntityTypeMapping TypeName="team18dbModel.Task">
+        <MappingFragment StoreEntitySet="Tasks">
+          <ScalarProperty Name="TaskID" ColumnName="TaskID" />
+          <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+          <ScalarProperty Name="TaskBudget" ColumnName="TaskBudget" />
+          <ScalarProperty Name="TaskName" ColumnName="TaskName" />
+          <ScalarProperty Name="TaskDeadline" ColumnName="TaskDeadline" />
+          <ScalarProperty Name="TaskStatus" ColumnName="TaskStatus" />
+          <ScalarProperty Name="TaskExpenses" ColumnName="TaskExpenses" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="team18dbModel.User">
+        <MappingFragment StoreEntitySet="Users">
           <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="role" ColumnName="role" />
+          <ScalarProperty Name="userName" ColumnName="userName" />
+          <ScalarProperty Name="password" ColumnName="password" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="getProjectInfo" FunctionName="Team18DBModel.Store.getProjectInfo">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="Team18DBModel.getProjectInfo_Result">
-          <ScalarProperty Name="Project_ID" ColumnName="Project_ID" />
-          <ScalarProperty Name="Project_Name" ColumnName="Project_Name" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="Department_Code" ColumnName="Department_Code" />
-          <ScalarProperty Name="Budget_Balance" ColumnName="Budget_Balance" />
-          <ScalarProperty Name="Amount_of_Related_Tasks" ColumnName="Amount_of_Related_Tasks" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
+    <EntitySetMapping Name="WorksOns">
+      <EntityTypeMapping TypeName="team18dbModel.WorksOn">
+        <MappingFragment StoreEntitySet="WorksOn">
+          <ScalarProperty Name="WorksOnID" ColumnName="WorksOnID" />
+          <ScalarProperty Name="ProjectNum" ColumnName="ProjectNum" />
+          <ScalarProperty Name="HoursWorked" ColumnName="HoursWorked" />
+          <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>
