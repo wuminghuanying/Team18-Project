@@ -11,7 +11,7 @@ namespace Team18App.Controllers
 {
     public class AccountsController : Controller
     {
-        team18dbEntities entity = new team18dbEntities();
+        team18dbEntities1 entity = new team18dbEntities1();
         // GET: Accounts
         public ActionResult Login()
         {

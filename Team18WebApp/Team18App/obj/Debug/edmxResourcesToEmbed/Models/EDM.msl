@@ -1,122 +1,122 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="team18dbModelStoreContainer" CdmEntityContainer="team18dbEntities">
+  <EntityContainerMapping StorageEntityContainer="team18dbModelStoreContainer" CdmEntityContainer="team18dbEntities1">
     <EntitySetMapping Name="Clients">
       <EntityTypeMapping TypeName="team18dbModel.Client">
         <MappingFragment StoreEntitySet="Client">
-          <ScalarProperty Name="Lname" ColumnName="Lname" />
-          <ScalarProperty Name="Minit" ColumnName="Minit" />
-          <ScalarProperty Name="Fname" ColumnName="Fname" />
-          <ScalarProperty Name="UserID" ColumnName="UserID" />
           <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Fname" ColumnName="Fname" />
+          <ScalarProperty Name="Minit" ColumnName="Minit" />
+          <ScalarProperty Name="Lname" ColumnName="Lname" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Departments">
       <EntityTypeMapping TypeName="team18dbModel.Department">
         <MappingFragment StoreEntitySet="Department">
-          <ScalarProperty Name="DepartmentManagerID" ColumnName="DepartmentManagerID" />
-          <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
           <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+          <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
+          <ScalarProperty Name="DepartmentManagerID" ColumnName="DepartmentManagerID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Employees">
       <EntityTypeMapping TypeName="team18dbModel.Employee">
         <MappingFragment StoreEntitySet="Employee">
-          <ScalarProperty Name="Hourly_rate" ColumnName="Hourly_rate" />
-          <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
-          <ScalarProperty Name="Sex" ColumnName="Sex" />
-          <ScalarProperty Name="DOB" ColumnName="DOB" />
-          <ScalarProperty Name="Lname" ColumnName="Lname" />
-          <ScalarProperty Name="Minit" ColumnName="Minit" />
-          <ScalarProperty Name="Fname" ColumnName="Fname" />
-          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
           <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+          <ScalarProperty Name="Fname" ColumnName="Fname" />
+          <ScalarProperty Name="Minit" ColumnName="Minit" />
+          <ScalarProperty Name="Lname" ColumnName="Lname" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="Sex" ColumnName="Sex" />
+          <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+          <ScalarProperty Name="Hourly_rate" ColumnName="Hourly_rate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="ErrorMessages">
       <EntityTypeMapping TypeName="team18dbModel.ErrorMessage">
         <MappingFragment StoreEntitySet="ErrorMessages">
-          <ScalarProperty Name="ErrorDescription" ColumnName="ErrorDescription" />
-          <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
           <ScalarProperty Name="MessageID" ColumnName="MessageID" />
+          <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+          <ScalarProperty Name="ErrorDescription" ColumnName="ErrorDescription" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Projects">
       <EntityTypeMapping TypeName="team18dbModel.Project">
         <MappingFragment StoreEntitySet="Projects">
-          <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
-          <ScalarProperty Name="ProjectStatus" ColumnName="ProjectStatus" />
-          <ScalarProperty Name="ProjectDeadline" ColumnName="ProjectDeadline" />
-          <ScalarProperty Name="CurrentExpenses" ColumnName="CurrentExpenses" />
-          <ScalarProperty Name="ProjectBudget" ColumnName="ProjectBudget" />
-          <ScalarProperty Name="ProjectManagerID" ColumnName="ProjectManagerID" />
-          <ScalarProperty Name="ProjectDept" ColumnName="ProjectDept" />
           <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+          <ScalarProperty Name="ProjectDept" ColumnName="ProjectDept" />
+          <ScalarProperty Name="ProjectManagerID" ColumnName="ProjectManagerID" />
+          <ScalarProperty Name="ProjectBudget" ColumnName="ProjectBudget" />
+          <ScalarProperty Name="CurrentExpenses" ColumnName="CurrentExpenses" />
+          <ScalarProperty Name="ProjectDeadline" ColumnName="ProjectDeadline" />
+          <ScalarProperty Name="ProjectStatus" ColumnName="ProjectStatus" />
+          <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Roles">
       <EntityTypeMapping TypeName="team18dbModel.Role">
         <MappingFragment StoreEntitySet="Role">
-          <ScalarProperty Name="roleName" ColumnName="roleName" />
           <ScalarProperty Name="roleId" ColumnName="roleId" />
+          <ScalarProperty Name="roleName" ColumnName="roleName" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Status">
       <EntityTypeMapping TypeName="team18dbModel.Status">
         <MappingFragment StoreEntitySet="Status">
-          <ScalarProperty Name="StatusName" ColumnName="StatusName" />
           <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="StatusName" ColumnName="StatusName" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Tasks">
       <EntityTypeMapping TypeName="team18dbModel.Task">
         <MappingFragment StoreEntitySet="Tasks">
-          <ScalarProperty Name="TaskExpenses" ColumnName="TaskExpenses" />
-          <ScalarProperty Name="TaskStatus" ColumnName="TaskStatus" />
-          <ScalarProperty Name="TaskDeadline" ColumnName="TaskDeadline" />
-          <ScalarProperty Name="TaskName" ColumnName="TaskName" />
-          <ScalarProperty Name="TaskBudget" ColumnName="TaskBudget" />
-          <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
           <ScalarProperty Name="TaskID" ColumnName="TaskID" />
+          <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+          <ScalarProperty Name="TaskBudget" ColumnName="TaskBudget" />
+          <ScalarProperty Name="TaskName" ColumnName="TaskName" />
+          <ScalarProperty Name="TaskDeadline" ColumnName="TaskDeadline" />
+          <ScalarProperty Name="TaskStatus" ColumnName="TaskStatus" />
+          <ScalarProperty Name="TaskExpenses" ColumnName="TaskExpenses" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="team18dbModel.User">
         <MappingFragment StoreEntitySet="Users">
-          <ScalarProperty Name="password" ColumnName="password" />
-          <ScalarProperty Name="userName" ColumnName="userName" />
-          <ScalarProperty Name="role" ColumnName="role" />
           <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="role" ColumnName="role" />
+          <ScalarProperty Name="userName" ColumnName="userName" />
+          <ScalarProperty Name="password" ColumnName="password" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="WorksOns">
       <EntityTypeMapping TypeName="team18dbModel.WorksOn">
         <MappingFragment StoreEntitySet="WorksOn">
-          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
-          <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
-          <ScalarProperty Name="HoursWorked" ColumnName="HoursWorked" />
           <ScalarProperty Name="WorksOnID" ColumnName="WorksOnID" />
+          <ScalarProperty Name="HoursWorked" ColumnName="HoursWorked" />
+          <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="database_firewall_rules">
       <EntityTypeMapping TypeName="team18dbModel.database_firewall_rules">
         <MappingFragment StoreEntitySet="database_firewall_rules">
-          <ScalarProperty Name="modify_date" ColumnName="modify_date" />
-          <ScalarProperty Name="create_date" ColumnName="create_date" />
-          <ScalarProperty Name="end_ip_address" ColumnName="end_ip_address" />
-          <ScalarProperty Name="start_ip_address" ColumnName="start_ip_address" />
-          <ScalarProperty Name="name" ColumnName="name" />
           <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="start_ip_address" ColumnName="start_ip_address" />
+          <ScalarProperty Name="end_ip_address" ColumnName="end_ip_address" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="modify_date" ColumnName="modify_date" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

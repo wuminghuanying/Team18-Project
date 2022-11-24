@@ -10,9 +10,10 @@ using Team18App.Models;
 
 namespace Team18App.Controllers
 {
+    [Authorize]
     public class TasksController : Controller
     {
-        private team18dbEntities db = new team18dbEntities();
+        private team18dbEntities1 db = new team18dbEntities1();
 
         // GET: Tasks
         public ActionResult Index()
