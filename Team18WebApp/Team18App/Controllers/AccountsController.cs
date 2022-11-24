@@ -36,6 +36,7 @@ namespace Team18App.Controllers
         [HttpPost]
         public ActionResult Signup(User userinfo)
         {
+            userinfo.role = 3;
             entity.Users.Add(userinfo);
             entity.SaveChanges();
             return RedirectToAction("Login");
