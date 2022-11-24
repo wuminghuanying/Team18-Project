@@ -10,7 +10,6 @@ using Team18App.Models;
 
 namespace Team18App.Controllers
 {
-    [Authorize]
     public class EmployeesController : Controller
     {
         private team18dbEntities1 db = new team18dbEntities1();
@@ -18,7 +17,7 @@ namespace Team18App.Controllers
         // GET: Employees
         public ActionResult Index()
         {
-            var employees = db.Employees.Include(e => e.User);
+            var employees = db.Employees.Include(e => e.Department).Include(e => e.User);
             return View(employees.ToList());
         }
 
@@ -40,6 +39,7 @@ namespace Team18App.Controllers
         // GET: Employees/Create
         public ActionResult Create()
         {
+            ViewBag.DepartmentID = new SelectList(db.Departments, "DepartmentID", "DepartmentName");
             ViewBag.UserID = new SelectList(db.Users, "id", "userName");
             return View();
         }
@@ -58,6 +58,7 @@ namespace Team18App.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.DepartmentID = new SelectList(db.Departments, "DepartmentID", "DepartmentName", employee.DepartmentID);
             ViewBag.UserID = new SelectList(db.Users, "id", "userName", employee.UserID);
             return View(employee);
         }
@@ -74,6 +75,7 @@ namespace Team18App.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.DepartmentID = new SelectList(db.Departments, "DepartmentID", "DepartmentName", employee.DepartmentID);
             ViewBag.UserID = new SelectList(db.Users, "id", "userName", employee.UserID);
             return View(employee);
         }
@@ -91,6 +93,7 @@ namespace Team18App.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.DepartmentID = new SelectList(db.Departments, "DepartmentID", "DepartmentName", employee.DepartmentID);
             ViewBag.UserID = new SelectList(db.Users, "id", "userName", employee.UserID);
             return View(employee);
         }

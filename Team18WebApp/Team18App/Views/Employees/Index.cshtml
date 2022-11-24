@@ -27,10 +27,10 @@
             @Html.DisplayNameFor(model => model.Sex)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DepartmentID)
+            @Html.DisplayNameFor(model => model.Hourly_rate)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Hourly_rate)
+            @Html.DisplayNameFor(model => model.Department.DepartmentName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.User.userName)
@@ -56,10 +56,10 @@
             @Html.DisplayFor(modelItem => item.Sex)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.DepartmentID)
+            @Html.DisplayFor(modelItem => item.Hourly_rate)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Hourly_rate)
+            @Html.DisplayFor(modelItem => item.Department.DepartmentName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.User.userName)

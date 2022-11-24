@@ -10,7 +10,6 @@ using Team18App.Models;
 
 namespace Team18App.Controllers
 {
-    [Authorize]
     public class DepartmentsController : Controller
     {
         private team18dbEntities1 db = new team18dbEntities1();
@@ -18,7 +17,8 @@ namespace Team18App.Controllers
         // GET: Departments
         public ActionResult Index()
         {
-            return View(db.Departments.ToList());
+            var departments = db.Departments.Include(d => d.Employee);
+            return View(departments.ToList());
         }
 
         // GET: Departments/Details/5
@@ -39,6 +39,7 @@ namespace Team18App.Controllers
         // GET: Departments/Create
         public ActionResult Create()
         {
+            ViewBag.DepartmentManagerID = new SelectList(db.Employees, "EmployeeID", "Fname");
             return View();
         }
 
@@ -56,6 +57,7 @@ namespace Team18App.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.DepartmentManagerID = new SelectList(db.Employees, "EmployeeID", "Fname", department.DepartmentManagerID);
             return View(department);
         }
 
@@ -71,6 +73,7 @@ namespace Team18App.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.DepartmentManagerID = new SelectList(db.Employees, "EmployeeID", "Fname", department.DepartmentManagerID);
             return View(department);
         }
 
@@ -87,6 +90,7 @@ namespace Team18App.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.DepartmentManagerID = new SelectList(db.Employees, "EmployeeID", "Fname", department.DepartmentManagerID);
             return View(department);
         }
 

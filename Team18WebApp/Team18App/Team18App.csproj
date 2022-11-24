@@ -378,17 +378,17 @@
     <Content Include="Views\Accounts\Login.cshtml" />
     <Content Include="Views\Accounts\Signup.cshtml" />
     <Content Include="Views\Tasks\SearchForm.cshtml" />
-    <Content Include="Views\Departments\Create.cshtml" />
-    <Content Include="Views\Departments\Delete.cshtml" />
-    <Content Include="Views\Departments\Details.cshtml" />
-    <Content Include="Views\Departments\Edit.cshtml" />
-    <Content Include="Views\Departments\Index.cshtml" />
+    <Content Include="Views\Home\InsufficientPerms.cshtml" />
     <Content Include="Views\Employees\Create.cshtml" />
     <Content Include="Views\Employees\Delete.cshtml" />
     <Content Include="Views\Employees\Details.cshtml" />
     <Content Include="Views\Employees\Edit.cshtml" />
     <Content Include="Views\Employees\Index.cshtml" />
-    <Content Include="Views\Home\InsufficientPerms.cshtml" />
+    <Content Include="Views\Departments\Create.cshtml" />
+    <Content Include="Views\Departments\Delete.cshtml" />
+    <Content Include="Views\Departments\Details.cshtml" />
+    <Content Include="Views\Departments\Edit.cshtml" />
+    <Content Include="Views\Departments\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
