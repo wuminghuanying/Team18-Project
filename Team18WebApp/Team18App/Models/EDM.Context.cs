@@ -13,10 +13,10 @@ namespace Team18App.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class team18dbEntities : DbContext
+    public partial class team18dbEntities1 : DbContext
     {
-        public team18dbEntities()
-            : base("name=team18dbEntities")
+        public team18dbEntities1()
+            : base("name=team18dbEntities1")
         {
         }
     
@@ -32,9 +32,9 @@ namespace Team18App.Models
         public virtual DbSet<Project> Projects { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<Status> Status { get; set; }
-        public virtual DbSet<Table> Tables { get; set; }
         public virtual DbSet<Task> Tasks { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<WorksOn> WorksOns { get; set; }
+        public virtual DbSet<database_firewall_rules> database_firewall_rules { get; set; }
     }
 }

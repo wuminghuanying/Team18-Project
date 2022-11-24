@@ -5,6 +5,7 @@ using System.Web.Mvc;
 using System.Web.Security;
 using Team18App.Models;
 using System.Linq;
+using System.Net;
 
 namespace Team18App.Controllers
 {
@@ -38,6 +39,12 @@ namespace Team18App.Controllers
         {
             userinfo.role = 3;
             entity.Users.Add(userinfo);
+            bool userExist = entity.Users.Any(x => x.userName == userinfo.userName);
+            if (userExist)
+            {
+                ModelState.AddModelError("", "Username already exists");
+                return View();
+            }
             entity.SaveChanges();
             return RedirectToAction("Login");
         }

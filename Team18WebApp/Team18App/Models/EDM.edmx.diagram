@@ -4,22 +4,25 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="87c0d88fccec43f0aec95ffe86aeee3b" Name="Diagram1">
-        <EntityTypeShape EntityType="team18dbModel.Client" Width="1.5" PointX="3.75" PointY="12.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="team18dbModel.Department" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="team18dbModel.Employee" Width="1.5" PointX="0.75" PointY="6.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="team18dbModel.ErrorMessage" Width="1.5" PointX="5.25" PointY="3" IsExpanded="true" />
-        <EntityTypeShape EntityType="team18dbModel.Project" Width="1.5" PointX="3" PointY="3.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="team18dbModel.Role" Width="1.5" PointX="1.5" PointY="14.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="team18dbModel.Status" Width="1.5" PointX="0.75" PointY="4.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="team18dbModel.Table" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="team18dbModel.Task" Width="1.5" PointX="8.25" PointY="3.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="team18dbModel.User" Width="1.5" PointX="1.5" PointY="11.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="team18dbModel.WorksOn" Width="1.5" PointX="5.25" PointY="9" IsExpanded="true" />
+      <Diagram DiagramId="39e6c6c2f5224c81bccc25e98c308701" Name="Diagram1">
+        <EntityTypeShape EntityType="team18dbModel.Client" Width="1.5" PointX="3.75" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="team18dbModel.Department" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="team18dbModel.Employee" Width="1.5" PointX="1.5" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="team18dbModel.ErrorMessage" Width="1.5" PointX="5.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="team18dbModel.Project" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="team18dbModel.Role" Width="1.5" PointX="1.5" PointY="17.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="team18dbModel.Status" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="team18dbModel.Task" Width="1.5" PointX="5.25" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="team18dbModel.User" Width="1.5" PointX="1.5" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="team18dbModel.WorksOn" Width="1.5" PointX="5.25" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="team18dbModel.database_firewall_rules" Width="1.5" PointX="7.75" PointY="1.25" IsExpanded="true" />
         <AssociationConnector Association="team18dbModel.FK_UserID" ManuallyRouted="false" />
+        <AssociationConnector Association="team18dbModel.FK_Department" ManuallyRouted="false" />
+        <AssociationConnector Association="team18dbModel.FK_DepartmentManagerID" ManuallyRouted="false" />
         <AssociationConnector Association="team18dbModel.FK_ProjectDept" ManuallyRouted="false" />
         <AssociationConnector Association="team18dbModel.FK_ManagerID" ManuallyRouted="false" />
         <AssociationConnector Association="team18dbModel.FK_UserIDEmployee" ManuallyRouted="false" />
+        <AssociationConnector Association="team18dbModel.FK_WorksOnEmployee" ManuallyRouted="false" />
         <AssociationConnector Association="team18dbModel.FK_ErrorMessages_ProjectID" ManuallyRouted="false" />
         <AssociationConnector Association="team18dbModel.FK_ProjectStatus" ManuallyRouted="false" />
         <AssociationConnector Association="team18dbModel.FK_TaskProjectID" ManuallyRouted="false" />

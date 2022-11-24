@@ -22,7 +22,7 @@ namespace Team18App.Models
         }
     
         public int id { get; set; }
-        public int role { get; set; }
+        public Nullable<int> role { get; set; }
         public string userName { get; set; }
         public string password { get; set; }
     

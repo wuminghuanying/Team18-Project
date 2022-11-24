@@ -1,24 +1,91 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="team18dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="team18dbEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Clients" EntityType="team18dbModel.Client" />
+    <EntitySet Name="Departments" EntityType="team18dbModel.Department" />
+    <EntitySet Name="Employees" EntityType="team18dbModel.Employee" />
+    <EntitySet Name="ErrorMessages" EntityType="team18dbModel.ErrorMessage" />
+    <EntitySet Name="Projects" EntityType="team18dbModel.Project" />
+    <EntitySet Name="Roles" EntityType="team18dbModel.Role" />
+    <EntitySet Name="Status" EntityType="team18dbModel.Status" />
+    <EntitySet Name="Tasks" EntityType="team18dbModel.Task" />
+    <EntitySet Name="Users" EntityType="team18dbModel.User" />
+    <EntitySet Name="WorksOns" EntityType="team18dbModel.WorksOn" />
+    <EntitySet Name="database_firewall_rules" EntityType="team18dbModel.database_firewall_rules" />
+    <AssociationSet Name="FK_UserID" Association="team18dbModel.FK_UserID">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Client" EntitySet="Clients" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Department" Association="team18dbModel.FK_Department">
+      <End Role="Department" EntitySet="Departments" />
+      <End Role="Employee" EntitySet="Employees" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DepartmentManagerID" Association="team18dbModel.FK_DepartmentManagerID">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="Department" EntitySet="Departments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProjectDept" Association="team18dbModel.FK_ProjectDept">
+      <End Role="Department" EntitySet="Departments" />
+      <End Role="Project" EntitySet="Projects" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ManagerID" Association="team18dbModel.FK_ManagerID">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="Project" EntitySet="Projects" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserIDEmployee" Association="team18dbModel.FK_UserIDEmployee">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Employee" EntitySet="Employees" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ErrorMessages_ProjectID" Association="team18dbModel.FK_ErrorMessages_ProjectID">
+      <End Role="Project" EntitySet="Projects" />
+      <End Role="ErrorMessage" EntitySet="ErrorMessages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProjectStatus" Association="team18dbModel.FK_ProjectStatus">
+      <End Role="Status" EntitySet="Status" />
+      <End Role="Project" EntitySet="Projects" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TaskProjectID" Association="team18dbModel.FK_TaskProjectID">
+      <End Role="Project" EntitySet="Projects" />
+      <End Role="Task" EntitySet="Tasks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WorksOnProject" Association="team18dbModel.FK_WorksOnProject">
+      <End Role="Project" EntitySet="Projects" />
+      <End Role="WorksOn" EntitySet="WorksOns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Role" Association="team18dbModel.FK_Role">
+      <End Role="Role" EntitySet="Roles" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TasksStatus" Association="team18dbModel.FK_TasksStatus">
+      <End Role="Status" EntitySet="Status" />
+      <End Role="Task" EntitySet="Tasks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WorksOnEmployee" Association="team18dbModel.FK_WorksOnEmployee">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="WorksOn" EntitySet="WorksOns" />
+    </AssociationSet>
+  </EntityContainer>
   <EntityType Name="Client">
     <Key>
       <PropertyRef Name="ClientID" />
     </Key>
     <Property Name="ClientID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="UserID" Type="Int32" Nullable="false" />
-    <Property Name="Fname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Fname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Minit" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-    <Property Name="Lname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <NavigationProperty Name="User" Relationship="Self.FK_UserID" FromRole="Client" ToRole="Users" />
+    <Property Name="Lname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="User" Relationship="team18dbModel.FK_UserID" FromRole="Client" ToRole="User" />
   </EntityType>
   <EntityType Name="Department">
     <Key>
       <PropertyRef Name="DepartmentID" />
     </Key>
     <Property Name="DepartmentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="DepartmentName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DepartmentName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="DepartmentManagerID" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Projects" Relationship="Self.FK_ProjectDept" FromRole="Department" ToRole="Projects" />
+    <NavigationProperty Name="Employees" Relationship="team18dbModel.FK_Department" FromRole="Department" ToRole="Employee" />
+    <NavigationProperty Name="Employee" Relationship="team18dbModel.FK_DepartmentManagerID" FromRole="Department" ToRole="Employee" />
+    <NavigationProperty Name="Projects" Relationship="team18dbModel.FK_ProjectDept" FromRole="Department" ToRole="Project" />
   </EntityType>
   <EntityType Name="Employee">
     <Key>
@@ -26,15 +93,18 @@
     </Key>
     <Property Name="UserID" Type="Int32" Nullable="false" />
     <Property Name="EmployeeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Fname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Fname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Minit" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-    <Property Name="Lname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Lname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="DOB" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="Sex" Type="String" MaxLength="1" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Sex" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="true" />
     <Property Name="DepartmentID" Type="Int32" Nullable="false" />
     <Property Name="Hourly_rate" Type="Decimal" Precision="6" Scale="2" />
-    <NavigationProperty Name="Projects" Relationship="Self.FK_ManagerID" FromRole="Employee" ToRole="Projects" />
-    <NavigationProperty Name="User" Relationship="Self.FK_UserIDEmployee" FromRole="Employee" ToRole="Users" />
+    <NavigationProperty Name="Department" Relationship="team18dbModel.FK_Department" FromRole="Employee" ToRole="Department" />
+    <NavigationProperty Name="Departments" Relationship="team18dbModel.FK_DepartmentManagerID" FromRole="Employee" ToRole="Department" />
+    <NavigationProperty Name="Projects" Relationship="team18dbModel.FK_ManagerID" FromRole="Employee" ToRole="Project" />
+    <NavigationProperty Name="User" Relationship="team18dbModel.FK_UserIDEmployee" FromRole="Employee" ToRole="User" />
+    <NavigationProperty Name="WorksOns" Relationship="team18dbModel.FK_WorksOnEmployee" FromRole="Employee" ToRole="WorksOn" />
   </EntityType>
   <EntityType Name="ErrorMessage">
     <Key>
@@ -42,8 +112,8 @@
     </Key>
     <Property Name="MessageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="ProjectID" Type="Int32" Nullable="false" />
-    <Property Name="ErrorDescription" Type="String" MaxLength="400" FixedLength="false" Unicode="true" Nullable="false" />
-    <NavigationProperty Name="Project" Relationship="Self.FK_ErrorMessages_ProjectID" FromRole="ErrorMessages" ToRole="Projects" />
+    <Property Name="ErrorDescription" Type="String" Nullable="false" MaxLength="400" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Project" Relationship="team18dbModel.FK_ErrorMessages_ProjectID" FromRole="ErrorMessage" ToRole="Project" />
   </EntityType>
   <EntityType Name="Project">
     <Key>
@@ -52,41 +122,34 @@
     <Property Name="ProjectID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="ProjectDept" Type="Int32" Nullable="false" />
     <Property Name="ProjectManagerID" Type="Int32" Nullable="false" />
-    <Property Name="ProjectBudget" Type="Decimal" Precision="9" Scale="2" Nullable="false" />
-    <Property Name="CurrentExpenses" Type="Decimal" Precision="9" Scale="2" Nullable="false" />
+    <Property Name="ProjectBudget" Type="Decimal" Nullable="false" Precision="9" Scale="2" />
+    <Property Name="CurrentExpenses" Type="Decimal" Nullable="false" Precision="9" Scale="2" />
     <Property Name="ProjectDeadline" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="ProjectStatus" Type="Int32" Nullable="false" />
-    <Property Name="ProjectName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <NavigationProperty Name="Department" Relationship="Self.FK_ProjectDept" FromRole="Projects" ToRole="Department" />
-    <NavigationProperty Name="Employee" Relationship="Self.FK_ManagerID" FromRole="Projects" ToRole="Employee" />
-    <NavigationProperty Name="ErrorMessages" Relationship="Self.FK_ErrorMessages_ProjectID" FromRole="Projects" ToRole="ErrorMessages" />
-    <NavigationProperty Name="Status" Relationship="Self.FK_ProjectStatus" FromRole="Projects" ToRole="Status" />
-    <NavigationProperty Name="Tasks" Relationship="Self.FK_TaskProjectID" FromRole="Projects" ToRole="Tasks" />
-    <NavigationProperty Name="WorksOns" Relationship="Self.FK_WorksOnProject" FromRole="Projects" ToRole="WorksOn" />
+    <Property Name="ProjectName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Department" Relationship="team18dbModel.FK_ProjectDept" FromRole="Project" ToRole="Department" />
+    <NavigationProperty Name="Employee" Relationship="team18dbModel.FK_ManagerID" FromRole="Project" ToRole="Employee" />
+    <NavigationProperty Name="ErrorMessages" Relationship="team18dbModel.FK_ErrorMessages_ProjectID" FromRole="Project" ToRole="ErrorMessage" />
+    <NavigationProperty Name="Status" Relationship="team18dbModel.FK_ProjectStatus" FromRole="Project" ToRole="Status" />
+    <NavigationProperty Name="Tasks" Relationship="team18dbModel.FK_TaskProjectID" FromRole="Project" ToRole="Task" />
+    <NavigationProperty Name="WorksOns" Relationship="team18dbModel.FK_WorksOnProject" FromRole="Project" ToRole="WorksOn" />
   </EntityType>
   <EntityType Name="Role">
     <Key>
       <PropertyRef Name="roleId" />
     </Key>
     <Property Name="roleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="roleName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-    <NavigationProperty Name="Users" Relationship="Self.FK_Role" FromRole="Role" ToRole="Users" />
+    <Property Name="roleName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Users" Relationship="team18dbModel.FK_Role" FromRole="Role" ToRole="User" />
   </EntityType>
   <EntityType Name="Status">
     <Key>
       <PropertyRef Name="StatusID" />
     </Key>
     <Property Name="StatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="StatusName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <NavigationProperty Name="Projects" Relationship="Self.FK_ProjectStatus" FromRole="Status" ToRole="Projects" />
-    <NavigationProperty Name="Tasks" Relationship="Self.FK_TasksStatus" FromRole="Status" ToRole="Tasks" />
-  </EntityType>
-  <EntityType Name="Table">
-    <Key>
-      <PropertyRef Name="StatusID" />
-    </Key>
-    <Property Name="StatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="StatusName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="StatusName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Projects" Relationship="team18dbModel.FK_ProjectStatus" FromRole="Status" ToRole="Project" />
+    <NavigationProperty Name="Tasks" Relationship="team18dbModel.FK_TasksStatus" FromRole="Status" ToRole="Task" />
   </EntityType>
   <EntityType Name="Task">
     <Key>
@@ -94,41 +157,58 @@
     </Key>
     <Property Name="TaskID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="ProjectID" Type="Int32" Nullable="false" />
-    <Property Name="TaskBudget" Type="Decimal" Precision="9" Scale="2" Nullable="false" />
-    <Property Name="TaskName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TaskBudget" Type="Decimal" Nullable="false" Precision="9" Scale="2" />
+    <Property Name="TaskName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="TaskDeadline" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="TaskStatus" Type="Int32" Nullable="false" />
-    <Property Name="TaskExpenses" Type="Decimal" Precision="9" Scale="2" Nullable="false" />
-    <NavigationProperty Name="Project" Relationship="Self.FK_TaskProjectID" FromRole="Tasks" ToRole="Projects" />
-    <NavigationProperty Name="Status" Relationship="Self.FK_TasksStatus" FromRole="Tasks" ToRole="Status" />
+    <Property Name="TaskExpenses" Type="Decimal" Nullable="false" Precision="9" Scale="2" />
+    <NavigationProperty Name="Project" Relationship="team18dbModel.FK_TaskProjectID" FromRole="Task" ToRole="Project" />
+    <NavigationProperty Name="Status" Relationship="team18dbModel.FK_TasksStatus" FromRole="Task" ToRole="Status" />
   </EntityType>
   <EntityType Name="User">
     <Key>
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="role" Type="Int32" Nullable="false" />
-    <Property Name="userName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-    <NavigationProperty Name="Clients" Relationship="Self.FK_UserID" FromRole="Users" ToRole="Client" />
-    <NavigationProperty Name="Employees" Relationship="Self.FK_UserIDEmployee" FromRole="Users" ToRole="Employee" />
-    <NavigationProperty Name="Role1" Relationship="Self.FK_Role" FromRole="Users" ToRole="Role" />
+    <Property Name="role" Type="Int32" />
+    <Property Name="userName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="password" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Clients" Relationship="team18dbModel.FK_UserID" FromRole="User" ToRole="Client" />
+    <NavigationProperty Name="Employees" Relationship="team18dbModel.FK_UserIDEmployee" FromRole="User" ToRole="Employee" />
+    <NavigationProperty Name="Role1" Relationship="team18dbModel.FK_Role" FromRole="User" ToRole="Role" />
   </EntityType>
   <EntityType Name="WorksOn">
     <Key>
       <PropertyRef Name="WorksOnID" />
     </Key>
     <Property Name="WorksOnID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="ProjectNum" Type="Int32" Nullable="false" />
-    <Property Name="HoursWorked" Type="Decimal" Precision="4" Scale="2" Nullable="false" />
+    <Property Name="HoursWorked" Type="Decimal" Nullable="false" Precision="4" Scale="2" />
     <Property Name="ProjectID" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Project" Relationship="Self.FK_WorksOnProject" FromRole="WorksOn" ToRole="Projects" />
+    <NavigationProperty Name="Project" Relationship="team18dbModel.FK_WorksOnProject" FromRole="WorksOn" ToRole="Project" />
+    <Property Name="EmployeeID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Employee" Relationship="team18dbModel.FK_WorksOnEmployee" FromRole="WorksOn" ToRole="Employee" />
+  </EntityType>
+  <EntityType Name="database_firewall_rules">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="name" />
+      <PropertyRef Name="start_ip_address" />
+      <PropertyRef Name="end_ip_address" />
+      <PropertyRef Name="create_date" />
+      <PropertyRef Name="modify_date" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="start_ip_address" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="end_ip_address" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="modify_date" Type="DateTime" Nullable="false" Precision="3" />
   </EntityType>
   <Association Name="FK_UserID">
-    <End Role="Users" Type="Self.User" Multiplicity="1" />
-    <End Role="Client" Type="Self.Client" Multiplicity="*" />
+    <End Type="team18dbModel.User" Role="User" Multiplicity="1" />
+    <End Type="team18dbModel.Client" Role="Client" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Users">
+      <Principal Role="User">
         <PropertyRef Name="id" />
       </Principal>
       <Dependent Role="Client">
@@ -136,35 +216,59 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_ProjectDept">
-    <End Role="Department" Type="Self.Department" Multiplicity="1" />
-    <End Role="Projects" Type="Self.Project" Multiplicity="*" />
+  <Association Name="FK_Department">
+    <End Type="team18dbModel.Department" Role="Department" Multiplicity="1" />
+    <End Type="team18dbModel.Employee" Role="Employee" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Department">
         <PropertyRef Name="DepartmentID" />
       </Principal>
-      <Dependent Role="Projects">
+      <Dependent Role="Employee">
+        <PropertyRef Name="DepartmentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DepartmentManagerID">
+    <End Type="team18dbModel.Employee" Role="Employee" Multiplicity="1" />
+    <End Type="team18dbModel.Department" Role="Department" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="EmployeeID" />
+      </Principal>
+      <Dependent Role="Department">
+        <PropertyRef Name="DepartmentManagerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProjectDept">
+    <End Type="team18dbModel.Department" Role="Department" Multiplicity="1" />
+    <End Type="team18dbModel.Project" Role="Project" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="DepartmentID" />
+      </Principal>
+      <Dependent Role="Project">
         <PropertyRef Name="ProjectDept" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_ManagerID">
-    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
-    <End Role="Projects" Type="Self.Project" Multiplicity="*" />
+    <End Type="team18dbModel.Employee" Role="Employee" Multiplicity="1" />
+    <End Type="team18dbModel.Project" Role="Project" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Employee">
         <PropertyRef Name="EmployeeID" />
       </Principal>
-      <Dependent Role="Projects">
+      <Dependent Role="Project">
         <PropertyRef Name="ProjectManagerID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_UserIDEmployee">
-    <End Role="Users" Type="Self.User" Multiplicity="1" />
-    <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+    <End Type="team18dbModel.User" Role="User" Multiplicity="1" />
+    <End Type="team18dbModel.Employee" Role="Employee" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Users">
+      <Principal Role="User">
         <PropertyRef Name="id" />
       </Principal>
       <Dependent Role="Employee">
@@ -173,46 +277,46 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_ErrorMessages_ProjectID">
-    <End Role="Projects" Type="Self.Project" Multiplicity="1" />
-    <End Role="ErrorMessages" Type="Self.ErrorMessage" Multiplicity="*" />
+    <End Type="team18dbModel.Project" Role="Project" Multiplicity="1" />
+    <End Type="team18dbModel.ErrorMessage" Role="ErrorMessage" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Projects">
+      <Principal Role="Project">
         <PropertyRef Name="ProjectID" />
       </Principal>
-      <Dependent Role="ErrorMessages">
+      <Dependent Role="ErrorMessage">
         <PropertyRef Name="ProjectID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_ProjectStatus">
-    <End Role="Status" Type="Self.Status" Multiplicity="1" />
-    <End Role="Projects" Type="Self.Project" Multiplicity="*" />
+    <End Type="team18dbModel.Status" Role="Status" Multiplicity="1" />
+    <End Type="team18dbModel.Project" Role="Project" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Status">
         <PropertyRef Name="StatusID" />
       </Principal>
-      <Dependent Role="Projects">
+      <Dependent Role="Project">
         <PropertyRef Name="ProjectStatus" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_TaskProjectID">
-    <End Role="Projects" Type="Self.Project" Multiplicity="1" />
-    <End Role="Tasks" Type="Self.Task" Multiplicity="*" />
+    <End Type="team18dbModel.Project" Role="Project" Multiplicity="1" />
+    <End Type="team18dbModel.Task" Role="Task" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Projects">
+      <Principal Role="Project">
         <PropertyRef Name="ProjectID" />
       </Principal>
-      <Dependent Role="Tasks">
+      <Dependent Role="Task">
         <PropertyRef Name="ProjectID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_WorksOnProject">
-    <End Role="Projects" Type="Self.Project" Multiplicity="1" />
-    <End Role="WorksOn" Type="Self.WorksOn" Multiplicity="*" />
+    <End Type="team18dbModel.Project" Role="Project" Multiplicity="1" />
+    <End Type="team18dbModel.WorksOn" Role="WorksOn" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Projects">
+      <Principal Role="Project">
         <PropertyRef Name="ProjectID" />
       </Principal>
       <Dependent Role="WorksOn">
@@ -221,80 +325,39 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Role">
-    <End Role="Role" Type="Self.Role" Multiplicity="1" />
-    <End Role="Users" Type="Self.User" Multiplicity="*" />
+    <End Type="team18dbModel.Role" Role="Role" Multiplicity="0..1" />
+    <End Type="team18dbModel.User" Role="User" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Role">
         <PropertyRef Name="roleId" />
       </Principal>
-      <Dependent Role="Users">
+      <Dependent Role="User">
         <PropertyRef Name="role" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_TasksStatus">
-    <End Role="Status" Type="Self.Status" Multiplicity="1" />
-    <End Role="Tasks" Type="Self.Task" Multiplicity="*" />
+    <End Type="team18dbModel.Status" Role="Status" Multiplicity="1" />
+    <End Type="team18dbModel.Task" Role="Task" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Status">
         <PropertyRef Name="StatusID" />
       </Principal>
-      <Dependent Role="Tasks">
+      <Dependent Role="Task">
         <PropertyRef Name="TaskStatus" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="team18dbEntities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="Clients" EntityType="Self.Client" />
-    <EntitySet Name="Departments" EntityType="Self.Department" />
-    <EntitySet Name="Employees" EntityType="Self.Employee" />
-    <EntitySet Name="ErrorMessages" EntityType="Self.ErrorMessage" />
-    <EntitySet Name="Projects" EntityType="Self.Project" />
-    <EntitySet Name="Roles" EntityType="Self.Role" />
-    <EntitySet Name="Status" EntityType="Self.Status" />
-    <EntitySet Name="Tables" EntityType="Self.Table" />
-    <EntitySet Name="Tasks" EntityType="Self.Task" />
-    <EntitySet Name="Users" EntityType="Self.User" />
-    <EntitySet Name="WorksOns" EntityType="Self.WorksOn" />
-    <AssociationSet Name="FK_UserID" Association="Self.FK_UserID">
-      <End Role="Users" EntitySet="Users" />
-      <End Role="Client" EntitySet="Clients" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ProjectDept" Association="Self.FK_ProjectDept">
-      <End Role="Department" EntitySet="Departments" />
-      <End Role="Projects" EntitySet="Projects" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ManagerID" Association="Self.FK_ManagerID">
-      <End Role="Employee" EntitySet="Employees" />
-      <End Role="Projects" EntitySet="Projects" />
-    </AssociationSet>
-    <AssociationSet Name="FK_UserIDEmployee" Association="Self.FK_UserIDEmployee">
-      <End Role="Users" EntitySet="Users" />
-      <End Role="Employee" EntitySet="Employees" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ErrorMessages_ProjectID" Association="Self.FK_ErrorMessages_ProjectID">
-      <End Role="Projects" EntitySet="Projects" />
-      <End Role="ErrorMessages" EntitySet="ErrorMessages" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ProjectStatus" Association="Self.FK_ProjectStatus">
-      <End Role="Status" EntitySet="Status" />
-      <End Role="Projects" EntitySet="Projects" />
-    </AssociationSet>
-    <AssociationSet Name="FK_TaskProjectID" Association="Self.FK_TaskProjectID">
-      <End Role="Projects" EntitySet="Projects" />
-      <End Role="Tasks" EntitySet="Tasks" />
-    </AssociationSet>
-    <AssociationSet Name="FK_WorksOnProject" Association="Self.FK_WorksOnProject">
-      <End Role="Projects" EntitySet="Projects" />
-      <End Role="WorksOn" EntitySet="WorksOns" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Role" Association="Self.FK_Role">
-      <End Role="Role" EntitySet="Roles" />
-      <End Role="Users" EntitySet="Users" />
-    </AssociationSet>
-    <AssociationSet Name="FK_TasksStatus" Association="Self.FK_TasksStatus">
-      <End Role="Status" EntitySet="Status" />
-      <End Role="Tasks" EntitySet="Tasks" />
-    </AssociationSet>
-  </EntityContainer>
+  <Association Name="FK_WorksOnEmployee">
+    <End Type="team18dbModel.Employee" Role="Employee" Multiplicity="1" />
+    <End Type="team18dbModel.WorksOn" Role="WorksOn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="EmployeeID" />
+      </Principal>
+      <Dependent Role="WorksOn">
+        <PropertyRef Name="EmployeeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

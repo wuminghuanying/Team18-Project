@@ -15,10 +15,11 @@ namespace Team18App.Models
     public partial class WorksOn
     {
         public int WorksOnID { get; set; }
-        public int ProjectNum { get; set; }
         public decimal HoursWorked { get; set; }
         public int ProjectID { get; set; }
+        public int EmployeeID { get; set; }
     
+        public virtual Employee Employee { get; set; }
         public virtual Project Project { get; set; }
     }
 }

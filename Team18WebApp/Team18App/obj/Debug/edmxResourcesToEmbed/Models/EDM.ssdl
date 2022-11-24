@@ -67,13 +67,6 @@
     <Property Name="StatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="StatusName" Type="nvarchar" MaxLength="50" Nullable="false" />
   </EntityType>
-  <EntityType Name="Table">
-    <Key>
-      <PropertyRef Name="StatusID" />
-    </Key>
-    <Property Name="StatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="StatusName" Type="nvarchar" MaxLength="50" Nullable="false" />
-  </EntityType>
   <EntityType Name="Tasks">
     <Key>
       <PropertyRef Name="TaskID" />
@@ -91,7 +84,7 @@
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="role" Type="int" Nullable="false" />
+    <Property Name="role" Type="int" />
     <Property Name="userName" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="password" Type="varchar" MaxLength="100" Nullable="false" />
   </EntityType>
@@ -100,10 +93,52 @@
       <PropertyRef Name="WorksOnID" />
     </Key>
     <Property Name="WorksOnID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="ProjectNum" Type="int" Nullable="false" />
     <Property Name="HoursWorked" Type="decimal" Precision="4" Scale="2" Nullable="false" />
     <Property Name="ProjectID" Type="int" Nullable="false" />
+    <Property Name="EmployeeID" Type="int" Nullable="false" />
   </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'team18db.sys.database_firewall_rules' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="database_firewall_rules">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="name" />
+      <PropertyRef Name="start_ip_address" />
+      <PropertyRef Name="end_ip_address" />
+      <PropertyRef Name="create_date" />
+      <PropertyRef Name="modify_date" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="start_ip_address" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="end_ip_address" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="create_date" Type="datetime" Nullable="false" />
+    <Property Name="modify_date" Type="datetime" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Department">
+    <End Role="Department" Type="Self.Department" Multiplicity="1" />
+    <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="DepartmentID" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="DepartmentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DepartmentManagerID">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="Department" Type="Self.Department" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="EmployeeID" />
+      </Principal>
+      <Dependent Role="Department">
+        <PropertyRef Name="DepartmentManagerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_ErrorMessages_ProjectID">
     <End Role="Projects" Type="Self.Projects" Multiplicity="1" />
     <End Role="ErrorMessages" Type="Self.ErrorMessages" Multiplicity="*" />
@@ -153,7 +188,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Role">
-    <End Role="Role" Type="Self.Role" Multiplicity="1" />
+    <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
     <End Role="Users" Type="Self.Users" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Role">
@@ -212,6 +247,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_WorksOnEmployee">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="WorksOn" Type="Self.WorksOn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="EmployeeID" />
+      </Principal>
+      <Dependent Role="WorksOn">
+        <PropertyRef Name="EmployeeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_WorksOnProject">
     <End Role="Projects" Type="Self.Projects" Multiplicity="1" />
     <End Role="WorksOn" Type="Self.WorksOn" Multiplicity="*" />
@@ -232,10 +279,27 @@
     <EntitySet Name="Projects" EntityType="Self.Projects" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Table" EntityType="Self.Table" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Tasks" EntityType="Self.Tasks" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="WorksOn" EntityType="Self.WorksOn" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="database_firewall_rules" EntityType="Self.database_firewall_rules" store:Type="Views" store:Schema="sys">
+      <DefiningQuery>SELECT 
+    [database_firewall_rules].[id] AS [id], 
+    [database_firewall_rules].[name] AS [name], 
+    [database_firewall_rules].[start_ip_address] AS [start_ip_address], 
+    [database_firewall_rules].[end_ip_address] AS [end_ip_address], 
+    [database_firewall_rules].[create_date] AS [create_date], 
+    [database_firewall_rules].[modify_date] AS [modify_date]
+    FROM [sys].[database_firewall_rules] AS [database_firewall_rules]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_Department" Association="Self.FK_Department">
+      <End Role="Department" EntitySet="Department" />
+      <End Role="Employee" EntitySet="Employee" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DepartmentManagerID" Association="Self.FK_DepartmentManagerID">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="Department" EntitySet="Department" />
+    </AssociationSet>
     <AssociationSet Name="FK_ErrorMessages_ProjectID" Association="Self.FK_ErrorMessages_ProjectID">
       <End Role="Projects" EntitySet="Projects" />
       <End Role="ErrorMessages" EntitySet="ErrorMessages" />
@@ -271,6 +335,10 @@
     <AssociationSet Name="FK_UserIDEmployee" Association="Self.FK_UserIDEmployee">
       <End Role="Users" EntitySet="Users" />
       <End Role="Employee" EntitySet="Employee" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WorksOnEmployee" Association="Self.FK_WorksOnEmployee">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="WorksOn" EntitySet="WorksOn" />
     </AssociationSet>
     <AssociationSet Name="FK_WorksOnProject" Association="Self.FK_WorksOnProject">
       <End Role="Projects" EntitySet="Projects" />
