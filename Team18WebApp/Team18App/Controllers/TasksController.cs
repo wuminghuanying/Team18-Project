@@ -21,6 +21,18 @@ namespace Team18App.Controllers
             return View(tasks.ToList());
         }
 
+        public ActionResult SearchForm()
+        {
+            var tasks = db.Tasks.Include(t => t.Project).Include(t => t.Status);
+            return View();
+        }
+
+        public ActionResult ShowSearchResults(String SearchPhrase)
+        {
+            var tasks = db.Tasks.Include(t => t.Project).Include(t => t.Status);
+            return View("Index",tasks.Include(t=> t.TaskName.Contains(SearchPhrase)).ToList());
+        }
+
         // GET: Tasks/Details/5
         public ActionResult Details(int? id)
         {
