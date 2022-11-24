@@ -50,22 +50,13 @@
                     @{
                         if (isLoggedIn)
                         {
-                            if (isEmployee)
-                            {
-                        <li>@Html.ActionLink("Task Report", "getParamsTI", "getTaskInfo")</li>
-                            if (isDhead){
-                        <li>@Html.ActionLink("Employee Report", "getParamsTE", "TopEmployees")</li>
-                        <li>@Html.ActionLink("Project Report", "getParamsPI", "getProjectInfo")</li>
-                        <li>@Html.ActionLink("Messages", "Index", "ErrorMessages")</li>
-                            }
-                            }
                         <li>@Html.ActionLink(User.Identity.Name, "Index", "Home")</li>
-                        <li>@Html.ActionLink("Signout", "Signout", "Account")</li>
+                        <li>@Html.ActionLink("Signout", "Signout", "Accounts")</li>
                         }
                         else
                         {
-                        <li>@Html.ActionLink("Login", "Login", "Account")</li>
-                        <li>@Html.ActionLink("Register", "Signup", "Account")</li>
+                        <li>@Html.ActionLink("Login", "Login", "Accounts")</li>
+                        <li>@Html.ActionLink("Register", "Signup", "Accounts")</li>
                         }
                     }
                 </ul>
