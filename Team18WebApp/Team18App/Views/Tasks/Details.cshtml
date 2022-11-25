@@ -35,6 +35,14 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.TaskStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TaskStatus)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.TaskExpenses)
         </dt>
 
@@ -43,19 +51,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Project.ProjectName)
+            @Html.DisplayNameFor(model => model.Project.ProjectStatus)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Project.ProjectName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Status.StatusName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Status.StatusName)
+            @Html.DisplayFor(model => model.Project.ProjectStatus)
         </dd>
 
     </dl>

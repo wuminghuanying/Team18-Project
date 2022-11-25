@@ -14,7 +14,7 @@ namespace Team18App.Models
     public partial class getTaskInfo_Result
     {
         public string Task { get; set; }
-        public int Status { get; set; }
+        public string Status { get; set; }
         public System.DateTime Deadline { get; set; }
     }
 }

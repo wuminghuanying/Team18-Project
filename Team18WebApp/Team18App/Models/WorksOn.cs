@@ -19,6 +19,7 @@ namespace Team18App.Models
         public int ProjectID { get; set; }
         public int EmployeeID { get; set; }
     
+        public virtual Employee Employee { get; set; }
         public virtual Project Project { get; set; }
     }
 }

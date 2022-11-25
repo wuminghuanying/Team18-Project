@@ -10,18 +10,17 @@ using Team18App.Models;
 
 namespace Team18App.Controllers
 {
-    [Authorize]
     public class ClientsController : Controller
     {
         private team18dbEntities db = new team18dbEntities();
-
+        [Authorize]
         // GET: Clients
         public ActionResult Index()
         {
             User u = db.Users.FirstOrDefault(x => x.userName == User.Identity.Name);
-            if (u.role!=3)
+            if (u.role == 1 || u.role == 3)
             {
-                
+                return RedirectToAction("InsufficientPerms", "Home");
             }
             var clients = db.Clients.Include(c => c.User);
             return View(clients.ToList());

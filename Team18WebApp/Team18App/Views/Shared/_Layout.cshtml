@@ -3,24 +3,6 @@
     if(string.IsNullOrWhiteSpace(User.Identity.Name)){
         isLoggedIn=false;
     }
-    bool isAdmin = false;
-    bool isDhead = false;
-    bool isEmployee = false;
-    if (User.Identity.Name.Contains("AdminUser"))
-    {
-        isAdmin = true;
-        isDhead = true;
-        isEmployee = true;
-    }
-    if (User.Identity.Name.Contains("DepartmentHead"))
-    {
-        isDhead = true;
-        isEmployee = true;
-    }
-    if (User.Identity.Name.Contains("Employee"))
-    {
-        isEmployee = true;
-    }
 }
 
 

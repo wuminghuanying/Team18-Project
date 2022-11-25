@@ -59,7 +59,7 @@
     <Property Name="ProjectBudget" Type="Decimal" Precision="9" Scale="2" Nullable="false" />
     <Property Name="CurrentExpenses" Type="Decimal" Precision="9" Scale="2" Nullable="false" />
     <Property Name="ProjectDeadline" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="ProjectStatus" Type="Int32" Nullable="false" />
+    <Property Name="ProjectStatus" Type="Int32" />
     <Property Name="ProjectName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <NavigationProperty Name="Department" Relationship="Self.FK_ProjectDept" FromRole="Projects" ToRole="Department" />
     <NavigationProperty Name="Employee" Relationship="Self.FK_ManagerID" FromRole="Projects" ToRole="Employee" />
@@ -84,6 +84,16 @@
     <Property Name="StatusName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <NavigationProperty Name="Projects" Relationship="Self.FK_ProjectStatus" FromRole="Status" ToRole="Projects" />
     <NavigationProperty Name="Tasks" Relationship="Self.FK_TasksStatus" FromRole="Status" ToRole="Tasks" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
   <EntityType Name="Task">
     <Key>
@@ -222,7 +232,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_ProjectStatus">
-    <End Role="Status" Type="Self.Status" Multiplicity="1" />
+    <End Role="Status" Type="Self.Status" Multiplicity="0..1" />
     <End Role="Projects" Type="Self.Project" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Status">
@@ -281,7 +291,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="team18dbEntities" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="team18dbEntities1" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Clients" EntityType="Self.Client" />
     <EntitySet Name="Departments" EntityType="Self.Department" />
     <EntitySet Name="Employees" EntityType="Self.Employee" />
@@ -289,6 +299,7 @@
     <EntitySet Name="Projects" EntityType="Self.Project" />
     <EntitySet Name="Roles" EntityType="Self.Role" />
     <EntitySet Name="Status" EntityType="Self.Status" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
     <EntitySet Name="Tasks" EntityType="Self.Task" />
     <EntitySet Name="Users" EntityType="Self.User" />
     <EntitySet Name="WorksOns" EntityType="Self.WorksOn" />
@@ -341,13 +352,76 @@
       <End Role="Status" EntitySet="Status" />
       <End Role="Tasks" EntitySet="Tasks" />
     </AssociationSet>
+    <FunctionImport Name="getProjectInfo" ReturnType="Collection(team18dbModel.getProjectInfo_Result)">
+      <Parameter Name="projectID" Mode="In" Type="Int32" />
+    </FunctionImport>
     <FunctionImport Name="getTaskInfo" ReturnType="Collection(team18dbModel.getTaskInfo_Result)">
       <Parameter Name="projectCode" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="getTopEmployees" ReturnType="Collection(team18dbModel.getTopEmployees_Result)">
+      <Parameter Name="hoursWorked" Mode="In" Type="Int32" />
+      <Parameter Name="deptID" Mode="In" Type="String" />
+      <Parameter Name="projID" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(team18dbModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(team18dbModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
   </EntityContainer>
+  <ComplexType Name="getProjectInfo_Result">
+    <Property Type="Int32" Name="Project_ID" Nullable="false" />
+    <Property Type="String" Name="Project_Name" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="Status" Nullable="true" />
+    <Property Type="Int32" Name="Department_Code" Nullable="false" />
+    <Property Type="Decimal" Name="Budget_Balance" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Int32" Name="Amount_of_Related_Tasks" Nullable="true" />
+  </ComplexType>
   <ComplexType Name="getTaskInfo_Result">
     <Property Type="String" Name="Task" Nullable="false" MaxLength="100" />
     <Property Type="Int32" Name="Status" Nullable="false" />
     <Property Type="DateTime" Name="Deadline" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="getTopEmployees_Result">
+    <Property Type="Int32" Name="EmployeeID" Nullable="false" />
+    <Property Type="String" Name="First_Name" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Last_Name" Nullable="false" MaxLength="50" />
+    <Property Type="Decimal" Name="Total_Hours_Worked" Nullable="true" Precision="38" Scale="2" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
   </ComplexType>
 </Schema>

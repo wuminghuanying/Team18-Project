@@ -28,14 +28,13 @@ namespace Team18App.Models
         public decimal ProjectBudget { get; set; }
         public decimal CurrentExpenses { get; set; }
         public System.DateTime ProjectDeadline { get; set; }
-        public int ProjectStatus { get; set; }
+        public string ProjectStatus { get; set; }
         public string ProjectName { get; set; }
     
         public virtual Department Department { get; set; }
         public virtual Employee Employee { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ErrorMessage> ErrorMessages { get; set; }
-        public virtual Status Status { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Task> Tasks { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -10,7 +10,6 @@ using Team18App.Models;
 
 namespace Team18App.Controllers
 {
-    [Authorize]
     public class ProjectsController : Controller
     {
         private team18dbEntities db = new team18dbEntities();
@@ -18,7 +17,7 @@ namespace Team18App.Controllers
         // GET: Projects
         public ActionResult Index()
         {
-            var projects = db.Projects.Include(p => p.Department).Include(p => p.Employee).Include(p => p.Status);
+            var projects = db.Projects.Include(p => p.Department).Include(p => p.Employee);
             return View(projects.ToList());
         }
 
@@ -42,7 +41,6 @@ namespace Team18App.Controllers
         {
             ViewBag.ProjectDept = new SelectList(db.Departments, "DepartmentID", "DepartmentName");
             ViewBag.ProjectManagerID = new SelectList(db.Employees, "EmployeeID", "Fname");
-            ViewBag.ProjectStatus = new SelectList(db.Status, "StatusID", "StatusName");
             return View();
         }
 
@@ -56,13 +54,13 @@ namespace Team18App.Controllers
             if (ModelState.IsValid)
             {
                 db.Projects.Add(project);
+                project.ProjectStatus = "Not Started";
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
             ViewBag.ProjectDept = new SelectList(db.Departments, "DepartmentID", "DepartmentName", project.ProjectDept);
             ViewBag.ProjectManagerID = new SelectList(db.Employees, "EmployeeID", "Fname", project.ProjectManagerID);
-            ViewBag.ProjectStatus = new SelectList(db.Status, "StatusID", "StatusName", project.ProjectStatus);
             return View(project);
         }
 
@@ -80,7 +78,6 @@ namespace Team18App.Controllers
             }
             ViewBag.ProjectDept = new SelectList(db.Departments, "DepartmentID", "DepartmentName", project.ProjectDept);
             ViewBag.ProjectManagerID = new SelectList(db.Employees, "EmployeeID", "Fname", project.ProjectManagerID);
-            ViewBag.ProjectStatus = new SelectList(db.Status, "StatusID", "StatusName", project.ProjectStatus);
             return View(project);
         }
 
@@ -99,7 +96,6 @@ namespace Team18App.Controllers
             }
             ViewBag.ProjectDept = new SelectList(db.Departments, "DepartmentID", "DepartmentName", project.ProjectDept);
             ViewBag.ProjectManagerID = new SelectList(db.Employees, "EmployeeID", "Fname", project.ProjectManagerID);
-            ViewBag.ProjectStatus = new SelectList(db.Status, "StatusID", "StatusName", project.ProjectStatus);
             return View(project);
         }
 

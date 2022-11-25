@@ -10,7 +10,6 @@ using Team18App.Models;
 
 namespace Team18App.Controllers
 {
-    [Authorize]
     public class TasksController : Controller
     {
         private team18dbEntities db = new team18dbEntities();
@@ -18,20 +17,8 @@ namespace Team18App.Controllers
         // GET: Tasks
         public ActionResult Index()
         {
-            var tasks = db.Tasks.Include(t => t.Project).Include(t => t.Status);
+            var tasks = db.Tasks.Include(t => t.Project);
             return View(tasks.ToList());
-        }
-
-        public ActionResult SearchForm()
-        {
-            var tasks = db.Tasks.Include(t => t.Project).Include(t => t.Status);
-            return View();
-        }
-
-        public ActionResult ShowSearchResults(String SearchPhrase)
-        {
-            var tasks = db.Tasks.Include(t => t.Project).Include(t => t.Status);
-            return View("Index",tasks.Include(t=> t.TaskName.Contains(SearchPhrase)).ToList());
         }
 
         // GET: Tasks/Details/5
@@ -52,8 +39,7 @@ namespace Team18App.Controllers
         // GET: Tasks/Create
         public ActionResult Create()
         {
-            ViewBag.ProjectID = new SelectList(db.Projects, "ProjectID", "ProjectName");
-            ViewBag.TaskStatus = new SelectList(db.Status, "StatusID", "StatusName");
+            ViewBag.ProjectID = new SelectList(db.Projects, "ProjectID", "ProjectStatus");
             return View();
         }
 
@@ -71,8 +57,7 @@ namespace Team18App.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ProjectID = new SelectList(db.Projects, "ProjectID", "ProjectName", task.ProjectID);
-            ViewBag.TaskStatus = new SelectList(db.Status, "StatusID", "StatusName", task.TaskStatus);
+            ViewBag.ProjectID = new SelectList(db.Projects, "ProjectID", "ProjectStatus", task.ProjectID);
             return View(task);
         }
 
@@ -88,8 +73,7 @@ namespace Team18App.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ProjectID = new SelectList(db.Projects, "ProjectID", "ProjectName", task.ProjectID);
-            ViewBag.TaskStatus = new SelectList(db.Status, "StatusID", "StatusName", task.TaskStatus);
+            ViewBag.ProjectID = new SelectList(db.Projects, "ProjectID", "ProjectStatus", task.ProjectID);
             return View(task);
         }
 
@@ -106,8 +90,7 @@ namespace Team18App.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ProjectID = new SelectList(db.Projects, "ProjectID", "ProjectName", task.ProjectID);
-            ViewBag.TaskStatus = new SelectList(db.Status, "StatusID", "StatusName", task.TaskStatus);
+            ViewBag.ProjectID = new SelectList(db.Projects, "ProjectID", "ProjectStatus", task.ProjectID);
             return View(task);
         }
 

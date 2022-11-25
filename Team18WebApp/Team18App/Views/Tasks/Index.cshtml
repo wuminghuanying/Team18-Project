@@ -21,13 +21,13 @@
             @Html.DisplayNameFor(model => model.TaskDeadline)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.TaskStatus)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.TaskExpenses)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Project.ProjectName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Status.StatusName)
+            @Html.DisplayNameFor(model => model.Project.ProjectStatus)
         </th>
         <th></th>
     </tr>
@@ -44,13 +44,13 @@
             @Html.DisplayFor(modelItem => item.TaskDeadline)
         </td>
         <td>
+            @Html.DisplayFor(modelItem => item.TaskStatus)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.TaskExpenses)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Project.ProjectName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Status.StatusName)
+            @Html.DisplayFor(modelItem => item.Project.ProjectStatus)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.TaskID }) |

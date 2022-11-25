@@ -19,6 +19,7 @@ namespace Team18App.Models
         {
             this.Departments = new HashSet<Department>();
             this.Projects = new HashSet<Project>();
+            this.WorksOns = new HashSet<WorksOn>();
         }
     
         public int UserID { get; set; }
@@ -37,5 +38,7 @@ namespace Team18App.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Project> Projects { get; set; }
         public virtual User User { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<WorksOn> WorksOns { get; set; }
     }
 }
