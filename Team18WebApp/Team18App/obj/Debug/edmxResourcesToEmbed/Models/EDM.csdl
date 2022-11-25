@@ -33,13 +33,12 @@
     <Property Name="Lname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="DOB" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="Sex" Type="String" MaxLength="1" FixedLength="true" Unicode="true" Nullable="false" />
-    <Property Name="DepartmentID" Type="Int32" Nullable="false" />
+    <Property Name="DepartmentID" Type="Int32" />
     <Property Name="Hourly_rate" Type="Decimal" Precision="6" Scale="2" />
     <NavigationProperty Name="Department" Relationship="Self.FK_Department" FromRole="Employee" ToRole="Department" />
     <NavigationProperty Name="Departments" Relationship="Self.FK_DepartmentManagerID" FromRole="Employee" ToRole="Department" />
     <NavigationProperty Name="Projects" Relationship="Self.FK_ManagerID" FromRole="Employee" ToRole="Projects" />
     <NavigationProperty Name="User" Relationship="Self.FK_UserIDEmployee" FromRole="Employee" ToRole="Users" />
-    <NavigationProperty Name="WorksOns" Relationship="Self.FK_WorksOnEmployee" FromRole="Employee" ToRole="WorksOn" />
   </EntityType>
   <EntityType Name="ErrorMessage">
     <Key>
@@ -120,7 +119,6 @@
     <Property Name="HoursWorked" Type="Decimal" Precision="4" Scale="2" Nullable="false" />
     <Property Name="ProjectID" Type="Int32" Nullable="false" />
     <Property Name="EmployeeID" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Employee" Relationship="Self.FK_WorksOnEmployee" FromRole="WorksOn" ToRole="Employee" />
     <NavigationProperty Name="Project" Relationship="Self.FK_WorksOnProject" FromRole="WorksOn" ToRole="Projects" />
   </EntityType>
   <EntityType Name="database_firewall_rules">
@@ -152,7 +150,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Department">
-    <End Role="Department" Type="Self.Department" Multiplicity="1" />
+    <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
     <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Department">
@@ -208,18 +206,6 @@
       </Principal>
       <Dependent Role="Employee">
         <PropertyRef Name="UserID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_WorksOnEmployee">
-    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
-    <End Role="WorksOn" Type="Self.WorksOn" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Employee">
-        <PropertyRef Name="EmployeeID" />
-      </Principal>
-      <Dependent Role="WorksOn">
-        <PropertyRef Name="EmployeeID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -295,7 +281,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="team18dbEntities1" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="team18dbEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Clients" EntityType="Self.Client" />
     <EntitySet Name="Departments" EntityType="Self.Department" />
     <EntitySet Name="Employees" EntityType="Self.Employee" />
@@ -331,10 +317,6 @@
       <End Role="Users" EntitySet="Users" />
       <End Role="Employee" EntitySet="Employees" />
     </AssociationSet>
-    <AssociationSet Name="FK_WorksOnEmployee" Association="Self.FK_WorksOnEmployee">
-      <End Role="Employee" EntitySet="Employees" />
-      <End Role="WorksOn" EntitySet="WorksOns" />
-    </AssociationSet>
     <AssociationSet Name="FK_ErrorMessages_ProjectID" Association="Self.FK_ErrorMessages_ProjectID">
       <End Role="Projects" EntitySet="Projects" />
       <End Role="ErrorMessages" EntitySet="ErrorMessages" />
@@ -359,5 +341,13 @@
       <End Role="Status" EntitySet="Status" />
       <End Role="Tasks" EntitySet="Tasks" />
     </AssociationSet>
+    <FunctionImport Name="getTaskInfo" ReturnType="Collection(team18dbModel.getTaskInfo_Result)">
+      <Parameter Name="projectCode" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
+  <ComplexType Name="getTaskInfo_Result">
+    <Property Type="String" Name="Task" Nullable="false" MaxLength="100" />
+    <Property Type="Int32" Name="Status" Nullable="false" />
+    <Property Type="DateTime" Name="Deadline" Nullable="false" />
+  </ComplexType>
 </Schema>

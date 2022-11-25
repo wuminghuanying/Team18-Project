@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="team18dbModelStoreContainer" CdmEntityContainer="team18dbEntities1">
+  <EntityContainerMapping StorageEntityContainer="team18dbModelStoreContainer" CdmEntityContainer="team18dbEntities">
     <EntitySetMapping Name="Clients">
       <EntityTypeMapping TypeName="team18dbModel.Client">
         <MappingFragment StoreEntitySet="Client">
@@ -120,5 +120,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="getTaskInfo" FunctionName="team18dbModel.Store.getTaskInfo">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="team18dbModel.getTaskInfo_Result">
+          <ScalarProperty Name="Task" ColumnName="Task" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Deadline" ColumnName="Deadline" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

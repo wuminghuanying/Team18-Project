@@ -19,7 +19,6 @@ namespace Team18App.Models
         {
             this.Departments = new HashSet<Department>();
             this.Projects = new HashSet<Project>();
-            this.WorksOns = new HashSet<WorksOn>();
         }
     
         public int UserID { get; set; }
@@ -29,7 +28,7 @@ namespace Team18App.Models
         public string Lname { get; set; }
         public System.DateTime DOB { get; set; }
         public string Sex { get; set; }
-        public int DepartmentID { get; set; }
+        public Nullable<int> DepartmentID { get; set; }
         public Nullable<decimal> Hourly_rate { get; set; }
     
         public virtual Department Department { get; set; }
@@ -38,7 +37,5 @@ namespace Team18App.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Project> Projects { get; set; }
         public virtual User User { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<WorksOn> WorksOns { get; set; }
     }
 }

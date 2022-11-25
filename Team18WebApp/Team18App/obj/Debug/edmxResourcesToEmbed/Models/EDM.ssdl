@@ -29,7 +29,7 @@
     <Property Name="Lname" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="DOB" Type="date" Nullable="false" />
     <Property Name="Sex" Type="nchar" MaxLength="1" Nullable="false" />
-    <Property Name="DepartmentID" Type="int" Nullable="false" />
+    <Property Name="DepartmentID" Type="int" />
     <Property Name="Hourly_rate" Type="decimal" Precision="6" Scale="2" />
   </EntityType>
   <EntityType Name="ErrorMessages">
@@ -116,7 +116,7 @@ warning 6002: The table/view 'team18db.sys.database_firewall_rules' does not hav
     <Property Name="modify_date" Type="datetime" Nullable="false" />
   </EntityType>
   <Association Name="FK_Department">
-    <End Role="Department" Type="Self.Department" Multiplicity="1" />
+    <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
     <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Department">
@@ -247,18 +247,6 @@ warning 6002: The table/view 'team18db.sys.database_firewall_rules' does not hav
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_WorksOnEmployee">
-    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
-    <End Role="WorksOn" Type="Self.WorksOn" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Employee">
-        <PropertyRef Name="EmployeeID" />
-      </Principal>
-      <Dependent Role="WorksOn">
-        <PropertyRef Name="EmployeeID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_WorksOnProject">
     <End Role="Projects" Type="Self.Projects" Multiplicity="1" />
     <End Role="WorksOn" Type="Self.WorksOn" Multiplicity="*" />
@@ -271,6 +259,9 @@ warning 6002: The table/view 'team18db.sys.database_firewall_rules' does not hav
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="getTaskInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="projectCode" Type="int" Mode="In" />
+  </Function>
   <EntityContainer Name="team18dbModelStoreContainer">
     <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
@@ -335,10 +326,6 @@ warning 6002: The table/view 'team18db.sys.database_firewall_rules' does not hav
     <AssociationSet Name="FK_UserIDEmployee" Association="Self.FK_UserIDEmployee">
       <End Role="Users" EntitySet="Users" />
       <End Role="Employee" EntitySet="Employee" />
-    </AssociationSet>
-    <AssociationSet Name="FK_WorksOnEmployee" Association="Self.FK_WorksOnEmployee">
-      <End Role="Employee" EntitySet="Employee" />
-      <End Role="WorksOn" EntitySet="WorksOn" />
     </AssociationSet>
     <AssociationSet Name="FK_WorksOnProject" Association="Self.FK_WorksOnProject">
       <End Role="Projects" EntitySet="Projects" />

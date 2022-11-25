@@ -10,15 +10,11 @@
 namespace Team18App.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class WorksOn
+    public partial class getTaskInfo_Result
     {
-        public int WorksOnID { get; set; }
-        public decimal HoursWorked { get; set; }
-        public int ProjectID { get; set; }
-        public int EmployeeID { get; set; }
-    
-        public virtual Project Project { get; set; }
+        public string Task { get; set; }
+        public int Status { get; set; }
+        public System.DateTime Deadline { get; set; }
     }
 }

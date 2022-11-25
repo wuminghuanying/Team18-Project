@@ -13,11 +13,16 @@ namespace Team18App.Controllers
     [Authorize]
     public class ClientsController : Controller
     {
-        private team18dbEntities1 db = new team18dbEntities1();
+        private team18dbEntities db = new team18dbEntities();
 
         // GET: Clients
         public ActionResult Index()
         {
+            User u = db.Users.FirstOrDefault(x => x.userName == User.Identity.Name);
+            if (u.role!=3)
+            {
+                
+            }
             var clients = db.Clients.Include(c => c.User);
             return View(clients.ToList());
         }

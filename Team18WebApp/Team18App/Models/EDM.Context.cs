@@ -12,11 +12,13 @@ namespace Team18App.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
-    public partial class team18dbEntities1 : DbContext
+    public partial class team18dbEntities : DbContext
     {
-        public team18dbEntities1()
-            : base("name=team18dbEntities1")
+        public team18dbEntities()
+            : base("name=team18dbEntities")
         {
         }
     
@@ -36,5 +38,14 @@ namespace Team18App.Models
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<WorksOn> WorksOns { get; set; }
         public virtual DbSet<database_firewall_rules> database_firewall_rules { get; set; }
+    
+        public virtual ObjectResult<getTaskInfo_Result> getTaskInfo(Nullable<int> projectCode)
+        {
+            var projectCodeParameter = projectCode.HasValue ?
+                new ObjectParameter("projectCode", projectCode) :
+                new ObjectParameter("projectCode", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getTaskInfo_Result>("getTaskInfo", projectCodeParameter);
+        }
     }
 }

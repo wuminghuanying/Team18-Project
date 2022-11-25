@@ -12,7 +12,7 @@ namespace Team18App.Controllers
 {
     public class EmployeesController : Controller
     {
-        private team18dbEntities1 db = new team18dbEntities1();
+        private team18dbEntities db = new team18dbEntities();
 
         // GET: Employees
         public ActionResult Index()
