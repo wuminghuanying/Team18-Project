@@ -10,10 +10,10 @@ using Team18App.Models;
 
 namespace Team18App.Controllers
 {
+        [Authorize]
     public class WorksOnController : Controller
     {
         private team18dbEntities db = new team18dbEntities();
-
         // GET: WorksOn
         public ActionResult Index()
         {
@@ -40,7 +40,7 @@ namespace Team18App.Controllers
         public ActionResult Create()
         {
             ViewBag.EmployeeID = new SelectList(db.Employees, "EmployeeID", "Fname");
-            ViewBag.ProjectID = new SelectList(db.Projects, "ProjectID", "ProjectStatus");
+            ViewBag.ProjectID = new SelectList(db.Projects, "ProjectID", "ProjectName");
             return View();
         }
 
@@ -59,7 +59,7 @@ namespace Team18App.Controllers
             }
 
             ViewBag.EmployeeID = new SelectList(db.Employees, "EmployeeID", "Fname", worksOn.EmployeeID);
-            ViewBag.ProjectID = new SelectList(db.Projects, "ProjectID", "ProjectStatus", worksOn.ProjectID);
+            ViewBag.ProjectID = new SelectList(db.Projects, "ProjectID", "ProjectName", worksOn.ProjectID);
             return View(worksOn);
         }
 
@@ -76,7 +76,7 @@ namespace Team18App.Controllers
                 return HttpNotFound();
             }
             ViewBag.EmployeeID = new SelectList(db.Employees, "EmployeeID", "Fname", worksOn.EmployeeID);
-            ViewBag.ProjectID = new SelectList(db.Projects, "ProjectID", "ProjectStatus", worksOn.ProjectID);
+            ViewBag.ProjectID = new SelectList(db.Projects, "ProjectID", "ProjectName", worksOn.ProjectID);
             return View(worksOn);
         }
 
@@ -94,7 +94,7 @@ namespace Team18App.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.EmployeeID = new SelectList(db.Employees, "EmployeeID", "Fname", worksOn.EmployeeID);
-            ViewBag.ProjectID = new SelectList(db.Projects, "ProjectID", "ProjectStatus", worksOn.ProjectID);
+            ViewBag.ProjectID = new SelectList(db.Projects, "ProjectID", "ProjectName", worksOn.ProjectID);
             return View(worksOn);
         }
 

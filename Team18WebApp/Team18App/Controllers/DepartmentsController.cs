@@ -10,20 +10,30 @@ using Team18App.Models;
 
 namespace Team18App.Controllers
 {
+        [Authorize]
     public class DepartmentsController : Controller
     {
         private team18dbEntities db = new team18dbEntities();
-
         // GET: Departments
         public ActionResult Index()
         {
+            User u = db.Users.FirstOrDefault(x => x.userName == User.Identity.Name);
             var departments = db.Departments.Include(d => d.Employee);
+            if (u.role == 1 || u.role == 3)
+            {
+                return RedirectToAction("InsufficientPerms", "Home");
+            }
             return View(departments.ToList());
         }
 
         // GET: Departments/Details/5
         public ActionResult Details(int? id)
         {
+            User u = db.Users.FirstOrDefault(x => x.userName == User.Identity.Name);
+            if (u.role == 1 || u.role == 3)
+            {
+                return RedirectToAction("InsufficientPerms", "Home");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -39,6 +49,11 @@ namespace Team18App.Controllers
         // GET: Departments/Create
         public ActionResult Create()
         {
+            User u = db.Users.FirstOrDefault(x => x.userName == User.Identity.Name);
+            if (u.role == 1 || u.role == 3)
+            {
+                return RedirectToAction("InsufficientPerms", "Home");
+            }
             ViewBag.DepartmentManagerID = new SelectList(db.Employees, "EmployeeID", "Fname");
             return View();
         }
@@ -50,6 +65,11 @@ namespace Team18App.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "DepartmentID,DepartmentName,DepartmentManagerID")] Department department)
         {
+            User u = db.Users.FirstOrDefault(x => x.userName == User.Identity.Name);
+            if (u.role == 1 || u.role == 3)
+            {
+                return RedirectToAction("InsufficientPerms", "Home");
+            }
             if (ModelState.IsValid)
             {
                 db.Departments.Add(department);
@@ -64,6 +84,11 @@ namespace Team18App.Controllers
         // GET: Departments/Edit/5
         public ActionResult Edit(int? id)
         {
+            User u = db.Users.FirstOrDefault(x => x.userName == User.Identity.Name);
+            if (u.role == 1 || u.role == 3)
+            {
+                return RedirectToAction("InsufficientPerms", "Home");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -84,6 +109,11 @@ namespace Team18App.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "DepartmentID,DepartmentName,DepartmentManagerID")] Department department)
         {
+            User u = db.Users.FirstOrDefault(x => x.userName == User.Identity.Name);
+            if (u.role == 1 || u.role == 3)
+            {
+                return RedirectToAction("InsufficientPerms", "Home");
+            }
             if (ModelState.IsValid)
             {
                 db.Entry(department).State = EntityState.Modified;
@@ -97,6 +127,11 @@ namespace Team18App.Controllers
         // GET: Departments/Delete/5
         public ActionResult Delete(int? id)
         {
+            User u = db.Users.FirstOrDefault(x => x.userName == User.Identity.Name);
+            if (u.role == 1 || u.role == 3)
+            {
+                return RedirectToAction("InsufficientPerms", "Home");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -114,6 +149,11 @@ namespace Team18App.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            User u = db.Users.FirstOrDefault(x => x.userName == User.Identity.Name);
+            if (u.role == 1 || u.role == 3)
+            {
+                return RedirectToAction("InsufficientPerms", "Home");
+            }
             Department department = db.Departments.Find(id);
             db.Departments.Remove(department);
             db.SaveChanges();

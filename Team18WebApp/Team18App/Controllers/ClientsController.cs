@@ -10,10 +10,10 @@ using Team18App.Models;
 
 namespace Team18App.Controllers
 {
+        [Authorize]
     public class ClientsController : Controller
     {
         private team18dbEntities db = new team18dbEntities();
-        [Authorize]
         // GET: Clients
         public ActionResult Index()
         {
@@ -29,6 +29,11 @@ namespace Team18App.Controllers
         // GET: Clients/Details/5
         public ActionResult Details(int? id)
         {
+            User u = db.Users.FirstOrDefault(x => x.userName == User.Identity.Name);
+            if (u.role == 1 || u.role == 3)
+            {
+                return RedirectToAction("InsufficientPerms", "Home");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -44,6 +49,11 @@ namespace Team18App.Controllers
         // GET: Clients/Create
         public ActionResult Create()
         {
+            User u = db.Users.FirstOrDefault(x => x.userName == User.Identity.Name);
+            if (u.role == 1 || u.role == 3)
+            {
+                return RedirectToAction("InsufficientPerms", "Home");
+            }
             ViewBag.UserID = new SelectList(db.Users, "id", "userName");
             return View();
         }
@@ -55,6 +65,11 @@ namespace Team18App.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ClientID,UserID,Fname,Minit,Lname")] Client client)
         {
+            User u = db.Users.FirstOrDefault(x => x.userName == User.Identity.Name);
+            if (u.role == 1 || u.role == 3)
+            {
+                return RedirectToAction("InsufficientPerms", "Home");
+            }
             if (ModelState.IsValid)
             {
                 db.Clients.Add(client);
@@ -69,6 +84,11 @@ namespace Team18App.Controllers
         // GET: Clients/Edit/5
         public ActionResult Edit(int? id)
         {
+            User u = db.Users.FirstOrDefault(x => x.userName == User.Identity.Name);
+            if (u.role == 1 || u.role == 3)
+            {
+                return RedirectToAction("InsufficientPerms", "Home");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -89,6 +109,11 @@ namespace Team18App.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ClientID,UserID,Fname,Minit,Lname")] Client client)
         {
+            User u = db.Users.FirstOrDefault(x => x.userName == User.Identity.Name);
+            if (u.role == 1 || u.role == 3)
+            {
+                return RedirectToAction("InsufficientPerms", "Home");
+            }
             if (ModelState.IsValid)
             {
                 db.Entry(client).State = EntityState.Modified;
@@ -102,6 +127,11 @@ namespace Team18App.Controllers
         // GET: Clients/Delete/5
         public ActionResult Delete(int? id)
         {
+            User u = db.Users.FirstOrDefault(x => x.userName == User.Identity.Name);
+            if (u.role == 1 || u.role == 3)
+            {
+                return RedirectToAction("InsufficientPerms", "Home");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -119,6 +149,11 @@ namespace Team18App.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            User u = db.Users.FirstOrDefault(x => x.userName == User.Identity.Name);
+            if (u.role == 1 || u.role == 3)
+            {
+                return RedirectToAction("InsufficientPerms", "Home");
+            }
             Client client = db.Clients.Find(id);
             db.Clients.Remove(client);
             db.SaveChanges();

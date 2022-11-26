@@ -10,29 +10,16 @@ using Team18App.Models;
 
 namespace Team18App.Controllers
 {
+        [Authorize]
     public class TasksController : Controller
     {
         private team18dbEntities db = new team18dbEntities();
-
         // GET: Tasks
         public ActionResult Index()
         {
             var tasks = db.Tasks.Include(t => t.Project);
             return View(tasks.ToList());
         }
-
-        public ActionResult SearchForm()
-        {
-            var tasks = db.Tasks.Include(t => t.Project);
-            return View();
-        }
-
-        public ActionResult ShowSearchResults(String SearchPhrase)
-        {
-            var tasks = db.Tasks.Include(t => t.Project);
-            return View("Index", tasks.Where(t => t.TaskName.Contains(SearchPhrase)).ToList());
-        }
-
 
         // GET: Tasks/Details/5
         public ActionResult Details(int? id)
@@ -52,7 +39,7 @@ namespace Team18App.Controllers
         // GET: Tasks/Create
         public ActionResult Create()
         {
-            ViewBag.ProjectID = new SelectList(db.Projects, "ProjectID", "ProjectStatus");
+            ViewBag.ProjectID = new SelectList(db.Projects, "ProjectID", "ProjectName");
             return View();
         }
 
@@ -61,7 +48,7 @@ namespace Team18App.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "TaskID,ProjectID,TaskBudget,TaskName,TaskDeadline,TaskStatus,TaskExpenses")] Task task)
+        public ActionResult Create([Bind(Include = "TaskID,ProjectID,TaskBudget,TaskName,TaskDeadline,TaskExpenses")] Task task)
         {
             if (ModelState.IsValid)
             {
@@ -70,7 +57,7 @@ namespace Team18App.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ProjectID = new SelectList(db.Projects, "ProjectID", "ProjectStatus", task.ProjectID);
+            ViewBag.ProjectID = new SelectList(db.Projects, "ProjectID", "ProjectName", task.ProjectID);
             return View(task);
         }
 
@@ -86,7 +73,7 @@ namespace Team18App.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ProjectID = new SelectList(db.Projects, "ProjectID", "ProjectStatus", task.ProjectID);
+            ViewBag.ProjectID = new SelectList(db.Projects, "ProjectID", "ProjectName", task.ProjectID);
             return View(task);
         }
 
@@ -95,7 +82,7 @@ namespace Team18App.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "TaskID,ProjectID,TaskBudget,TaskName,TaskDeadline,TaskStatus,TaskExpenses")] Task task)
+        public ActionResult Edit([Bind(Include = "TaskID,ProjectID,TaskBudget,TaskName,TaskDeadline,TaskExpenses")] Task task)
         {
             if (ModelState.IsValid)
             {
@@ -103,7 +90,7 @@ namespace Team18App.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ProjectID = new SelectList(db.Projects, "ProjectID", "ProjectStatus", task.ProjectID);
+            ViewBag.ProjectID = new SelectList(db.Projects, "ProjectID", "ProjectName", task.ProjectID);
             return View(task);
         }
 

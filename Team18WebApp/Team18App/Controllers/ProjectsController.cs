@@ -10,10 +10,10 @@ using Team18App.Models;
 
 namespace Team18App.Controllers
 {
+        [Authorize]
     public class ProjectsController : Controller
     {
         private team18dbEntities db = new team18dbEntities();
-
         // GET: Projects
         public ActionResult Index()
         {
@@ -49,7 +49,7 @@ namespace Team18App.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProjectID,ProjectDept,ProjectManagerID,ProjectBudget,CurrentExpenses,ProjectDeadline,ProjectStatus,ProjectName")] Project project)
+        public ActionResult Create([Bind(Include = "ProjectID,ProjectDept,ProjectManagerID,ProjectBudget,CurrentExpenses,ProjectDeadline,ProjectName")] Project project)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace Team18App.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProjectID,ProjectDept,ProjectManagerID,ProjectBudget,CurrentExpenses,ProjectDeadline,ProjectStatus,ProjectName")] Project project)
+        public ActionResult Edit([Bind(Include = "ProjectID,ProjectDept,ProjectManagerID,ProjectBudget,CurrentExpenses,ProjectDeadline,ProjectName")] Project project)
         {
             if (ModelState.IsValid)
             {

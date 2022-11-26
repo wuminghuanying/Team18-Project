@@ -10,13 +10,18 @@ using Team18App.Models;
 
 namespace Team18App.Controllers
 {
+        [Authorize]
     public class EmployeesController : Controller
     {
         private team18dbEntities db = new team18dbEntities();
-
         // GET: Employees
         public ActionResult Index()
         {
+            User u = db.Users.FirstOrDefault(x => x.userName == User.Identity.Name);
+            if (u.role == 1 || u.role == 3)
+            {
+                return RedirectToAction("InsufficientPerms", "Home");
+            }
             var employees = db.Employees.Include(e => e.Department).Include(e => e.User);
             return View(employees.ToList());
         }
@@ -24,6 +29,11 @@ namespace Team18App.Controllers
         // GET: Employees/Details/5
         public ActionResult Details(int? id)
         {
+            User u = db.Users.FirstOrDefault(x => x.userName == User.Identity.Name);
+            if (u.role == 1 || u.role == 3)
+            {
+                return RedirectToAction("InsufficientPerms", "Home");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -39,6 +49,11 @@ namespace Team18App.Controllers
         // GET: Employees/Create
         public ActionResult Create()
         {
+            User u = db.Users.FirstOrDefault(x => x.userName == User.Identity.Name);
+            if (u.role == 1 || u.role == 3)
+            {
+                return RedirectToAction("InsufficientPerms", "Home");
+            }
             ViewBag.DepartmentID = new SelectList(db.Departments, "DepartmentID", "DepartmentName");
             ViewBag.UserID = new SelectList(db.Users, "id", "userName");
             return View();
@@ -51,6 +66,11 @@ namespace Team18App.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "UserID,EmployeeID,Fname,Minit,Lname,DOB,Sex,DepartmentID,Hourly_rate")] Employee employee)
         {
+            User u = db.Users.FirstOrDefault(x => x.userName == User.Identity.Name);
+            if (u.role == 1 || u.role == 3)
+            {
+                return RedirectToAction("InsufficientPerms", "Home");
+            }
             if (ModelState.IsValid)
             {
                 db.Employees.Add(employee);
@@ -66,6 +86,11 @@ namespace Team18App.Controllers
         // GET: Employees/Edit/5
         public ActionResult Edit(int? id)
         {
+            User u = db.Users.FirstOrDefault(x => x.userName == User.Identity.Name);
+            if (u.role == 1 || u.role == 3)
+            {
+                return RedirectToAction("InsufficientPerms", "Home");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -87,6 +112,11 @@ namespace Team18App.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "UserID,EmployeeID,Fname,Minit,Lname,DOB,Sex,DepartmentID,Hourly_rate")] Employee employee)
         {
+            User u = db.Users.FirstOrDefault(x => x.userName == User.Identity.Name);
+            if (u.role == 1 || u.role == 3)
+            {
+                return RedirectToAction("InsufficientPerms", "Home");
+            }
             if (ModelState.IsValid)
             {
                 db.Entry(employee).State = EntityState.Modified;
@@ -101,6 +131,11 @@ namespace Team18App.Controllers
         // GET: Employees/Delete/5
         public ActionResult Delete(int? id)
         {
+            User u = db.Users.FirstOrDefault(x => x.userName == User.Identity.Name);
+            if (u.role == 1 || u.role == 3)
+            {
+                return RedirectToAction("InsufficientPerms", "Home");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -118,6 +153,11 @@ namespace Team18App.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            User u = db.Users.FirstOrDefault(x => x.userName == User.Identity.Name);
+            if (u.role == 1 || u.role == 3)
+            {
+                return RedirectToAction("InsufficientPerms", "Home");
+            }
             Employee employee = db.Employees.Find(id);
             db.Employees.Remove(employee);
             db.SaveChanges();

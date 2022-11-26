@@ -1,7 +1,14 @@
 ﻿@model IEnumerable<Team18App.Models.Department>
-
+@using Team18App.Models;
 @{
+    team18dbEntities db = new team18dbEntities();
     ViewBag.Title = "Index";
+@*    bool isEmployee;
+    User u = db.Users.FirstOrDefault(x => x.userName == User.Identity.Name);
+    if (u.role == 1)
+    {
+        isEmployee = true;
+    }*@
 }
 
 <h2>Index</h2>
@@ -20,20 +27,21 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.DepartmentName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Employee.Fname)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.DepartmentID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.DepartmentID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.DepartmentID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DepartmentName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Employee.Fname)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.DepartmentID }) 
+                @Html.ActionLink("Details", "Details", new { id = item.DepartmentID }) 
+                @Html.ActionLink("Delete", "Delete", new { id = item.DepartmentID })
+            </td>
+        </tr>
+    }
 
 </table>

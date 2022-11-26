@@ -18,7 +18,7 @@
             @Html.DisplayNameFor(model => model.Employee.Fname)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Project.ProjectStatus)
+            @Html.DisplayNameFor(model => model.Project.ProjectName)
         </th>
         <th></th>
     </tr>
@@ -32,7 +32,7 @@
             @Html.DisplayFor(modelItem => item.Employee.Fname)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Project.ProjectStatus)
+            @Html.DisplayFor(modelItem => item.Project.ProjectName)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.WorksOnID }) |
