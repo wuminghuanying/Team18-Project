@@ -21,6 +21,18 @@ namespace Team18App.Controllers
             return View(users.ToList());
         }
 
+        public ActionResult SearchForm()
+        {
+            var users = db.Users.Include(u => u.Role1);
+            return View();
+        }
+
+        public ActionResult ShowSearchResults(String SearchPhrase)
+        {
+            var users = db.Users.Include(u => u.Role1);
+            return View("Index", users.Where(t => t.userName.Contains(SearchPhrase)).ToList());
+        }
+
         // GET: Users/Details/5
         public ActionResult Details(int? id)
         {
