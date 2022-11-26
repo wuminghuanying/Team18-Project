@@ -33,7 +33,7 @@ namespace Team18App.Models
         public virtual DbSet<ErrorMessage> ErrorMessages { get; set; }
         public virtual DbSet<Project> Projects { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<Table> Tables { get; set; }
         public virtual DbSet<Task> Tasks { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<WorksOn> WorksOns { get; set; }
@@ -57,7 +57,7 @@ namespace Team18App.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getTaskInfo_Result>("getTaskInfo", projectCodeParameter);
         }
     
-        public virtual ObjectResult<getTopEmployees_Result> getTopEmployees(Nullable<int> hoursWorked, string deptName, string projName)
+        public virtual ObjectResult<getTopEmployees_Result> getTopEmployees(Nullable<int> hoursWorked, string deptName)
         {
             var hoursWorkedParameter = hoursWorked.HasValue ?
                 new ObjectParameter("hoursWorked", hoursWorked) :
@@ -67,11 +67,7 @@ namespace Team18App.Models
                 new ObjectParameter("deptName", deptName) :
                 new ObjectParameter("deptName", typeof(string));
     
-            var projNameParameter = projName != null ?
-                new ObjectParameter("projName", projName) :
-                new ObjectParameter("projName", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getTopEmployees_Result>("getTopEmployees", hoursWorkedParameter, deptNameParameter, projNameParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getTopEmployees_Result>("getTopEmployees", hoursWorkedParameter, deptNameParameter);
         }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)

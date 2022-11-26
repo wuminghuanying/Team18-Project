@@ -19,7 +19,6 @@ namespace Team18App.Models
         public decimal TaskBudget { get; set; }
         public string TaskName { get; set; }
         public System.DateTime TaskDeadline { get; set; }
-        public string TaskStatus { get; set; }
         public decimal TaskExpenses { get; set; }
     
         public virtual Project Project { get; set; }

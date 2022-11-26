@@ -54,7 +54,6 @@ namespace Team18App.Controllers
             if (ModelState.IsValid)
             {
                 db.Projects.Add(project);
-                project.ProjectStatus = "Not Started";
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

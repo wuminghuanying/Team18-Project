@@ -50,7 +50,6 @@
     <Property Name="ProjectBudget" Type="decimal" Precision="9" Scale="2" Nullable="false" />
     <Property Name="CurrentExpenses" Type="decimal" Precision="9" Scale="2" Nullable="false" />
     <Property Name="ProjectDeadline" Type="date" Nullable="false" />
-    <Property Name="ProjectStatus" Type="nvarchar" MaxLength="50" />
     <Property Name="ProjectName" Type="nvarchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="Role">
@@ -60,15 +59,11 @@
     <Property Name="roleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="roleName" Type="varchar" MaxLength="30" Nullable="false" />
   </EntityType>
-  <EntityType Name="sysdiagrams">
+  <EntityType Name="Table">
     <Key>
-      <PropertyRef Name="diagram_id" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="principal_id" Type="int" Nullable="false" />
-    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="version" Type="int" />
-    <Property Name="definition" Type="varbinary(max)" />
+    <Property Name="Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Tasks">
     <Key>
@@ -79,7 +74,6 @@
     <Property Name="TaskBudget" Type="decimal" Precision="9" Scale="2" Nullable="false" />
     <Property Name="TaskName" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="TaskDeadline" Type="date" Nullable="false" />
-    <Property Name="TaskStatus" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="TaskExpenses" Type="decimal" Precision="9" Scale="2" Nullable="false" />
   </EntityType>
   <EntityType Name="Users">
@@ -260,7 +254,6 @@ warning 6002: The table/view 'team18db.sys.database_firewall_rules' does not hav
   <Function Name="getTopEmployees" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="hoursWorked" Type="int" Mode="In" />
     <Parameter Name="deptName" Type="varchar" Mode="In" />
-    <Parameter Name="projName" Type="varchar" Mode="In" />
   </Function>
   <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
@@ -299,7 +292,7 @@ warning 6002: The table/view 'team18db.sys.database_firewall_rules' does not hav
     <EntitySet Name="ErrorMessages" EntityType="Self.ErrorMessages" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Projects" EntityType="Self.Projects" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Table" EntityType="Self.Table" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Tasks" EntityType="Self.Tasks" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="WorksOn" EntityType="Self.WorksOn" Schema="dbo" store:Type="Tables" />

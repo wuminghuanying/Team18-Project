@@ -28,7 +28,6 @@ namespace Team18App.Models
         public decimal ProjectBudget { get; set; }
         public decimal CurrentExpenses { get; set; }
         public System.DateTime ProjectDeadline { get; set; }
-        public string ProjectStatus { get; set; }
         public string ProjectName { get; set; }
     
         public virtual Department Department { get; set; }
