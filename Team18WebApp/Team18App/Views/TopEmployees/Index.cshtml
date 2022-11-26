@@ -1,0 +1,28 @@
+﻿@model IEnumerable<Team18App.Models.TopEmployeeViewModel>
+<h2>Top Employees Report</h2>
+<style type="text/css">
+    th {
+        padding: 0 20px;
+    }
+
+    td {
+        padding: 0 20px;
+    }
+</style>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Total Hours Worked</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.EmployeeID.ToString()</td>
+            <td>@item.FirstName</td>
+            <td>@item.LastName</td>
+            <td>@item.HoursWorked.ToString()</td>
+        </tr>
+    }
+</table>
