@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Team18App.Models.Client>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Index for Clients";
 }
 
 <h2>Index</h2>
@@ -12,16 +12,16 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Fname)
+            <p>First Name</p>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Minit)
+            <p>Middle Initial</p>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Lname)
+            <p>Last Name</p>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.User.userName)
+            <p>Username</p>
         </th>
         <th></th>
     </tr>

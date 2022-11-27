@@ -10,6 +10,7 @@ using Team18App.Models;
 
 namespace Team18App.Controllers
 {
+    [Authorize]
     public class ErrorMessageController : Controller
     {
         private team18dbEntities db = new team18dbEntities();

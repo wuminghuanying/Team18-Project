@@ -38,15 +38,17 @@
 <h2>Index</h2>
 
 <p>
+    @if (!isEmployee) { 
     @Html.ActionLink("Create New", "Create")
+    }
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.DepartmentName)
+            <p>Department Name</p>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Employee.Fname)
+            <p>Department Manager</p>
         </th>
         <th></th>
     </tr>
