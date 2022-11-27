@@ -72,13 +72,22 @@ namespace Team18App.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getTopEmployees_Result>("getTopEmployees", hoursWorkedParameter, deptNameParameter);
         }
     
-        public virtual ObjectResult<projectDraft_Result> projectDraft(Nullable<int> projectID)
+        public virtual ObjectResult<Project> projectDraft(Nullable<int> projectID)
         {
             var projectIDParameter = projectID.HasValue ?
                 new ObjectParameter("projectID", projectID) :
                 new ObjectParameter("projectID", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<projectDraft_Result>("projectDraft", projectIDParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Project>("projectDraft", projectIDParameter);
+        }
+    
+        public virtual ObjectResult<Project> projectDraft(Nullable<int> projectID, MergeOption mergeOption)
+        {
+            var projectIDParameter = projectID.HasValue ?
+                new ObjectParameter("projectID", projectID) :
+                new ObjectParameter("projectID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Project>("projectDraft", mergeOption, projectIDParameter);
         }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)

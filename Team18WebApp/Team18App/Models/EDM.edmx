@@ -723,7 +723,7 @@ warning 6002: The table/view 'team18db.sys.database_firewall_rules' does not hav
             <Parameter Name="hoursWorked" Mode="In" Type="Int32" />
             <Parameter Name="deptName" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="projectDraft" ReturnType="Collection(team18dbModel.projectDraft_Result)">
+          <FunctionImport Name="projectDraft" EntitySet="Projects" ReturnType="Collection(team18dbModel.Project)">
           <Parameter Name="projectID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_alterdiagram">
@@ -967,17 +967,6 @@ warning 6002: The table/view 'team18db.sys.database_firewall_rules' does not hav
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="projectDraft" FunctionName="team18dbModel.Store.projectDraft">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="team18dbModel.projectDraft_Result">
-                <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
-                <ScalarProperty Name="ProjectDept" ColumnName="ProjectDept" />
-                <ScalarProperty Name="ProjectManagerID" ColumnName="ProjectManagerID" />
-                <ScalarProperty Name="ProjectBudget" ColumnName="ProjectBudget" />
-                <ScalarProperty Name="CurrentExpenses" ColumnName="CurrentExpenses" />
-                <ScalarProperty Name="ProjectDeadline" ColumnName="ProjectDeadline" />
-                <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
-              </ComplexTypeMapping>
-            </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="team18dbModel.Store.sp_alterdiagram" />
           <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="team18dbModel.Store.sp_creatediagram" />
