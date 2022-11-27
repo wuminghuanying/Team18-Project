@@ -1,8 +1,35 @@
+@using Team18App.Models;
 @{
     bool isLoggedIn = true;
     if(string.IsNullOrWhiteSpace(User.Identity.Name)){
         isLoggedIn=false;
     }
+    team18dbEntities db = new team18dbEntities();
+    User u = db.Users.FirstOrDefault(x => x.userName == User.Identity.Name);
+    bool isEmployee = false;
+    bool isClient = false;
+    bool isAdmin = false;
+    bool isDhead = false;
+    if(isLoggedIn == true)
+            {
+
+    if (u.role == 1)
+    {
+        isEmployee = true;
+    }
+    if (u.role == 3)
+    {
+        isClient = true;
+    }
+    if (u.role == 2)
+    {
+        isAdmin = true;
+    }
+    if (u.role == 4)
+    {
+        isDhead = true;
+    }
+            }
 }
 
 
@@ -24,21 +51,58 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("COSC 3380 Team 18", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @if (!isLoggedIn)
+                {
+                    @Html.ActionLink("COSC 3380 Team 18", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                }
+                @if (isClient)
+                {
+                    @Html.ActionLink("COSC 3380 Team 18", "ClientIndex", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                }
+                @if (isEmployee)
+                {
+                    @Html.ActionLink("COSC 3380 Team 18", "EmployeeIndex", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                }
+                @if (isDhead)
+                {
+                    @Html.ActionLink("COSC 3380 Team 18", "DepartmentHeadIndex", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                }
+                @if (isAdmin)
+                {
+                    @Html.ActionLink("COSC 3380 Team 18", "AdminIndex", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                }
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    @if (!isLoggedIn)
+                    {
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    }
+                    @if (isClient)
+                    {
+                        <li> @Html.ActionLink("Home", "ClientIndex", "Home") </li>
+                    }
+                    @if (isEmployee)
+                    {
+                        <li> @Html.ActionLink("Home", "EmployeeIndex", "Home") </li>
+                    }
+                    @if (isDhead)
+                    {
+                        <li> @Html.ActionLink("Home", "DepartmentHeadIndex", "Home") </li>
+                    }
+                    @if (isAdmin)
+                    {
+                        <li> @Html.ActionLink("Home", "AdminIndex", "Home") </li>
+                    }
                     @{
                         if (isLoggedIn)
                         {
-                        <li>@Html.ActionLink(User.Identity.Name, "Index", "Home")</li>
-                        <li>@Html.ActionLink("Signout", "Signout", "Accounts")</li>
+                            <li>@Html.ActionLink("Signout", "Signout", "Accounts")</li>
                         }
                         else
                         {
-                        <li>@Html.ActionLink("Login", "Login", "Accounts")</li>
-                        <li>@Html.ActionLink("Register", "Signup", "Accounts")</li>
+                            <li>@Html.ActionLink("Login", "Login", "Accounts")</li>
+                            <li>@Html.ActionLink("Register", "Signup", "Accounts")</li>
                         }
                     }
                 </ul>

@@ -19,7 +19,7 @@ namespace Team18App.Controllers
         {
             User u = db.Users.FirstOrDefault(x => x.userName == User.Identity.Name);
             var departments = db.Departments.Include(d => d.Employee);
-            if (u.role == 1 || u.role == 3)
+            if (u.role == 3)
             {
                 return RedirectToAction("InsufficientPerms", "Home");
             }
@@ -30,7 +30,7 @@ namespace Team18App.Controllers
         public ActionResult Details(int? id)
         {
             User u = db.Users.FirstOrDefault(x => x.userName == User.Identity.Name);
-            if (u.role == 1 || u.role == 3)
+            if (u.role == 3)
             {
                 return RedirectToAction("InsufficientPerms", "Home");
             }

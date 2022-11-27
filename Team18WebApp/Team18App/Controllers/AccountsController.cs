@@ -26,6 +26,30 @@ namespace Team18App.Controllers
         {
             bool userExist = entity.Users.Any(x => x.userName == credentials.Username && x.password == credentials.Password);
             User u = entity.Users.FirstOrDefault(x => x.userName == credentials.Username && x.password == credentials.Password);
+            bool isEmployee = false;
+            bool isClient = false;
+            bool isAdmin = false;
+            bool isDhead = false;
+            if (userExist == true)
+            {
+
+                if (u.role == 1)
+                {
+                    isEmployee = true;
+                }
+                if (u.role == 3)
+                {
+                    isClient = true;
+                }
+                if (u.role == 2)
+                {
+                    isAdmin = true;
+                }
+                if (u.role == 4)
+                {
+                    isDhead = true;
+                }
+            }
             if (userExist)
             {
                 FormsAuthentication.SetAuthCookie(u.userName, false);

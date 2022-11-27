@@ -3,12 +3,36 @@
 @{
     team18dbEntities db = new team18dbEntities();
     ViewBag.Title = "Index";
-@*    bool isEmployee;
-    User u = db.Users.FirstOrDefault(x => x.userName == User.Identity.Name);
-    if (u.role == 1)
+    bool isLoggedIn = true;
+    if (string.IsNullOrWhiteSpace(User.Identity.Name))
     {
-        isEmployee = true;
-    }*@
+        isLoggedIn = false;
+    }
+    User u = db.Users.FirstOrDefault(x => x.userName == User.Identity.Name);
+    bool isEmployee = false;
+    bool isClient = false;
+    bool isAdmin = false;
+    bool isDhead = false;
+    if (isLoggedIn == true)
+    {
+
+        if (u.role == 1)
+        {
+            isEmployee = true;
+        }
+        if (u.role == 3)
+        {
+            isClient = true;
+        }
+        if (u.role == 2)
+        {
+            isAdmin = true;
+        }
+        if (u.role == 4)
+        {
+            isDhead = true;
+        }
+    }
 }
 
 <h2>Index</h2>
@@ -37,9 +61,12 @@
                 @Html.DisplayFor(modelItem => item.Employee.Fname)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.DepartmentID }) 
+                @if (isDhead || isAdmin)
+                {
+                @Html.ActionLink("Edit  |", "Edit", new { id = item.DepartmentID }) 
+                @Html.ActionLink("Delete |", "Delete", new { id = item.DepartmentID })
+                }
                 @Html.ActionLink("Details", "Details", new { id = item.DepartmentID }) 
-                @Html.ActionLink("Delete", "Delete", new { id = item.DepartmentID })
             </td>
         </tr>
     }

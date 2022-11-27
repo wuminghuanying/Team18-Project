@@ -135,6 +135,7 @@
     <Compile Include="Controllers\ClientsController.cs" />
     <Compile Include="Controllers\DepartmentsController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
+    <Compile Include="Controllers\ErrorMessageController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
     <Compile Include="Controllers\TasksController.cs" />
@@ -414,6 +415,15 @@
     <Content Include="Views\WorksOn\Details.cshtml" />
     <Content Include="Views\WorksOn\Edit.cshtml" />
     <Content Include="Views\WorksOn\Index.cshtml" />
+    <Content Include="Views\Home\AdminIndex.cshtml" />
+    <Content Include="Views\Home\EmployeeIndex.cshtml" />
+    <Content Include="Views\Home\DepartmentHeadIndex.cshtml" />
+    <Content Include="Views\Home\ClientIndex.cshtml" />
+    <Content Include="Views\ErrorMessage\Create.cshtml" />
+    <Content Include="Views\ErrorMessage\Delete.cshtml" />
+    <Content Include="Views\ErrorMessage\Details.cshtml" />
+    <Content Include="Views\ErrorMessage\Edit.cshtml" />
+    <Content Include="Views\ErrorMessage\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
