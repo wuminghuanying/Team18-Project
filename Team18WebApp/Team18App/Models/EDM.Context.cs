@@ -33,11 +33,13 @@ namespace Team18App.Models
         public virtual DbSet<ErrorMessage> ErrorMessages { get; set; }
         public virtual DbSet<Project> Projects { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Table> Tables { get; set; }
         public virtual DbSet<Task> Tasks { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<WorksOn> WorksOns { get; set; }
         public virtual DbSet<database_firewall_rules> database_firewall_rules { get; set; }
+        public virtual DbSet<ClientRequest> ClientRequests { get; set; }
     
         public virtual ObjectResult<getProjectInfo_Result> getProjectInfo(Nullable<int> projectID)
         {
@@ -68,6 +70,15 @@ namespace Team18App.Models
                 new ObjectParameter("deptName", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getTopEmployees_Result>("getTopEmployees", hoursWorkedParameter, deptNameParameter);
+        }
+    
+        public virtual ObjectResult<projectDraft_Result> projectDraft(Nullable<int> projectID)
+        {
+            var projectIDParameter = projectID.HasValue ?
+                new ObjectParameter("projectID", projectID) :
+                new ObjectParameter("projectID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<projectDraft_Result>("projectDraft", projectIDParameter);
         }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)

@@ -17,12 +17,18 @@ namespace Team18App.Controllers
         // GET: Users
         public ActionResult Index()
         {
+            User z = db.Users.FirstOrDefault(x => x.userName == User.Identity.Name);
+            if (z.role != 2)
+            {
+                return RedirectToAction("InsufficientPerms", "Home");
+            }
             var users = db.Users.Include(u => u.Role1);
             return View(users.ToList());
         }
 
         public ActionResult SearchForm()
         {
+
             var users = db.Users.Include(u => u.Role1);
             return View();
         }
@@ -36,6 +42,11 @@ namespace Team18App.Controllers
         // GET: Users/Details/5
         public ActionResult Details(int? id)
         {
+            User u = db.Users.FirstOrDefault(x => x.userName == User.Identity.Name);
+            if (u.role != 2)
+            {
+                return RedirectToAction("InsufficientPerms", "Home");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -51,6 +62,11 @@ namespace Team18App.Controllers
         // GET: Users/Create
         public ActionResult Create()
         {
+            User u = db.Users.FirstOrDefault(x => x.userName == User.Identity.Name);
+            if (u.role != 2)
+            {
+                return RedirectToAction("InsufficientPerms", "Home");
+            }
             ViewBag.role = new SelectList(db.Roles, "roleId", "roleName");
             return View();
         }
@@ -62,6 +78,11 @@ namespace Team18App.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "id,role,userName,password")] User user)
         {
+            User u = db.Users.FirstOrDefault(x => x.userName == User.Identity.Name);
+            if (u.role != 2)
+            {
+                return RedirectToAction("InsufficientPerms", "Home");
+            }
             if (ModelState.IsValid)
             {
                 db.Users.Add(user);
@@ -76,6 +97,11 @@ namespace Team18App.Controllers
         // GET: Users/Edit/5
         public ActionResult Edit(int? id)
         {
+            User u = db.Users.FirstOrDefault(x => x.userName == User.Identity.Name);
+            if (u.role != 2)
+            {
+                return RedirectToAction("InsufficientPerms", "Home");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -96,6 +122,11 @@ namespace Team18App.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id,role,userName,password")] User user)
         {
+            User u = db.Users.FirstOrDefault(x => x.userName == User.Identity.Name);
+            if (u.role != 2)
+            {
+                return RedirectToAction("InsufficientPerms", "Home");
+            }
             if (ModelState.IsValid)
             {
                 db.Entry(user).State = EntityState.Modified;
@@ -109,6 +140,11 @@ namespace Team18App.Controllers
         // GET: Users/Delete/5
         public ActionResult Delete(int? id)
         {
+            User u = db.Users.FirstOrDefault(x => x.userName == User.Identity.Name);
+            if (u.role != 2)
+            {
+                return RedirectToAction("InsufficientPerms", "Home");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -126,6 +162,11 @@ namespace Team18App.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            User u = db.Users.FirstOrDefault(x => x.userName == User.Identity.Name);
+            if (u.role != 2)
+            {
+                return RedirectToAction("InsufficientPerms", "Home");
+            }
             User user = db.Users.Find(id);
             db.Users.Remove(user);
             db.SaveChanges();

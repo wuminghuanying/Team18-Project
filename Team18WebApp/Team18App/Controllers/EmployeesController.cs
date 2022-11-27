@@ -74,6 +74,8 @@ namespace Team18App.Controllers
             if (ModelState.IsValid)
             {
                 db.Employees.Add(employee);
+                User x = db.Users.FirstOrDefault(z => z.id == employee.UserID);
+                x.role = 1;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -159,6 +161,8 @@ namespace Team18App.Controllers
                 return RedirectToAction("InsufficientPerms", "Home");
             }
             Employee employee = db.Employees.Find(id);
+            User y = db.Users.FirstOrDefault(z => z.id == employee.UserID);
+            y.role = 3;
             db.Employees.Remove(employee);
             db.SaveChanges();
             return RedirectToAction("Index");

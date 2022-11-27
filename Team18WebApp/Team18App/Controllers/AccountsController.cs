@@ -53,6 +53,22 @@ namespace Team18App.Controllers
             if (userExist)
             {
                 FormsAuthentication.SetAuthCookie(u.userName, false);
+                if (isClient)
+                {
+                    return RedirectToAction("ClientIndex", "Home");
+                }
+                if (isEmployee)
+                {
+                    return RedirectToAction("EmployeeIndex", "Home");
+                }
+                if (isDhead)
+                {
+                    return RedirectToAction("DepartmentHeadIndex", "Home");
+                }
+                if (isAdmin)
+                {
+                    return RedirectToAction("AdminIndex", "Home");
+                }
                 return RedirectToAction("Index", "Home");
             }
             ModelState.AddModelError("", "Username or Password is wrong");

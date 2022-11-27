@@ -1,0 +1,42 @@
+﻿@model Team18App.Models.WorksOn
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>WorksOn</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.HoursWorked)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HoursWorked)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Employee.Fname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Employee.Fname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Project.ProjectName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Project.ProjectName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.WorksOnID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

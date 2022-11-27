@@ -1,0 +1,15 @@
+﻿@{
+
+}
+
+<div class="jumbotron">
+    <h1 style="text-align:center">COSC 3380 Team 18</h1>
+    <p class="lead" style="text-align:center">Project Management Systems</p>
+    @if (string.IsNullOrWhiteSpace(User.Identity.Name))
+    {
+    <p style="text-align:center"><a href="https://team18app.azurewebsites.net/Account/Signup" class="btn btn-primary btn-lg">Signup &raquo;</a></p> }
+    else
+            {
+    <p style="text-align:center">Welcome, @User.Identity.Name!</p>
+            }
+</div>

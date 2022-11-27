@@ -15,7 +15,6 @@ namespace Team18App.Models
     {
         public int Project_ID { get; set; }
         public string Project_Name { get; set; }
-        public string Status { get; set; }
         public int Department_Code { get; set; }
         public Nullable<decimal> Budget_Balance { get; set; }
         public Nullable<int> Amount_of_Related_Tasks { get; set; }

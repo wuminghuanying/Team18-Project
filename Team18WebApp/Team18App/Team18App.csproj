@@ -132,6 +132,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountsController.cs" />
+    <Compile Include="Controllers\ClientRequestsController.cs" />
     <Compile Include="Controllers\ClientsController.cs" />
     <Compile Include="Controllers\DepartmentsController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
@@ -145,9 +146,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\TopEmployeeFormModel.cs" />
-    <Compile Include="Models\TopEmployeeViewModel.cs" />
     <Compile Include="Models\Client.cs">
+      <DependentUpon>EDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ClientRequest.cs">
       <DependentUpon>EDM.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\database_firewall_rules.cs">
@@ -186,8 +188,10 @@
     <Compile Include="Models\getTopEmployees_Result.cs">
       <DependentUpon>EDM.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\Project.cs">
+      <DependentUpon>EDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\projectDraft_Result.cs">
       <DependentUpon>EDM.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Role.cs">
@@ -199,12 +203,18 @@
     <Compile Include="Models\sp_helpdiagrams_Result.cs">
       <DependentUpon>EDM.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>EDM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Table.cs">
       <DependentUpon>EDM.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Task.cs">
       <DependentUpon>EDM.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TopEmployeeFormModel.cs" />
+    <Compile Include="Models\TopEmployeeViewModel.cs" />
+    <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\User.cs">
       <DependentUpon>EDM.tt</DependentUpon>
     </Compile>
@@ -424,6 +434,11 @@
     <Content Include="Views\ErrorMessage\Details.cshtml" />
     <Content Include="Views\ErrorMessage\Edit.cshtml" />
     <Content Include="Views\ErrorMessage\Index.cshtml" />
+    <Content Include="Views\ClientRequests\Create.cshtml" />
+    <Content Include="Views\ClientRequests\Delete.cshtml" />
+    <Content Include="Views\ClientRequests\Details.cshtml" />
+    <Content Include="Views\ClientRequests\Edit.cshtml" />
+    <Content Include="Views\ClientRequests\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

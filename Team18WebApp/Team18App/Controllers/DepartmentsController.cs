@@ -50,7 +50,7 @@ namespace Team18App.Controllers
         public ActionResult Create()
         {
             User u = db.Users.FirstOrDefault(x => x.userName == User.Identity.Name);
-            if (u.role == 1 || u.role == 3)
+            if (u.role != 2)
             {
                 return RedirectToAction("InsufficientPerms", "Home");
             }
