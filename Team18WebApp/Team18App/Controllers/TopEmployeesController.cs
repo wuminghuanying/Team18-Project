@@ -1,15 +1,13 @@
-﻿using System;
+﻿using Microsoft.Ajax.Utilities;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Data;
-using System.Linq;
-using System.Web;
+using System.Data.SqlClient;
 using System.Web.Mvc;
 using Team18App.Models;
 
 namespace Team18App.Controllers
 {
-        [Authorize]
+    [Authorize]
     public class TopEmployeesController : Controller
     {
         int x;
@@ -25,18 +23,18 @@ namespace Team18App.Controllers
         {
             x = tmp.hoursWorked;
             y = tmp.departmentName;
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { x = tmp.hoursWorked, y = tmp.departmentName });
         }
         // GET: TopEmployees
-        public ActionResult Index()
+        public ActionResult Index(SqlConnection con, int x, string y)
         {
             var model = new List<TopEmployeeViewModel>();
 
             // create a connection
-            SqlConnection con = new SqlConnection("Data Source=team18projectms-server.database.windows.net;Initial Catalog=team18db;Persist Security Info=True;User ID=team18projectms-server-admin;Password=C4734SM3F76MA575$;MultipleActiveResultSets=True;Application Name=EntityFramework");
+            string ct = "Data Source=team18projectms-server.database.windows.net;Initial Catalog=team18db;Persist Security Info=True;User ID=team18projectms-server-admin;Password=C4734SM3F76MA575$;MultipleActiveResultSets=True;Application Name=EntityFramework";
+            con = new SqlConnection(ct);
             try
             {
-                // open the conneciton
                 con.Open();
 
                 // prepare a command
@@ -45,20 +43,25 @@ namespace Team18App.Controllers
 
                 // add parameters if you need
                 command.Parameters.AddWithValue("@hoursWorked", x);
-                command.Parameters.AddWithValue("@deptName", y);
+                command.Parameters.Add("@deptName", SqlDbType.NVarChar);
                 // execute a reader with the command
+
+                command.Parameters["@deptName"].Value = y;
                 using (var reader = command.ExecuteReader())
                 {
                     // loop in the result and fill the list
                     while (reader.Read())
                     {
+                        //int empid = (int)reader["EmployeeID"];
+                        //string name  = (string)reader["FirstName"];
+
                         // add items in the list
                         model.Add(new TopEmployeeViewModel()
                         {
-                            EmployeeID = (int)reader["ID"],
+                            EmployeeID = (int)reader["EmployeeID"],
                             FirstName = reader["First Name"].ToString(),
                             LastName = reader["Last Name"].ToString(),
-                            HoursWorked = (int)reader["Total Hours Worked"]
+                            HoursWorked = (decimal)reader["Total Hours Worked"]
                             // other properties
                         });
                     }

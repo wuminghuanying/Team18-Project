@@ -10,7 +10,7 @@ namespace Team18App.Models
         public int EmployeeID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public int HoursWorked { get; set; }
+        public decimal HoursWorked { get; set; }
 
     }
 }

@@ -11,4 +11,3 @@ namespace Team18App.Models
         public string departmentName { get; set; }
     }
 }
-
