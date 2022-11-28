@@ -1,0 +1,34 @@
+﻿@model  IEnumerable<Team18App.Models.TaskInfoViewModel>
+
+<h2>Task Information</h2>
+
+
+<style type="text/css">
+    th {
+        padding: 0 20px;
+    }
+
+    td {
+        padding: 0 20px;
+    }
+</style>
+
+
+
+<table>
+    <tr>
+        <th>Task</th>
+        <th>Budget</th>
+        <th>Deadline</th>
+
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.TaskName.ToString()</td>
+            <td>@item.TaskBudget.ToString()</td>
+            <td>@item.Deadline.ToString()</td>
+
+        </tr>
+    }
+</table>
