@@ -1,10 +1,10 @@
 ﻿@model Team18App.Models.ClientRequest
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "";
 }
 
-<h2>Create</h2>
+<h2>Create Project Request</h2>
 
 
 @using (Html.BeginForm()) 
@@ -12,7 +12,7 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>ClientRequest</h4>
+        <h4>Make sure to include your username and a project description!</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -30,10 +30,6 @@
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

@@ -341,7 +341,7 @@
       <Parameter Name="hoursWorked" Mode="In" Type="Int32" />
       <Parameter Name="deptName" Mode="In" Type="String" />
     </FunctionImport>
-    <FunctionImport Name="projectDraft" ReturnType="Collection(team18dbModel.projectDraft_Result)">
+    <FunctionImport Name="projectDraft" EntitySet="Projects" ReturnType="Collection(team18dbModel.Project)">
       <Parameter Name="projectID" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="sp_alterdiagram">

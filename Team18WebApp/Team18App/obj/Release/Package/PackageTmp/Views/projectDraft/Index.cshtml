@@ -1,0 +1,75 @@
+﻿@model IEnumerable<Team18App.Models.Project>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Project Report</h2>
+
+@using (Html.BeginForm("Index", "projectDraft", FormMethod.Post))
+{
+    <input type="number" name="id" placeholder="Enter Project ID" />
+    <input type="submit" value="Search" />
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ProjectID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProjectBudget)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CurrentExpenses)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProjectDeadline)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProjectName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Department.DepartmentName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WorksOns)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tasks)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProjectID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProjectBudget)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CurrentExpenses)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProjectDeadline)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProjectName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Department.DepartmentName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WorksOns.Count)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tasks.Count)
+            </td>
+
+        </tr>
+    }
+
+</table>
+
